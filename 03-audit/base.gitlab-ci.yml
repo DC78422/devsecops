@@ -1,0 +1,56 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+variables:
+  SBOM_PATH_GRYPE: reports/audit.grype.report.json
+
+# Anchore Grype (https://github.com/anchore/grype)
+# Ruby (Gems)
+# Java (JAR, WAR, EAR, JPI, HPI)
+# JavaScript (NPM, Yarn)
+# Python (Egg, Wheel, Poetry, requirements.txt/setup.py files)
+# Dotnet (deps.json)
+# Golang (go.mod)
+# PHP (Composer)
+# Rust (Cargo)
+
+# Grype SBOM:
+#   # stage: .post
+#   stage: Audit (src)
+#   extends:
+#     - ".artifacts"
+#     - ".audit_base"
+#     - ".audit_rule"
+#     - ".DefectDojo_variables"
+#     - ".extended_runner_resource_request"
+#   variables:
+#     # AUDIT_IMAGE: registry.example.com/openshift/grype:0.74.6-debug
+#     AUDIT_IMAGE: harbor.example.com/devops/grype:latest
+#     GIT_STRATEGY: none
+#     GRYPE_DB_UPDATE_URL: "https://grype-db.example.com/listing.json"
+#     GRYPE_DB_CACHE_DIR: "/tmp"
+#   script:
+#     - mkdir /tmp/config || true
+#     - grype db list
+#     - grype ./ -o json > $SBOM_PATH_GRYPE
+#   after_script:
+#     - |
+#       if [ "$DT_UPLOAD_REPORT" = 'true' ]; then
+#         echo "Uploading"
+#         dt-wrapper --dt-sbom-path $SBOM_PATH_GRYPE --dt-enable-project-properties
+#       fi
+#   when: manual
+
+# Uploading Grype SBOM to Dependency Track:
+#   extends:
+#     - ".Uploading_SBOM_to_Dependency_Track"
+#     - ".audit_rule"
+#   variables:
+#     SBOM_PATH: $SBOM_PATH_GRYPE
+#   needs: ["Grype SBOM"]
+  # rules:
+  #   - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /python/"
+
+DefectDojo Engagement Creation:
+  extends:
+    - ".DefectDojo_Engagement_Creation"

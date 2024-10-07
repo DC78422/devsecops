@@ -1,0 +1,65 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# Detect-secrets (https://github.com/Yelp/detect-secrets)
+Detect-Secrets:
+  extends:
+    - ".artifacts"
+    - ".secrets_base"
+    - ".secrets_rule"
+    - ".DefectDojo_variables"
+    - ".default_runner_resource_request"
+  variables:
+    SECRETS_IMAGE: harbor.example.com/devops/detect-secrets:latest 
+    DETECT_SECRETS_IGNORE_FILE: ".detectsecretsingore"
+  script:
+    - |
+      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+        if [[ -e $DETECT_SECRETS_IGNORE_FILE ]]; then
+          detect-secrets scan --word-list $DETECT_SECRETS_IGNORE_FILE . > reports/secrets.detect_secrets.report.json
+        else
+          detect-secrets scan . > reports/secrets.detect_secrets.report.json
+        fi
+      else
+        if [[ -e $DETECT_SECRETS_IGNORE_FILE ]]; then
+          detect-secrets scan --word-list $DETECT_SECRETS_IGNORE_FILE .
+        else
+          detect-secrets scan .
+        fi
+      fi
+  after_script:
+    - |
+      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+        echo "Uploading"
+        dd-wrapper --dd-report-file=reports/secrets.detect_secrets.report.json --dd-engagement-test-title="Detect-Secrets Scan"   --dd-engagement-scan-type="Detect-secrets Scan"
+      fi
+  when: manual
+
+# Trufflehog3 (https://github.com/feeltheajf/trufflehog3)
+Trufflehog3:
+  extends:
+    - ".artifacts"
+    - ".secrets_base"
+    - ".secrets_rule"
+    - ".DefectDojo_variables"
+    - ".default_runner_resource_request"
+  variables:
+    SECRETS_IMAGE: harbor.example.com/devops/trufflehog3:latest
+  script:
+    - |
+      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+        trufflehog3 -f JSON -o reports/secrets.trufflehog3.report.json .
+      else
+        trufflehog3 .
+      fi
+  after_script:
+    - |
+      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+        echo "Uploading"
+        dd-wrapper --dd-report-file=reports/secrets.trufflehog3.report.json --dd-engagement-test-title="Trufflehog3 Scan" --dd-engagement-scan-type="Trufflehog3 Scan"
+      fi
+  when: manual
+
+DefectDojo Engagement Creation:
+  extends:
+    - ".DefectDojo_Engagement_Creation"

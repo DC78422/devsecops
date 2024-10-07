@@ -1,0 +1,58 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+variables:
+  SBOM_PATH: "reports/cdx-sbom.py.json"
+
+Registry Check (Python):
+  extends:
+    - ".audit_base"
+    - ".audit_rule"
+    - ".extended_runner_resource_request"
+  stage: ".pre"
+  variables:
+    AUDIT_IMAGE: harbor.example.com/devops/registry-checker:latest
+    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
+  script:
+    - registrycheck python poetry
+  when: manual
+
+Forming CycloneDX SBOM:
+  extends:
+    - ".artifacts"
+    - ".audit_base"
+    - ".audit_rule"
+    - ".extended_runner_resource_request"
+  variables:
+    AUDIT_IMAGE: harbor.example.com/devops/cyclonedx-py:latest
+  # before_script:
+  #   - mkdir reports/ || true
+  script:
+    - cyclonedx-py $PYTHON_DEPENDENCY_MANAGMENT
+      --output-format json
+      --outfile $SBOM_PATH
+  after_script:
+    - |
+      if [ "$DT_UPLOAD_REPORT" = 'true' ]; then
+        echo "Uploading"
+        dt-wrapper --dt-sbom-path $SBOM_PATH --dt-enable-project-properties
+      fi
+  when: manual
+
+poetry-audit:
+  extends:
+    - ".audit_base"
+    - ".audit_rule_mr"
+    - ".extended_runner_resource_request"
+  variables:
+    AUDIT_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
+    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
+  before_script:
+    - poetry self add ko-poetry-audit-plugin
+  script:
+    - poetry audit --with dev
+  when: manual
+
+DefectDojo Engagement Creation:
+  extends:
+    - ".DefectDojo_Engagement_Creation"

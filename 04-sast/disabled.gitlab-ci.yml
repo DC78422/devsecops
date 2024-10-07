@@ -1,0 +1,193 @@
+# -
+flawfinder:
+  variables:
+    SAST_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
+    SEARCH_MAX_DEPTH: 4
+  extends:
+    - ".default_runner_resource_request"
+    - ".sast_base"
+  before_script:
+    - mkdir reports/ || true
+  script:
+    - find . -type f -name "*.c"
+    - find . -type f -name "*.cc"
+    - find . -type f -name "*.cpp"
+    - find . -type f -name "*.c++"
+    - find . -type f -name "*.cp"
+    - find . -type f -name "*.cxx"
+    - echo flawfinder
+    - echo flawfinder > reports/flawfinder.json
+  rules:
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /flawfinder/"
+      when: never
+    - if: "$CI_COMMIT_BRANCH"
+      exists:
+        - "**/*.c"
+        - "**/*.cc"
+        - "**/*.cpp"
+        - "**/*.c++"
+        - "**/*.cp"
+        - "**/*.cxx"
+  when: manual
+  allow_failure: true
+# -
+kubesec:
+  variables:
+    SAST_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
+    SEARCH_MAX_DEPTH: 4
+  extends:
+    - ".default_runner_resource_request"
+    - ".sast_base"
+  before_script:
+    - mkdir reports/ || true
+  script:
+    - echo kubesec
+    - echo kubesec > reports/kubesec.json
+  rules:
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /kubesec/"
+      when: never
+    - if: "$CI_COMMIT_BRANCH && $SCAN_KUBERNETES_MANIFESTS == 'true'"
+  when: manual
+  allow_failure: true
+# -
+nodejs-scan:
+  variables:
+    SAST_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
+    SEARCH_MAX_DEPTH: 4
+  extends:
+    - ".default_runner_resource_request"
+    - ".sast_base"
+  before_script:
+    - mkdir reports/ || true
+  script:
+    - find . -type f -name package.json
+    - echo nodejs-scan
+    - echo nodejs-scan > reports/nodejs-scan.json
+  rules:
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /nodejs-scan/"
+      when: never
+    - if: "$CI_COMMIT_BRANCH"
+      exists:
+        - "**/package.json"
+  when: manual
+  allow_failure: true
+# -
+phpcs-security-audit:
+  variables:
+    SAST_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
+    SEARCH_MAX_DEPTH: 4
+  extends:
+    - ".default_runner_resource_request"
+    - ".sast_base"
+  before_script:
+    - mkdir reports/ || true
+  script:
+    - find . -type f -name "*.php"
+    - echo phpcs-security-audit
+    - echo phpcs-security-audit > reports/phpcs-security-audit.json
+  rules:
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /phpcs-security-audit/"
+      when: never
+    - if: "$CI_COMMIT_BRANCH"
+      exists:
+        - "**/*.php"
+  when: manual
+  allow_failure: true
+# -
+sobelow:
+  variables:
+    SAST_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
+    SEARCH_MAX_DEPTH: 4
+  extends:
+    - ".default_runner_resource_request"
+    - ".sast_base"
+  before_script:
+    - mkdir reports/ || true
+  script:
+    - find . -type f -name "mix.exs"
+    - echo sobelow
+    - echo sobelow > reports/sobelow.json
+  rules:
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /sobelow/"
+      when: never
+    - if: "$CI_COMMIT_BRANCH"
+      exists:
+        - "**/mix.exs"
+  when: manual
+  allow_failure: true
+# -
+salus:
+  variables:
+    SAST_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
+    SEARCH_MAX_DEPTH: 4
+  extends:
+    - ".default_runner_resource_request"
+    - ".sast_base"
+  before_script:
+    - mkdir reports/ || true
+  script:
+    - find . -type f -name "*.ipa"
+    - find . -type d -name "*.xcodeproj"
+    - echo salus
+    - echo salus > reports/salus.json
+  rules:
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /salus/"
+      when: never
+    - if: "$CI_COMMIT_BRANCH"
+      exists:
+        - "**/*.rb"
+        - "**/Gemfile"
+        - "**/*.js"
+        - "**/*.json"
+        - "**/*.py"
+        - "**/*.mjs"
+        - "**/*.go"
+        - "**/*.rs"
+        - "**/*.toml"
+        - "**/*.cargo"
+  allow_failure: true
+  when: manual
+
+# SonarQube
+
+# PVS-studio
+
+# Bearer (https://github.com/Bearer/bearer)
+Bearer:
+  variables:
+    SAST_IMAGE: harbor.example.com/devops/bearer:latest
+    SEARCH_MAX_DEPTH: 4
+    # KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: ""
+  extends:
+    - ".default_runner_resource_request"
+    - ".sast_base"
+  script:
+    - /bin/bearer scan .
+      --format sarif
+      --output reports/sast.bearer.report.json
+  after_script:
+    - |
+      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+        echo "Uploading"
+        dd-wrapper --dd-report-file=reports/sast.bearer.report.json --dd-engagement-test-title="Bearer Sarif Report" --dd-engagement-scan-type="SARIF"
+      fi
+  rules:
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /bearer/"
+      when: never
+    - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /(javascript|typescript|ruby|php|go|python|java$|tsx)/"
+  when: manual
+  allow_failure: true

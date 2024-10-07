@@ -1,0 +1,48 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# Nuclei (https://github.com/projectdiscovery/nuclei)
+Nuclei:
+  extends:
+    - ".dast_base"
+    - ".default_runner_resource_request"
+  variables:
+    DAST_IMAGE: harbor.example.com/devops/nuclei:latest
+    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: builder
+  script:
+    - echo $CI_JOB_NAME
+    - nuclei
+      -target $DAST_WEBSITE
+      -json-export reports/dast.nuclei.report.json
+  after_script:
+    - echo "Uploading"
+    - dd-wrapper --dd-report-file=reports/dast.nuclei.report.json --dd-engagement-test-title="Nuclei" --dd-engagement-scan-type="Nuclei Scan"
+  rules:
+    - if: $DAST_WEBSITE
+  when: manual
+
+# Wapiti Scan (https://github.com/inc775/wapiti-3.0.0)
+Wapiti:
+  extends:
+    - ".dast_base"
+    - ".extended_runner_resource_request"
+  variables:
+    DAST_IMAGE: harbor.example.com/devops/wapiti:3.1.8
+    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: builder
+  script:
+    - wapiti
+      --url http://$DAST_WEBSITE
+      --format xml
+      --output ./reports/dast.wapiti.report.xml
+  after_script:
+    - sed -i '/info name="auth"/d' ./reports/dast.wapiti.report.xml
+    - echo "Uploading"
+    - dd-wrapper --dd-report-file=reports/dast.wapiti.report.xml --dd-engagement-test-title="Wapiti Scan" --dd-engagement-scan-type="Wapiti Scan"
+  rules:
+    - if: $DAST_WEBSITE
+  when: manual
+  allow_failure: true
+
+DefectDojo Engagement Creation:
+  extends:
+    - ".DefectDojo_Engagement_Creation"

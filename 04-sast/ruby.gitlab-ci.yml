@@ -1,0 +1,34 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# Brakeman Scan (https://github.com/presidentbeef/brakeman)
+Brakeman:
+  variables:
+    SAST_IMAGE: presidentbeef/brakeman
+    SEARCH_MAX_DEPTH: 4
+  extends:
+    - ".sast_base"
+    - ".DefectDojo_variables"
+    - ".default_runner_resource_request"
+  script:
+    - /usr/src/app/bin/brakeman
+      -f json
+      -o reports/sast.brakeman.report.json
+  after_script:
+    - |
+      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+        echo "Uploading"
+        dd-wrapper --dd-report-file=reports/sast.brakeman.report.json --dd-engagement-test-title="Brakeman scan" --dd-engagement-scan-type="Brakeman Scan"
+      fi
+  rules:
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /brakeman/"
+      when: never
+    - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /ruby/"
+  when: manual
+  allow_failure: true
+
+DefectDojo Engagement Creation:
+  extends:
+    - ".DefectDojo_Engagement_Creation"

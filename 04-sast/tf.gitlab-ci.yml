@@ -1,0 +1,12 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# TFSec (https://github.com/aquasecurity/tfsec)
+
+# Terrascan (https://github.com/tenable/terrascan)
+
+# chechov и почему-то посмотреть назад
+# https://www.checkov.io/1.Welcome/Quick%20Start.html
+
+# KICS Scanner (https://github.com/Checkmarx/kics)
+# Terraform

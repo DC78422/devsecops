@@ -1,0 +1,33 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+variables:
+  SBOM_PATH: "reports/cdx-sbom.ruby.json"
+
+Forming CycloneDX SBOM:
+  extends:
+    - ".artifacts"
+    - ".audit_base"
+    - ".audit_rule"
+    - ".extended_runner_resource_request"
+  variables:
+    AUDIT_IMAGE: "$REGISTRY/openshift/ruby:2.7.2"
+  # before_script:
+  #   - mkdir reports/ || true
+  script:
+    - gem install cyclonedx-ruby
+    - cyclonedx-ruby -p . -o $SBOM_PATH
+  artifacts:
+    paths:
+      - reports/
+    expire_in: 1 day
+
+DefectDojo Engagement Creation:
+  extends:
+    - ".DefectDojo_Engagement_Creation"
+
+Uploading SBOM to Dependency Track:
+  extends:
+    - ".Uploading_SBOM_to_Dependency_Track"
+    - ".audit_rule"
+  needs: ["Forming CycloneDX SBOM"]

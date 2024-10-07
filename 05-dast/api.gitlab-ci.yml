@@ -1,0 +1,42 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# Zed Attack Proxy
+ZAP API scan:
+  extends:
+    - ".dast_base"
+    - ".extended_runner_resource_request"
+  variables:
+    DAST_IMAGE: harbor.example.com/devops/zap:2.15.0
+    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: builder
+  before_script:
+    - mkdir zap/ || true
+  script:
+    - echo "create a directory..."
+    - mkdir /zap/wrk
+    - echo "Execute the baseline scan..."
+    - /zap/zap-api-scan.py
+      -t http://$DAST_WEBSITE_API
+      -f $DAST_WEBSITE_API_FORMAT
+      -r dast.zap-api-scan.report.html
+      -x dast.zap-api-scan.report.xml
+  after_script:
+    - echo "Copy report file to the artifact path..."
+    - cp /zap/wrk/dast.zap-api-scan.report.html ./zap/
+    - cp /zap/wrk/dast.zap-api-scan.report.xml ./zap/
+    - echo "Uploading"
+    - dd-wrapper --dd-report-file=zap/dast.zap-api-scan.report.xml --dd-engagement-test-title="ZAP API scan" --dd-engagement-scan-type="ZAP Scan"
+  rules:
+    - if: $DAST_WEBSITE_API
+  artifacts:
+    name: "$CI_JOB_NAME"
+    paths:
+      - zap/
+    expire_in: 1 day
+    when: always
+  when: manual
+  allow_failure: true
+
+DefectDojo Engagement Creation:
+  extends:
+    - ".DefectDojo_Engagement_Creation"
