@@ -1,9 +1,6 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
-variables:
-  SBOM_PATH_SYFT: "reports/cdx-sbom.syft.json"
-
 Forming CycloneDX SBOM (Docker):
   stage: Audit (image)
   extends:
@@ -11,19 +8,17 @@ Forming CycloneDX SBOM (Docker):
     - ".audit_base"
     - ".audit_rule"
     - ".DefectDojo_variables"
-    - ".extended_runner_resource_request"
   variables:
     AUDIT_IMAGE: harbor.example.com/devops/syft:latest
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
   script:
     - syft login $TARGET_REGISTRY -u $TARGET_REGISTRY_LOGIN -p $TARGET_REGISTRY_PASSWORD
     - syft scan $IMAGE_TO_SCAN
-      -o cyclonedx-json > $SBOM_PATH_SYFT
+      -o cyclonedx-json > reports/cdx-sbom.syft.json
   after_script:
     - |
       if [ "$DT_UPLOAD_REPORT" = 'true' ]; then
         echo "Uploading"
-        dt-wrapper --dt-sbom-path $SBOM_PATH_SYFT --dt-enable-project-properties
+        dt-wrapper --dt-sbom-path reports/cdx-sbom.syft.json --dt-enable-project-properties
       fi
   when: manual
 

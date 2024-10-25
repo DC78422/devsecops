@@ -7,12 +7,6 @@ SBOm генерируется на основе зависимостей, кот
 Сгенерировать SBOM можно в рамках шага в пайплайне. Самый просто вариант генерации выглядит следующим образом:
 ```yaml
 Forming CycloneDX SBOM:
-  variables:
-    KUBERNETES_CPU_REQUEST: '400m'
-    KUBERNETES_CPU_LIMIT: '500m'
-    KUBERNETES_MEMORY_REQUEST: '550Mi'
-    KUBERNETES_MEMORY_LIMIT: '750Mi'
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
   image: "$REGISTRY/openshift/ruby:2.7.2"
   stage: cdx-sbom
   script:

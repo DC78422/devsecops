@@ -22,7 +22,6 @@ variables:
 #     - ".audit_base"
 #     - ".audit_rule"
 #     - ".DefectDojo_variables"
-#     - ".extended_runner_resource_request"
 #   variables:
 #     # AUDIT_IMAGE: registry.example.com/openshift/grype:0.74.6-debug
 #     AUDIT_IMAGE: harbor.example.com/devops/grype:latest

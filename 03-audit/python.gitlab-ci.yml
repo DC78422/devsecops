@@ -8,11 +8,9 @@ Registry Check (Python):
   extends:
     - ".audit_base"
     - ".audit_rule"
-    - ".extended_runner_resource_request"
   stage: ".pre"
   variables:
     AUDIT_IMAGE: harbor.example.com/devops/registry-checker:latest
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
   script:
     - registrycheck python poetry
   when: manual
@@ -22,7 +20,6 @@ Forming CycloneDX SBOM:
     - ".artifacts"
     - ".audit_base"
     - ".audit_rule"
-    - ".extended_runner_resource_request"
   variables:
     AUDIT_IMAGE: harbor.example.com/devops/cyclonedx-py:latest
   # before_script:
@@ -43,10 +40,8 @@ poetry-audit:
   extends:
     - ".audit_base"
     - ".audit_rule_mr"
-    - ".extended_runner_resource_request"
   variables:
     AUDIT_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
   before_script:
     - poetry self add ko-poetry-audit-plugin
   script:

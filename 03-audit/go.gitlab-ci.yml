@@ -9,7 +9,6 @@ Forming CycloneDX SBOM:
     - ".artifacts"
     - ".audit_base"
     - ".audit_rule"
-    - ".extended_runner_resource_request"
   variables:
     AUDIT_IMAGE: "cyclonedx-gomod:1.7.0"
     AUDIT_IMAGE_ENTRYPOINT: ""
