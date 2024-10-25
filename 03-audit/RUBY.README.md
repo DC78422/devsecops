@@ -5,6 +5,7 @@ SBOm генерируется на основе зависимостей, кот
 ## Использование
 
 Сгенерировать SBOM можно в рамках шага в пайплайне. Самый просто вариант генерации выглядит следующим образом:
+
 ```yaml
 Forming CycloneDX SBOM:
   image: "$REGISTRY/openshift/ruby:2.7.2"
@@ -20,6 +21,7 @@ Forming CycloneDX SBOM:
 ```
 
 Для встраивания этого шага в пайплайн нужно объявить переменную `DEPENDENCYTRACK_SBOM_PATH`, её значением должен быть путь до сгенерированного SBOM'а.
+
 ```yaml
 variables:
   REGISTRY: "registry.example.com"

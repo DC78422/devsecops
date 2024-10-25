@@ -10,7 +10,7 @@ SBOM генерируется на основе зависимостей, кот
 
 Установка не требуется, просто вызовите по требованию через dlx-wrapper
 
-```sh
+```yaml
 stages:
   - Audit (src)
 
@@ -44,7 +44,7 @@ Forming CycloneDX SBOM (yarn) v1:
 
 Как development зависимость текущего проекта
 
-```sh
+```yaml
 stages:
   - Audit (src)
 
@@ -79,7 +79,7 @@ Forming CycloneDX SBOM (yarn) v2:
 
 Установить последнюю версию из релиза GitHub в качестве плагина для текущего проекта
 
-```sh
+```yaml
 stages:
   - Audit (src)
 

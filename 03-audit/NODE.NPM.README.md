@@ -10,7 +10,7 @@ SBOM генерируется на основе зависимостей, кот
 
 В качестве глобального инструмента
 
-```sh
+```yaml
 stages:
   - Audit (src)
 
@@ -43,7 +43,7 @@ Forming CycloneDX SBOM (npm) v1:
 
 В качестве глобального инструмента
 
-```sh
+```yaml
 stages:
   - Audit (src)
 
@@ -76,7 +76,7 @@ Forming CycloneDX SBOM (npm) v2:
 
 В качестве глобального инструмента через обновление npm до последнией версии
 
-```sh
+```yaml
 stages:
   - Audit (src)
 

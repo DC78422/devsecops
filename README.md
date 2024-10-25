@@ -1,6 +1,6 @@
 # gitlab-devops-gitlab-ci
 
-```sh
+```yaml
 include:
   - project: dc20e6/devsecops/pipeline
     ref: main
