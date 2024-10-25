@@ -6,7 +6,6 @@ GitLeaks:
   extends:
     - ".secrets_base"
     - ".secrets_rule"
-    - ".default_runner_resource_request"
   variables:
     SECRETS_IMAGE: harbor.example.com/devops/gitleaks:latest
   script:
@@ -17,7 +16,7 @@ GitLeaks:
       -v
   after_script:
     - echo "Uploading"
-    - dd-wrapper --dd-report-file=reports/secrets.gitleaks.report.json       --dd-engagement-test-title="Gitleaks Scan"         --dd-engagement-scan-type="Gitleaks Scan"
+    - dd-wrapper --dd-report-file=reports/secrets.gitleaks.report.json --dd-engagement-test-title="Gitleaks Scan"  --dd-engagement-scan-type="Gitleaks Scan"
   when: manual
 
 # Talisman (https://github.com/thoughtworks/talisman)
@@ -26,7 +25,6 @@ Talisman:
     - ".artifacts"
     - ".secrets_base"
     - ".secrets_rule"
-    - ".default_runner_resource_request"
   variables:
     SECRETS_IMAGE: harbor.example.com/devops/talisman:latest
   script:
@@ -37,7 +35,7 @@ Talisman:
     - mv reports/talisman_reports/data/report.json reports/secrets.talisman.report.json
     - rm -rf reports/talisman_reports/
     - echo "Uploading"
-    - dd-wrapper --dd-report-file=reports/secrets.talisman.report.json       --dd-engagement-test-title="Talisman Scan"         --dd-engagement-scan-type="Talisman Scan"
+    - dd-wrapper --dd-report-file=reports/secrets.talisman.report.json --dd-engagement-test-title="Talisman Scan"  --dd-engagement-scan-type="Talisman Scan"
   when: manual
 
 DefectDojo Engagement Creation:
