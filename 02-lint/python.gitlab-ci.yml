@@ -5,10 +5,8 @@ mypy:
   extends:
     - ".lint_base"
     - ".lint_rule"
-    - ".extended_runner_resource_request"
   variables:
     LINT_IMAGE: harbor.example.com/devops/mypy:latest
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
     MYPY_SOURCE: .
     MYPY_EXCLUDE: >
       --exclude '/build\.py$'
@@ -19,17 +17,15 @@ mypy:
       $MYPY_SOURCE
     #  > reports/lint.mypy.txt
   # after_script:
-  #   - dd-wrapper --dd-report-file=reports/lint.kics_dockerfile.report.json     --dd-engagement-test-title="KICS Dockerfile Scanner"     --dd-engagement-scan-type="KICS Scan"
+  #   - dd-wrapper --dd-report-file=reports/lint.kics_dockerfile.report.json    --dd-engagement-test-title="KICS Dockerfile Scanner"    --dd-engagement-scan-type="KICS Scan"
   when: manual
 
 ruff:
   extends:
     - ".lint_base"
     - ".lint_rule"
-    - ".extended_runner_resource_request"
   variables:
     LINT_IMAGE: harbor.example.com/devops/ruff:latest
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
     RUFF_TARGET_VERSION: py311
     RUFF_SOURCE: .
     RUFF_ARGS: ""
@@ -45,5 +41,5 @@ ruff:
       ruff check $RUFF_ARGS $RUFF_SOURCE
     #  > reports/lint.ruff.txt
   # after_script:
-  #   - dd-wrapper --dd-report-file=reports/lint.kics_dockerfile.report.json     --dd-engagement-test-title="KICS Dockerfile Scanner"     --dd-engagement-scan-type="KICS Scan"
+  #   - dd-wrapper --dd-report-file=reports/lint.kics_dockerfile.report.json    --dd-engagement-test-title="KICS Dockerfile Scanner"    --dd-engagement-scan-type="KICS Scan"
   when: manual

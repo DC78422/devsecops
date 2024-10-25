@@ -5,12 +5,10 @@ golangci-lint:
   extends:
     - ".lint_base"
     - ".lint_rule"
-    - ".extended_runner_resource_request"
   variables:
     LINT_IMAGE: harbor.example.com/devops/golangci-lint:latest
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
   script:
     - golangci-lint run -v
-       --issues-exit-code 0
-       --print-issued-lines=false
+      --issues-exit-code 0
+      --print-issued-lines=false
   when: manual

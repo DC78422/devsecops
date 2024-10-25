@@ -6,12 +6,10 @@ helm lint:
   extends:
     - ".lint_base"
     - ".lint_rule"
-    - ".default_runner_resource_request"
   variables:
-    LINT_IMAGE: $CI_REGISTRY/devops/deploy-tools:latest
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
+    LINT_IMAGE: $CI_REGISTRY/devops/helm:latest
   script:
     - helm lint .
   # after_script:
-  #   - dd-wrapper --dd-report-file=reports/lint.kics_dockerfile.report.json     --dd-engagement-test-title="KICS Dockerfile Scanner"     --dd-engagement-scan-type="KICS Scan"
+  #   - dd-wrapper --dd-report-file=reports/lint.kics_dockerfile.report.json    --dd-engagement-test-title="KICS Dockerfile Scanner"    --dd-engagement-scan-type="KICS Scan"
   when: manual
