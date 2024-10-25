@@ -5,10 +5,8 @@ include:
 Nuclei:
   extends:
     - ".dast_base"
-    - ".default_runner_resource_request"
   variables:
     DAST_IMAGE: harbor.example.com/devops/nuclei:latest
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: builder
   script:
     - echo $CI_JOB_NAME
     - nuclei
@@ -25,10 +23,8 @@ Nuclei:
 Wapiti:
   extends:
     - ".dast_base"
-    - ".extended_runner_resource_request"
   variables:
     DAST_IMAGE: harbor.example.com/devops/wapiti:3.1.8
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: builder
   script:
     - wapiti
       --url http://$DAST_WEBSITE

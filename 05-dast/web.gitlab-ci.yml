@@ -5,7 +5,6 @@ include:
 Nikto:
   extends:
     - ".dast_base"
-    - ".default_runner_resource_request"
   variables:
     DAST_IMAGE: harbor.example.com/devops/nikto:latest
   script:
@@ -23,7 +22,6 @@ Nikto:
 Nikto (all):
   extends:
     - ".dast_base"
-    - ".default_runner_resource_request"
   variables:
     DAST_IMAGE: harbor.example.com/devops/nikto:latest
   script:
@@ -34,7 +32,7 @@ Nikto (all):
       -C all
   after_script:
     - echo "Uploading"
-    - dd-wrapper --dd-report-file=reports/dast.nikto_all.report.json             --dd-engagement-test-title="Nikto (all)"             --dd-engagement-scan-type="Nikto Scan"
+    - dd-wrapper --dd-report-file=reports/dast.nikto_all.report.json       --dd-engagement-test-title="Nikto (all)"       --dd-engagement-scan-type="Nikto Scan"
   rules:
     - if: $DAST_WEBSITE
   when: manual
@@ -43,7 +41,6 @@ Nikto (all):
 Dastardly:
   extends:
     - ".dast_base"
-    - ".extended_runner_resource_request"
   variables:
     DAST_IMAGE: harbor.example.com/devops/dastardly:2024.4.1
     DAST_IMAGE_ENTRYPOINT: "dastardly-entrypoint.sh"
@@ -53,7 +50,7 @@ Dastardly:
     - /usr/local/burpsuite_enterprise/bin/dastardly
   after_script:
     - echo "Uploading"
-    - dd-wrapper --dd-report-file=reports/dast.dastardly.report.xml          --dd-engagement-test-title="Dastardly"         --dd-engagement-scan-type="Burp Dastardly Scan"
+    - dd-wrapper --dd-report-file=reports/dast.dastardly.report.xml   --dd-engagement-test-title="Dastardly"  --dd-engagement-scan-type="Burp Dastardly Scan"
   rules:
     - if: $DAST_WEBSITE
   when: manual
@@ -63,10 +60,8 @@ Dastardly:
 ZAP baseline scan:
   extends:
     - ".dast_base"
-    - ".extended_runner_resource_request"
   variables:
     DAST_IMAGE: harbor.example.com/devops/zap:2.15.0
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: builder
   before_script:
     - mkdir zap/ || true
   script:
@@ -83,7 +78,7 @@ ZAP baseline scan:
     - cp /zap/wrk/dast.zap-baseline-scan.report.html ./zap/
     - cp /zap/wrk/dast.zap-baseline-scan.report.xml ./zap/
     - echo "Uploading"
-    - dd-wrapper --dd-report-file=zap/dast.zap-baseline-scan.report.xml  --dd-engagement-test-title="ZAP baseline scan" --dd-engagement-scan-type="ZAP Scan"
+    - dd-wrapper --dd-report-file=zap/dast.zap-baseline-scan.report.xml --dd-engagement-test-title="ZAP baseline scan" --dd-engagement-scan-type="ZAP Scan"
   rules:
     - if: $DAST_WEBSITE
   artifacts:

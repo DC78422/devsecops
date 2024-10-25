@@ -5,10 +5,8 @@ include:
 ZAP API scan:
   extends:
     - ".dast_base"
-    - ".extended_runner_resource_request"
   variables:
     DAST_IMAGE: harbor.example.com/devops/zap:2.15.0
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: builder
   before_script:
     - mkdir zap/ || true
   script:

@@ -5,7 +5,6 @@ include:
 Kubeaudit:
   extends:
     - ".dast_base"
-    - ".default_runner_resource_request"
   variables:
     IAC_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
   script:
@@ -18,7 +17,6 @@ Kubeaudit:
 Kubescape Cluster Scan:
   extends:
     - ".dast_base"
-    - ".default_runner_resource_request"
   variables:
     IAC_IMAGE: harbor.example.com/devops/kubescape:v3.0.11
   script:
@@ -32,7 +30,6 @@ Kubescape Cluster Scan:
 Popeye:
   extends:
     - ".dast_base"
-    - ".default_runner_resource_request"
   variables:
     IAC_IMAGE: harbor.example.com/devops/popeye:v0.21.3
   script:
@@ -46,7 +43,6 @@ Popeye:
 Prowler:
   extends:
     - ".dast_base"
-    - ".default_runner_resource_request"
   variables:
     IAC_IMAGE: harbor.example.com/devops/prowler:latest
   script:
@@ -61,7 +57,6 @@ Prowler:
 kubeHunter:
   extends:
     - ".dast_base"
-    - ".default_runner_resource_request"
   variables:
     IAC_IMAGE: $CI_REGISTRY/devops/kube-hunter:latest
   script:
