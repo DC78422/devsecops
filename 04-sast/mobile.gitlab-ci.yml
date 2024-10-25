@@ -8,7 +8,6 @@ include:
   extends:
     - ".sast_base"
     - ".DefectDojo_variables"
-    - ".default_runner_resource_request"
   rules:
     - when: never
   script:
@@ -21,7 +20,6 @@ mobsf-android:
     SAST_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
     SEARCH_MAX_DEPTH: 4
   extends:
-    - ".default_runner_resource_request"
     - ".mobsf"
   script:
     - echo mobsf-android
@@ -44,7 +42,6 @@ mobsf-ios:
     SAST_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
     SEARCH_MAX_DEPTH: 4
   extends:
-    - ".default_runner_resource_request"
     - ".mobsf"
   script:
     - echo mobsf-ios

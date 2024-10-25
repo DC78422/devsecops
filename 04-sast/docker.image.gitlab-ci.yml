@@ -9,7 +9,6 @@ Grype Image Scanning:
     - ".sast_base"
     - ".sast_rule"
     - ".DefectDojo_variables"
-    - ".extended_runner_resource_request"
   variables:
     SAST_IMAGE: registry.example.com/openshift/grype:0.74.6-debug
     GIT_STRATEGY: none
@@ -34,11 +33,9 @@ Trivy Image Scanning:
     - ".sast_base"
     - ".sast_rule"
     - ".DefectDojo_variables"
-    - ".extended_runner_resource_request"
   variables:
     # SAST_IMAGE: harbor.example.com/devops/trivy:latest
     SAST_IMAGE: registry.example.com/openshift/trivy:0.49.1
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
   script:
     - trivy image
       --ignore-unfixed
@@ -59,7 +56,6 @@ Dockle Image Scanning:
     - ".sast_base"
     - ".sast_rule"
     - ".DefectDojo_variables"
-    - ".default_runner_resource_request"
   variables:
     SAST_IMAGE: harbor.example.com/devops/dockle:latest
   script:
@@ -85,10 +81,8 @@ Dockle Image Scanning:
 #   extends:
 #     - ".sast_base"
 #     - ".iac_docker_rule"
-#     - ".default_runner_resource_request"
 #   variables:
 #     IAC_IMAGE: harbor.example.com/devops/trufflehog:latest
-#     KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
 #   script:
 #     - trufflehog docker --image=$IMAGE_TO_SCAN -j > reports/iac.trufflehog.report.json
 #   when: manual

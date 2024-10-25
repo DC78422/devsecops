@@ -12,7 +12,6 @@ pmd:
   extends:
     - ".sast_base"
     - ".DefectDojo_variables"
-    - ".default_runner_resource_request"
   script:
     - /pmd-bin-7.1.0/bin/pmd check 
       -d .
@@ -37,7 +36,6 @@ cpd:
   extends:
     - ".sast_base"
     - ".DefectDojo_variables"
-    - ".default_runner_resource_request"
   script:
     - /pmd-bin-7.1.0/bin/pmd cpd 
       -d .
@@ -62,7 +60,6 @@ spotbugs:
   extends:
     - ".sast_base"
     - ".DefectDojo_variables"
-    - ".default_runner_resource_request"
   script:
     - echo sobelow
     - echo sobelow > reports/sast.sobelow.report.json
@@ -80,11 +77,9 @@ Bearer:
   variables:
     SAST_IMAGE: harbor.example.com/devops/bearer:latest
     SEARCH_MAX_DEPTH: 4
-    # KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: ""
   extends:
     - ".sast_base"
     - ".DefectDojo_variables"
-    - ".default_runner_resource_request"
   script:
     - /bin/bearer scan .
       --format sarif

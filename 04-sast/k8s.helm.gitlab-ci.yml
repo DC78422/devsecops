@@ -6,10 +6,8 @@ KICS Scanning:
   extends:
     - ".sast_base"
     - ".DefectDojo_variables"
-    - ".default_runner_resource_request"
   variables:
     IAC_IMAGE: harbor.example.com/devops/kics:latest
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
   script:
     - kics scan
       --no-progress
@@ -30,10 +28,8 @@ Kubescape Helm Scan:
   extends:
     - ".sast_base"
     - ".DefectDojo_variables"
-    - ".default_runner_resource_request"
   variables:
     IAC_IMAGE: harbor.example.com/devops/kubescape:v3.0.11
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
   script:
     - echo $CI_JOB_NAME
     - kubescape scan .
@@ -49,10 +45,8 @@ Trivy K8S Scanning:
   extends:
     - ".sast_base"
     - ".DefectDojo_variables"
-    - ".extended_runner_resource_request"
   variables:
     IAC_IMAGE: aquasec/trivy:0.51.1
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
   script:
     - trivy k8s 
       --report summary cluster
@@ -63,10 +57,8 @@ chart-testing:
   extends:
     - ".sast_base"
     - ".DefectDojo_variables"
-    - ".extended_runner_resource_request"
   variables:
     IAC_IMAGE: quay.io/helmpack/chart-testing:v3.11.0
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
   script:
     - ct install
       --chart-dirs . 
@@ -83,10 +75,8 @@ checkov:
   extends:
     - ".sast_base"
     - ".DefectDojo_variables"
-    - ".extended_runner_resource_request"
   variables:
     IAC_IMAGE: $CI_REGISTRY/devops/checkov:3.2.91
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
   script:
     - checkov
       --framework helm
@@ -106,10 +96,8 @@ kube-linter:
   extends:
     - ".sast_base"
     - ".DefectDojo_variables"
-    - ".extended_runner_resource_request"
   variables:
     IAC_IMAGE: harbor.example.com/devops/kube-linter:latest 
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
   script:
     - kube-linter lint .
     # - kube-linter lint /path/to/your/yaml.yaml
@@ -125,10 +113,8 @@ kube-score:
   extends:
     - ".sast_base"
     - ".DefectDojo_variables"
-    - ".extended_runner_resource_request"
   variables:
     IAC_IMAGE: zegl/kube-score:v1.18.0
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
     HELM_VALUES_FILES: >
       -f values.yaml
   script:
@@ -146,10 +132,8 @@ kubeconform:
   extends:
     - ".sast_base"
     - ".DefectDojo_variables"
-    - ".extended_runner_resource_request"
   variables:
     IAC_IMAGE: $CI_REGISTRY/devops/deploy-tools:latest
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
     HELM_VALUES_FILES: >
       -f values.yaml
   script:
@@ -166,10 +150,8 @@ kubesec:
   extends:
     - ".sast_base"
     - ".DefectDojo_variables"
-    - ".extended_runner_resource_request"
   variables:
     IAC_IMAGE: harbor.example.com/devops/kubesec:latest 
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
     HELM_VALUES_FILES: >
       -f values.yaml
   script:

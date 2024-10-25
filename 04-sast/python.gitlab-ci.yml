@@ -10,7 +10,6 @@ Bandit:
     - ".sast_base"
     - ".sast_bandit_rule"
     - ".DefectDojo_variables"
-    - ".default_runner_resource_request"
   script:
     - bandit
       -r .

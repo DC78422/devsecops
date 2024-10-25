@@ -6,11 +6,6 @@ Semgrep:
   variables:
     SAST_IMAGE: harbor.example.com/devops/semgrep:latest 
     SEARCH_MAX_DEPTH: 4
-    KUBERNETES_CPU_REQUEST: 1000m
-    KUBERNETES_CPU_LIMIT: 2000m
-    KUBERNETES_MEMORY_REQUEST: 1000Mi
-    KUBERNETES_MEMORY_LIMIT: 2000Mi
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
   extends:
     - ".sast_base"
     - ".sast_semgrep_rule"
@@ -37,10 +32,6 @@ appscreener:
     - ".sast_appscreener_rule"
   variables:
     SAST_IMAGE: stock.example.com/pcp/appscreener-cli:latest
-    KUBERNETES_CPU_REQUEST: "100m"
-    KUBERNETES_CPU_LIMIT: "150m"
-    KUBERNETES_MEMORY_REQUEST: "100Mi"
-    KUBERNETES_MEMORY_LIMIT: "150Mi"
   script:
     - clt.sh
       -t $APPSCREENER_TOKEN

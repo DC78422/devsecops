@@ -12,7 +12,6 @@ Gosec:
   extends:
     - ".sast_base"
     - ".DefectDojo_variables"
-    - ".default_runner_resource_request"
   script:
     - ls -la
     - gosec

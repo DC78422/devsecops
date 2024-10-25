@@ -9,7 +9,6 @@ Progpilot:
   extends:
     - ".sast_base"
     - ".DefectDojo_variables"
-    - ".default_runner_resource_request"
   script:
     - echo progpilot
     - echo progpilot > reports/sast.progpilot.report.json

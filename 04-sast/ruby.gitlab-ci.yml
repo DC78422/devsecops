@@ -9,7 +9,6 @@ Brakeman:
   extends:
     - ".sast_base"
     - ".DefectDojo_variables"
-    - ".default_runner_resource_request"
   script:
     - /usr/src/app/bin/brakeman
       -f json
