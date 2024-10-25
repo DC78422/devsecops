@@ -12,20 +12,6 @@ variables:
   IMAGE_TO_SCAN: $APP_IMAGE:latest
   SECURITY_BRANCH: $CI_DEFAULT_BRANCH
 
-".default_runner_resource_request":
-  variables:
-    KUBERNETES_CPU_REQUEST: 500m
-    KUBERNETES_CPU_LIMIT: 1000m
-    KUBERNETES_MEMORY_REQUEST: 500Mi
-    KUBERNETES_MEMORY_LIMIT: 1000Mi
-
-".extended_runner_resource_request":
-  variables:
-    KUBERNETES_CPU_REQUEST: 1000m
-    KUBERNETES_CPU_LIMIT: 1500m
-    KUBERNETES_MEMORY_REQUEST: 1000Mi
-    KUBERNETES_MEMORY_LIMIT: 1500Mi
-
 ".artifacts":
   before_script:
     - mkdir reports/ || true
@@ -43,7 +29,6 @@ variables:
     entrypoint: [$SECRETS_IMAGE_ENTRYPOINT]
   variables:
     SECRETS_IMAGE_ENTRYPOINT: ""
-    # KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
 
 ".lint_base":
   stage: Lint
@@ -54,7 +39,6 @@ variables:
     entrypoint: [$LINT_IMAGE_ENTRYPOINT]
   variables:
     LINT_IMAGE_ENTRYPOINT: ""
-    # KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
     # PYTHON_INSTALL_CMD: "echo 'Здесь может быть команда для установки зависимостей'"
 
 ".audit_base":
@@ -64,7 +48,6 @@ variables:
     # entrypoint: [$AUDIT_IMAGE_ENTRYPOINT]
   variables:
     AUDIT_IMAGE_ENTRYPOINT: ""
-    # KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
 
 ".sast_base":
   stage: SAST (src)
@@ -75,7 +58,6 @@ variables:
     entrypoint: [$SAST_IMAGE_ENTRYPOINT]
   variables:
     SAST_IMAGE_ENTRYPOINT: ""
-    # KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
 
 ".dast_base":
   stage: DAST
@@ -86,7 +68,6 @@ variables:
     entrypoint: [$DAST_IMAGE_ENTRYPOINT]
   variables:
     DAST_IMAGE_ENTRYPOINT: ""
-    # KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
 
 # ".security_rule":
 #   rules:
@@ -170,10 +151,8 @@ variables:
 ".DefectDojo":
   extends:
     # - ".security_rule"
-    - ".default_runner_resource_request"
     - ".DefectDojo_variables"
   variables:
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
     GIT_STRATEGY: none
   image:
     name: "stock.example.com/pcp/dd-wrapper:$DD_WRAPPER_VERSION"
@@ -221,9 +200,7 @@ variables:
   extends:
     - ".artifacts"
     # - ".security_rule"
-    - ".default_runner_resource_request"
   variables:
-    KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"
   stage: .post
   image:
     name: "stock.example.com/pcp/dt-wrapper:$DT_WRAPPER_VERSION"
