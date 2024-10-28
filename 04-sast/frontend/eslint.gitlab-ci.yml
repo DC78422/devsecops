@@ -1,0 +1,38 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+variables:
+  DD_UPLOAD_REPORT: "true"
+
+# ESLint (https://eslint.org/)
+eslint (sast):
+  variables:
+    SAST_IMAGE: harbor.example.com/devops/node:18.20.3-p10
+    SEARCH_MAX_DEPTH: 4
+  extends:
+    - ".sast_base"
+    - ".DefectDojo_variables"
+  script:
+    # - npx eslint .
+    # - npm test
+    - echo "Здесь необходимо переопределить блок script в соответствии с окружением"
+    - echo eslint > reports/sast.eslint.report.json
+  after_script:
+    - |
+      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+        echo "Uploading"
+        dd-wrapper --dd-report-file=reports/sast.eslint.report.json --dd-engagement-test-title="ESLint Scan" --dd-engagement-scan-type="ESLint Scan"
+      fi
+  rules:
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /eslint/"
+      when: never
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /(javascript|typescript|jsx|tsx)/"
+    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
+  when: manual
+  allow_failure: true
+
+DefectDojo Engagement Creation:
+  extends:
+    - ".DefectDojo_Engagement_Creation"
