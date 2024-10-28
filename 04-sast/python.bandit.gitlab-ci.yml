@@ -1,6 +1,12 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
+variables:
+  # SAST_EXCLUDED_ANALYZERS: "bandit"
+  # SAST_DISABLED: "true"
+  SECURITY_BRANCH: "develop"
+  DD_UPLOAD_REPORT: "true"
+
 # Bandit (https://github.com/PyCQA/bandit)
 Bandit:
   variables:
@@ -8,7 +14,6 @@ Bandit:
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
-    - ".sast_bandit_rule"
     - ".DefectDojo_variables"
   script:
     - bandit
@@ -22,6 +27,12 @@ Bandit:
         echo "Uploading"
         dd-wrapper --dd-report-file=reports/sast.bandit.report.json --dd-engagement-test-title="Bandit scan" --dd-engagement-scan-type="Bandit Scan"
       fi
+  rules:
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /bandit/"
+      when: never
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
   when: manual
   allow_failure: true
 
