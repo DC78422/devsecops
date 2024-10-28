@@ -1,0 +1,21 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+mypy:
+  extends:
+    - ".lint_base"
+    - ".lint_rule"
+  variables:
+    LINT_IMAGE: harbor.example.com/devops/mypy:latest
+    MYPY_SOURCE: .
+    MYPY_EXCLUDE: >
+      --exclude '/build\.py$'
+  script:
+    - $PYTHON_INSTALL_CMD
+    - mypy
+      $MYPY_EXCLUDE
+      $MYPY_SOURCE
+    #  > reports/lint.mypy.txt
+  # after_script:
+  #   - dd-wrapper --dd-report-file=reports/lint.kics_dockerfile.report.json    --dd-engagement-test-title="KICS Dockerfile Scanner"    --dd-engagement-scan-type="KICS Scan"
+  when: manual

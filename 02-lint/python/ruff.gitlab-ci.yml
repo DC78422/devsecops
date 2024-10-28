@@ -1,0 +1,26 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+ruff:
+  extends:
+    - ".lint_base"
+    - ".lint_rule"
+  variables:
+    LINT_IMAGE: harbor.example.com/devops/ruff:latest
+    RUFF_TARGET_VERSION: py311
+    RUFF_SOURCE: .
+    RUFF_ARGS: ""
+  script:
+    - $PYTHON_INSTALL_CMD
+    - |
+      set -ex
+      if [[ -n $RUFF_TARGET_VERSION ]]; then
+        RUFF_ARGS="$RUFF_ARGS --target-version $RUFF_TARGET_VERSION"
+      fi
+      echo "ruff args: $RUFF_ARGS"
+      echo "ruff source: $RUFF_SOURCE"
+      ruff check $RUFF_ARGS $RUFF_SOURCE
+    #  > reports/lint.ruff.txt
+  # after_script:
+  #   - dd-wrapper --dd-report-file=reports/lint.kics_dockerfile.report.json    --dd-engagement-test-title="KICS Dockerfile Scanner"    --dd-engagement-scan-type="KICS Scan"
+  when: manual
