@@ -26,9 +26,9 @@ variables:
   stage: Secrets
   image:
     name: $SECRETS_IMAGE
-    entrypoint: [$SECRETS_IMAGE_ENTRYPOINT]
-  variables:
-    SECRETS_IMAGE_ENTRYPOINT: ""
+    # entrypoint: [$SECRETS_IMAGE_ENTRYPOINT]
+  # variables:
+  #   SECRETS_IMAGE_ENTRYPOINT: ""
 
 ".lint_base":
   stage: Lint
@@ -36,9 +36,9 @@ variables:
     - ".artifacts"
   image:
     name: $LINT_IMAGE
-    entrypoint: [$LINT_IMAGE_ENTRYPOINT]
-  variables:
-    LINT_IMAGE_ENTRYPOINT: ""
+    # entrypoint: [$LINT_IMAGE_ENTRYPOINT]
+  # variables:
+    # LINT_IMAGE_ENTRYPOINT: ""
     # PYTHON_INSTALL_CMD: "echo 'Здесь может быть команда для установки зависимостей'"
 
 ".audit_base":
@@ -46,8 +46,8 @@ variables:
   image:
     name: $AUDIT_IMAGE
     # entrypoint: [$AUDIT_IMAGE_ENTRYPOINT]
-  variables:
-    AUDIT_IMAGE_ENTRYPOINT: ""
+  # variables:
+  #   AUDIT_IMAGE_ENTRYPOINT: ""
 
 ".sast_base":
   stage: SAST (src)
@@ -55,9 +55,9 @@ variables:
     - ".artifacts"
   image:
     name: $SAST_IMAGE
-    entrypoint: [$SAST_IMAGE_ENTRYPOINT]
-  variables:
-    SAST_IMAGE_ENTRYPOINT: ""
+    # entrypoint: [$SAST_IMAGE_ENTRYPOINT]
+  # variables:
+  #   SAST_IMAGE_ENTRYPOINT: ""
 
 ".dast_base":
   stage: DAST
@@ -65,9 +65,9 @@ variables:
     - ".artifacts"
   image:
     name: $DAST_IMAGE
-    entrypoint: [$DAST_IMAGE_ENTRYPOINT]
+    # entrypoint: [$DAST_IMAGE_ENTRYPOINT]
   variables:
-    DAST_IMAGE_ENTRYPOINT: ""
+    # DAST_IMAGE_ENTRYPOINT: ""
 
 # ".security_rule":
 #   rules:
@@ -91,52 +91,32 @@ variables:
 
 ".audit_rule":
   rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      variables:
+        DT_UPLOAD_REPORT: "false"
     - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
-  variables:
-    DT_UPLOAD_REPORT: "true"
+      variables:
+        DT_UPLOAD_REPORT: "true"
 
 ".audit_rule_mr":
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 
-.sast_rule_template: &sast_rule_template
-  - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-    when: never
-  - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
-
 ".sast_rule":
   rules:
-    - *sast_rule_template
-  variables:
-    DD_UPLOAD_REPORT: "true"
-
-".sast_bandit_rule":
-  rules:
-    - if: "$SAST_EXCLUDED_ANALYZERS =~ /bandit/"
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
       when: never
-    - *sast_rule_template
-  variables:
-    DD_UPLOAD_REPORT: "true"
-
-".sast_semgrep_rule":
-  rules:
-    - if: "$SAST_EXCLUDED_ANALYZERS =~ /semgrep/"
-      when: never
-    - *sast_rule_template
-  variables:
-    DD_UPLOAD_REPORT: "true"
-
-".sast_appscreener_rule":
-  rules:
-    - if: "$SAST_EXCLUDED_ANALYZERS =~ /appscreener/"
-      when: never
-    - *sast_rule_template
+    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
+      variables:
+        DD_UPLOAD_REPORT: "true"
 
 ".dast_rule":
   rules:
+    - if: "$DAST_DISABLED == 'true' || $DAST_DISABLED == '1'"
+      when: never
     - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
-  variables:
-    DD_UPLOAD_REPORT: "true"
+      variables:
+        DD_UPLOAD_REPORT: "true"
 
 ".DefectDojo_variables":
   variables:
