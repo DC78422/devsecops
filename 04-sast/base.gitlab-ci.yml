@@ -25,23 +25,6 @@ Semgrep:
   when: manual
   allow_failure: true
 
-# Solar Appscreener
-appscreener:
-  extends:
-    - ".sast_base"
-    - ".sast_appscreener_rule"
-  variables:
-    SAST_IMAGE: stock.example.com/pcp/appscreener-cli:latest
-  script:
-    - clt.sh
-      -t $APPSCREENER_TOKEN
-      -p $PROJECT_NAME
-      -u $PROJECT_ID
-      -type FILE
-      -path .
-      start
-  when: manual
-
 DefectDojo Engagement Creation:
   extends:
     - ".DefectDojo_Engagement_Creation"
