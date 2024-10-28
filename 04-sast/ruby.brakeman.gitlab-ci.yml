@@ -20,9 +20,9 @@ Brakeman:
         dd-wrapper --dd-report-file=reports/sast.brakeman.report.json --dd-engagement-test-title="Brakeman scan" --dd-engagement-scan-type="Brakeman Scan"
       fi
   rules:
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /brakeman/"
+      when: never
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
       when: never
     - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /ruby/"
   when: manual
