@@ -1,0 +1,8 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# kube-bench Scanner (https://github.com/aquasecurity/kube-bench)
+
+DefectDojo Engagement Creation:
+  extends:
+    - ".DefectDojo_Engagement_Creation"

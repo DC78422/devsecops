@@ -1,71 +1,7 @@
 include:
-  - local: 'functions.gitlab-ci.yml'
-
-# Kubeaudit Scan (https://github.com/Shopify/kubeaudit)
-Kubeaudit:
-  extends:
-    - ".dast_base"
-  variables:
-    IAC_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
-  script:
-    - echo $CI_JOB_NAME
-  rules:
-    - if: "$CLUSTER_SCAN == 'true' || $CLUSTER_SCAN == '1'"
-  when: manual
-
-# Kubescape Scanner (https://github.com/kubescape/kubescape)
-Kubescape Cluster Scan:
-  extends:
-    - ".dast_base"
-  variables:
-    IAC_IMAGE: harbor.example.com/devops/kubescape:v3.0.11
-  script:
-    - echo $CI_JOB_NAME
-    - kubescape scan --kubeconfig cluster.conf
-  rules:
-    - if: "$CLUSTER_SCAN == 'true' || $CLUSTER_SCAN == '1'"
-  when: manual
-
-# Popeye (https://github.com/derailed/popeye)
-Popeye:
-  extends:
-    - ".dast_base"
-  variables:
-    IAC_IMAGE: harbor.example.com/devops/popeye:v0.21.3
-  script:
-    - echo $CI_JOB_NAME
-    - popeye
-  rules:
-    - if: "$CLUSTER_SCAN == 'true' || $CLUSTER_SCAN == '1'"
-  when: manual
-
-# Prowler (https://github.com/prowler-cloud/prowler)
-Prowler:
-  extends:
-    - ".dast_base"
-  variables:
-    IAC_IMAGE: harbor.example.com/devops/prowler:latest
-  script:
-    - prowler kubernetes --help
-  rules:
-    - if: "$CLUSTER_SCAN == 'true' || $CLUSTER_SCAN == '1'"
-  when: manual
-
-# kube-bench Scanner (https://github.com/aquasecurity/kube-bench)
-
-# kubeHunter Scanner (https://github.com/aquasecurity/kube-hunter)
-kubeHunter:
-  extends:
-    - ".dast_base"
-  variables:
-    IAC_IMAGE: $CI_REGISTRY/devops/kube-hunter:latest
-  script:
-    - echo $CI_JOB_NAME
-    - kube-hunter
-  rules:
-    - if: "$CLUSTER_SCAN == 'true' || $CLUSTER_SCAN == '1'"
-  when: manual
-
-DefectDojo Engagement Creation:
-  extends:
-    - ".DefectDojo_Engagement_Creation"
+  - local: '05-dast/k8s.cluster/kube-bench.gitlab-ci.yml'
+  - local: '05-dast/k8s.cluster/kube-hunter.gitlab-ci.yml'
+  - local: '05-dast/k8s.cluster/kubeaudit.gitlab-ci.yml'
+  - local: '05-dast/k8s.cluster/kubescape.gitlab-ci.yml'
+  - local: '05-dast/k8s.cluster/popeye.gitlab-ci.yml'
+  - local: '05-dast/k8s.cluster/prowler.gitlab-ci.yml'
