@@ -1,0 +1,24 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# kubeconform (https://github.com/yannh/kubeconform)
+kubeconform:
+  extends:
+    - ".sast_base"
+    - ".DefectDojo_variables"
+  variables:
+    IAC_IMAGE: $CI_REGISTRY/devops/deploy-tools:latest
+    HELM_VALUES_FILES: >
+      -f values.yaml
+  script:
+    - helm plugin install https://github.com/jtyr/kubeconform-helm
+    - helm kubeconform
+      --verbose
+      --summary
+      $HELM_VALUES_FILES
+      .
+  when: manual
+
+DefectDojo Engagement Creation:
+  extends:
+    - ".DefectDojo_Engagement_Creation"

@@ -1,0 +1,18 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# Trivy
+Trivy K8S Scanning:
+  extends:
+    - ".sast_base"
+    - ".DefectDojo_variables"
+  variables:
+    IAC_IMAGE: aquasec/trivy:0.51.1
+  script:
+    - trivy k8s 
+      --report summary cluster
+  when: manual
+
+DefectDojo Engagement Creation:
+  extends:
+    - ".DefectDojo_Engagement_Creation"
