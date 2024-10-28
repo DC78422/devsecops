@@ -23,11 +23,12 @@ Gosec:
         dd-wrapper --dd-report-file=reports/sast.gosec.report.json --dd-engagement-test-title="Gosec Scanner" --dd-engagement-scan-type="Gosec Scanner"
       fi
   rules:
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /gosec/"
       when: never
-    - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /go/"
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /go/"
+    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
   when: manual
   allow_failure: true
 

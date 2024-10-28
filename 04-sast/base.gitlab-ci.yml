@@ -8,7 +8,6 @@ Semgrep:
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
-    - ".sast_semgrep_rule"
     - ".DefectDojo_variables"
   script:
     - semgrep scan
@@ -22,6 +21,12 @@ Semgrep:
         echo "Uploading"
         dd-wrapper --dd-report-file=reports/sast.semgrep.report.json --dd-engagement-test-title="Semgrep JSON Report" --dd-engagement-scan-type="Semgrep JSON Report"
       fi
+  rules:
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /semgrep/"
+      when: never
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
   when: manual
   allow_failure: true
 

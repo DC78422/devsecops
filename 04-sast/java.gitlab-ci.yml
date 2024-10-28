@@ -18,11 +18,12 @@ pmd:
       -f json
       -r reports/sast.pmd.report.json
   rules:
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /pmd/"
       when: never
-    - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /java$/"
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /java$/"
+    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
   when: manual
   allow_failure: true
 
@@ -44,11 +45,12 @@ cpd:
       --language=$LANGUAGE
       --rulesets=$LANGUAGE_RULESETS
   rules:
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /cpd/"
       when: never
-    - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /java$/"
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /java$/"
+    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
   when: manual
   allow_failure: true
 
@@ -64,11 +66,12 @@ spotbugs:
     - echo sobelow
     - echo sobelow > reports/sast.sobelow.report.json
   rules:
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /spotbugs/"
       when: never
-    - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /java$/"
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /java$/"
+    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
   when: manual
   allow_failure: true
 
@@ -91,11 +94,12 @@ Bearer:
         dd-wrapper --dd-report-file=reports/sast.bearer.report.json --dd-engagement-test-title="Bearer Sarif Report" --dd-engagement-scan-type="SARIF"
       fi
   rules:
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /bearer/"
       when: never
-    - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /(javascript|typescript|ruby|php|go|python|java$|tsx)/"
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /(javascript|typescript|ruby|php|go|python|java$|tsx)/"
+    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
   when: manual
   allow_failure: true
 

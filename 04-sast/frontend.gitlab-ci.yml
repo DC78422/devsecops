@@ -21,11 +21,12 @@ ESlint (sast):
         dd-wrapper --dd-report-file=reports/sast.eslint.report.json --dd-engagement-test-title="ESLint Scan" --dd-engagement-scan-type="ESLint Scan"
       fi
   rules:
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /eslint/"
       when: never
-    - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /(javascript|typescript|jsx|tsx)/"
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /(javascript|typescript|jsx|tsx)/"
+    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
   when: manual
   allow_failure: true
 
