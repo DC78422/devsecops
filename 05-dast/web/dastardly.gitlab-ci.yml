@@ -1,0 +1,26 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# Burp Dastardly
+Dastardly:
+  extends:
+    - ".dast_base"
+  image:
+    name: harbor.example.com/devops/dastardly:2024.4.1
+    entrypoint: [dastardly-entrypoint.sh]
+  variables:
+    BURP_START_URL: https://$DAST_WEBSITE
+    BURP_REPORT_FILE_PATH: reports/dast.dastardly.report.xml
+  script:
+    - /usr/local/burpsuite_enterprise/bin/dastardly
+  after_script:
+    - echo "Uploading"
+    - dd-wrapper --dd-report-file=reports/dast.dastardly.report.xml   --dd-engagement-test-title="Dastardly"  --dd-engagement-scan-type="Burp Dastardly Scan"
+  rules:
+    - if: $DAST_WEBSITE
+  when: manual
+  allow_failure: true
+
+DefectDojo Engagement Creation:
+  extends:
+    - ".DefectDojo_Engagement_Creation"
