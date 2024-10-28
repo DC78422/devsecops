@@ -1,4 +1,5 @@
 include:
+  - local: '04-sast/base/semgrep.gitlab-ci.yml'
   - local: '04-sast/k8s.helm/chart-testing.gitlab-ci.yml'
   - local: '04-sast/k8s.helm/checkov.gitlab-ci.yml'
   - local: '04-sast/k8s.helm/kics.gitlab-ci.yml'
