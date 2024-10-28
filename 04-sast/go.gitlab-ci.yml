@@ -1,36 +1,4 @@
 include:
   - local: 'functions.gitlab-ci.yml'
-
-# добавить и попробовать
-# https://github.com/golang/vuln
-
-# Gosec Scanner (https://github.com/securego/gosec)
-Gosec:
-  variables:
-    SAST_IMAGE: harbor.example.com/devops/gosec:latest
-    SEARCH_MAX_DEPTH: 4
-  extends:
-    - ".sast_base"
-    - ".DefectDojo_variables"
-  script:
-    - ls -la
-    - gosec
-    - echo gosec > reports/sast.gosec.report.json
-  after_script:
-    - |
-      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
-        echo "Uploading"
-        dd-wrapper --dd-report-file=reports/sast.gosec.report.json --dd-engagement-test-title="Gosec Scanner" --dd-engagement-scan-type="Gosec Scanner"
-      fi
-  rules:
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
-    - if: "$SAST_EXCLUDED_ANALYZERS =~ /gosec/"
-      when: never
-    - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /go/"
-  when: manual
-  allow_failure: true
-
-DefectDojo Engagement Creation:
-  extends:
-    - ".DefectDojo_Engagement_Creation"
+  - local: '04-sast/go.gosec.gitlab-ci.yml'
+  - local: '04-sast/go.vuln.gitlab-ci.yml'

@@ -1,0 +1,9 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# добавить и попробовать
+# https://github.com/golang/vuln
+
+DefectDojo Engagement Creation:
+  extends:
+    - ".DefectDojo_Engagement_Creation"
