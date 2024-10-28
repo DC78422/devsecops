@@ -1,0 +1,37 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+variables:
+  DD_UPLOAD_REPORT: "true"
+
+# bearer (https://github.com/Bearer/bearer)
+bearer:
+  variables:
+    SAST_IMAGE: harbor.example.com/devops/bearer:latest
+    SEARCH_MAX_DEPTH: 4
+  extends:
+    - ".sast_base"
+    - ".DefectDojo_variables"
+  script:
+    - /bin/bearer scan .
+      --format sarif
+      --output reports/sast.bearer.report.json
+  after_script:
+    - |
+      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+        echo "Uploading"
+        dd-wrapper --dd-report-file=reports/sast.bearer.report.json --dd-engagement-test-title="Bearer Sarif Report" --dd-engagement-scan-type="SARIF"
+      fi
+  rules:
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /bearer/"
+      when: never
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /(javascript|typescript|ruby|php|go|python|java$|tsx)/"
+    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
+  when: manual
+  allow_failure: true
+
+DefectDojo Engagement Creation:
+  extends:
+    - ".DefectDojo_Engagement_Creation"
