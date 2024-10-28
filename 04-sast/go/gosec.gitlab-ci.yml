@@ -1,8 +1,8 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
-# добавить и попробовать
-# https://github.com/golang/vuln
+variables:
+  DD_UPLOAD_REPORT: "true"
 
 # Gosec Scanner (https://github.com/securego/gosec)
 Gosec:

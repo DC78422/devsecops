@@ -1,6 +1,9 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
+variables:
+  DD_UPLOAD_REPORT: "true"
+
 # добавить и попробовать
 # https://github.com/golang/vuln
 

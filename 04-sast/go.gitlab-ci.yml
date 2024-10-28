@@ -1,4 +1,6 @@
 include:
-  - local: 'functions.gitlab-ci.yml'
-  - local: '04-sast/go.gosec.gitlab-ci.yml'
-  - local: '04-sast/go.vuln.gitlab-ci.yml'
+  - local: '04-sast/go/gosec.gitlab-ci.yml'
+  - local: '04-sast/go/vuln.gitlab-ci.yml'
+
+variables:
+  DD_UPLOAD_REPORT: "true"
