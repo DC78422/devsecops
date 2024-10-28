@@ -1,0 +1,44 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+variables:
+  DD_UPLOAD_REPORT: "true"
+
+".mobsf":
+  variables:
+    SAST_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
+    SEARCH_MAX_DEPTH: 4
+  extends:
+    - ".sast_base"
+    - ".DefectDojo_variables"
+  rules:
+    - when: never
+  script:
+    - echo mobsf
+  allow_failure: true
+
+# +
+mobsf-ios:
+  variables:
+    SAST_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
+    SEARCH_MAX_DEPTH: 4
+  extends:
+    - ".mobsf"
+  script:
+    - echo mobsf-ios
+    - echo mobsf-ios > reports/sast.mobsf-ios.report.json
+  rules:
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /mobsf/"
+      when: never
+    - if: "$CI_COMMIT_BRANCH && $SAST_EXPERIMENTAL_FEATURES == 'true'"
+      exists:
+        - "**/*.ipa"
+        - "**/*.xcodeproj/*"
+  allow_failure: true
+  when: manual
+
+DefectDojo Engagement Creation:
+  extends:
+    - ".DefectDojo_Engagement_Creation"
