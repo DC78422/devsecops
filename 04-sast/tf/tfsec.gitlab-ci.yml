@@ -1,0 +1,7 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+variables:
+  DD_UPLOAD_REPORT: "true"
+
+# TFSec (https://github.com/aquasecurity/tfsec)
