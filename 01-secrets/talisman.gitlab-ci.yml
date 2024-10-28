@@ -1,24 +1,6 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
-# Gitleaks (https://github.com/gitleaks/gitleaks)
-GitLeaks:
-  extends:
-    - ".secrets_base"
-    - ".secrets_rule"
-  variables:
-    SECRETS_IMAGE: harbor.example.com/devops/gitleaks:latest
-  script:
-    - gitleaks detect
-      --source .
-      --report-format=json
-      --report-path=reports/secrets.gitleaks.report.json
-      -v
-  after_script:
-    - echo "Uploading"
-    - dd-wrapper --dd-report-file=reports/secrets.gitleaks.report.json --dd-engagement-test-title="Gitleaks Scan"  --dd-engagement-scan-type="Gitleaks Scan"
-  when: manual
-
 # Talisman (https://github.com/thoughtworks/talisman)
 Talisman:
   extends:
