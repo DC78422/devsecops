@@ -1,5 +1,4 @@
 include:
-  - local: 'functions.gitlab-ci.yml'
   - local: '04-sast/docker.image/dockle.gitlab-ci.yml'
   - local: '04-sast/docker.image/grype.gitlab-ci.yml'
   - local: '04-sast/docker.image/trivy.gitlab-ci.yml'
