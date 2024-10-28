@@ -1,0 +1,4 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# KICS Scanner (https://github.com/Checkmarx/kics)

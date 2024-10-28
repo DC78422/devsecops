@@ -1,5 +1,5 @@
 include:
-  - local: 'functions.gitlab-ci.yml'
+  - local: '04-sast/cicd/kics.gitlab-ci.yml'
 
-# KICS Scanner (https://github.com/Checkmarx/kics)
-# CICD
+variables:
+  DD_UPLOAD_REPORT: "true"
