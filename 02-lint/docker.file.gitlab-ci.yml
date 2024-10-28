@@ -11,7 +11,6 @@ KICS Dockerfile Scanning:
     - ".lint_base"
     - ".lint_rule"
     - ".DefectDojo_variables"
-    - ".default_runner_resource_request"
   variables:
     LINT_IMAGE: harbor.example.com/devops/kics:latest
   script:

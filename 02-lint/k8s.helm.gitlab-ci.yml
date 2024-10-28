@@ -6,7 +6,6 @@ helm lint:
   extends:
     - ".lint_base"
     - ".lint_rule"
-    - ".default_runner_resource_request"
   variables:
     LINT_IMAGE: $CI_REGISTRY/devops/deploy-tools:latest
     KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: "builder"

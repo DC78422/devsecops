@@ -6,7 +6,6 @@ eslint (lint):
   extends:
     - ".lint_base"
     - ".lint_rule"
-    - ".default_runner_resource_request"
   variables:
     LINT_IMAGE: harbor.example.com/devops/node:18.20.3-p10
     SEARCH_MAX_DEPTH: 4
