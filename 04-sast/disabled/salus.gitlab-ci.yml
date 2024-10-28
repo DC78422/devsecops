@@ -1,0 +1,36 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# -
+salus:
+  variables:
+    SAST_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
+    SEARCH_MAX_DEPTH: 4
+  extends:
+    - ".sast_base"
+  before_script:
+    - mkdir reports/ || true
+  script:
+    - find . -type f -name "*.ipa"
+    - find . -type d -name "*.xcodeproj"
+    - echo salus
+    - echo salus > reports/salus.json
+  rules:
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /salus/"
+      when: never
+    - if: "$CI_COMMIT_BRANCH"
+      exists:
+        - "**/*.rb"
+        - "**/Gemfile"
+        - "**/*.js"
+        - "**/*.json"
+        - "**/*.py"
+        - "**/*.mjs"
+        - "**/*.go"
+        - "**/*.rs"
+        - "**/*.toml"
+        - "**/*.cargo"
+  allow_failure: true
+  when: manual

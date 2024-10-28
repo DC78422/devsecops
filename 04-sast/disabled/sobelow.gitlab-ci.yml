@@ -1,0 +1,26 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# -
+sobelow:
+  variables:
+    SAST_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
+    SEARCH_MAX_DEPTH: 4
+  extends:
+    - ".sast_base"
+  before_script:
+    - mkdir reports/ || true
+  script:
+    - find . -type f -name "mix.exs"
+    - echo sobelow
+    - echo sobelow > reports/sobelow.json
+  rules:
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /sobelow/"
+      when: never
+    - if: "$CI_COMMIT_BRANCH"
+      exists:
+        - "**/mix.exs"
+  when: manual
+  allow_failure: true

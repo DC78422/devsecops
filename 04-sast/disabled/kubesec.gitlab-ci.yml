@@ -1,0 +1,23 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# -
+kubesec:
+  variables:
+    SAST_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
+    SEARCH_MAX_DEPTH: 4
+  extends:
+    - ".sast_base"
+  before_script:
+    - mkdir reports/ || true
+  script:
+    - echo kubesec
+    - echo kubesec > reports/kubesec.json
+  rules:
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /kubesec/"
+      when: never
+    - if: "$CI_COMMIT_BRANCH && $SCAN_KUBERNETES_MANIFESTS == 'true'"
+  when: manual
+  allow_failure: true

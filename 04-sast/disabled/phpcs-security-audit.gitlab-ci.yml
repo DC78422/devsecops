@@ -1,0 +1,26 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# -
+phpcs-security-audit:
+  variables:
+    SAST_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
+    SEARCH_MAX_DEPTH: 4
+  extends:
+    - ".sast_base"
+  before_script:
+    - mkdir reports/ || true
+  script:
+    - find . -type f -name "*.php"
+    - echo phpcs-security-audit
+    - echo phpcs-security-audit > reports/phpcs-security-audit.json
+  rules:
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /phpcs-security-audit/"
+      when: never
+    - if: "$CI_COMMIT_BRANCH"
+      exists:
+        - "**/*.php"
+  when: manual
+  allow_failure: true
