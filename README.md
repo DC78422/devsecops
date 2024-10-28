@@ -11,11 +11,6 @@ variables:
   DEPENDENCYTRACK_URL: "https://dt-api.example.com"
   DD_URL: "https://defectdojo.example.com"
 
-  # AppScreener
-  PROJECT_NAME: project
-  PROJECT_ID: id
-  # APPSCREENER_TOKEN: 
-
   PYTHON_INSTALL_CMD: "pip install ."
   PYTHON_DEPENDENCY_MANAGMENT: environment  # Build an SBOM from Python (virtual) environment
   # PYTHON_DEPENDENCY_MANAGMENT: requirements # Build an SBOM from Pip requirements
