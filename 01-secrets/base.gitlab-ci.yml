@@ -8,7 +8,6 @@ Detect-Secrets:
     - ".secrets_base"
     - ".secrets_rule"
     - ".DefectDojo_variables"
-    - ".default_runner_resource_request"
   variables:
     SECRETS_IMAGE: harbor.example.com/devops/detect-secrets:latest 
     DETECT_SECRETS_IGNORE_FILE: ".detectsecretsingore"
@@ -42,7 +41,6 @@ Trufflehog3:
     - ".secrets_base"
     - ".secrets_rule"
     - ".DefectDojo_variables"
-    - ".default_runner_resource_request"
   variables:
     SECRETS_IMAGE: harbor.example.com/devops/trufflehog3:latest
   script:

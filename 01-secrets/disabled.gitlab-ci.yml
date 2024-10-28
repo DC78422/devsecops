@@ -6,7 +6,6 @@ GitLeaks:
   extends:
     - ".secrets_base"
     - ".secrets_rule"
-    - ".default_runner_resource_request"
   variables:
     SECRETS_IMAGE: harbor.example.com/devops/gitleaks:latest
   script:
@@ -26,7 +25,6 @@ Talisman:
     - ".artifacts"
     - ".secrets_base"
     - ".secrets_rule"
-    - ".default_runner_resource_request"
   variables:
     SECRETS_IMAGE: harbor.example.com/devops/talisman:latest
   script:
