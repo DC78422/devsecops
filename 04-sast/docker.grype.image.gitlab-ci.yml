@@ -23,6 +23,12 @@ Grype Image Scanning:
   after_script:
     - echo "Uploading"
     - dd-wrapper --dd-report-file=reports/iac.grype.report.json --dd-engagement-test-title="Anchore Image Grype" --dd-engagement-scan-type="Anchore Grype"
+  rules:
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /Grype Image Scanning/"
+      when: never
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
   when: manual
 
 DefectDojo Engagement Creation:

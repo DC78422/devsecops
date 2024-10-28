@@ -24,6 +24,12 @@ Dockle Image Scanning:
         echo "Uploading"
         dd-wrapper --dd-report-file=reports/iac.dockle.report.json --dd-engagement-test-title="Dockle Image Scanning" --dd-engagement-scan-type="Dockle Scan"
       fi
+  rules:
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /Dockle Image Scanning/"
+      when: never
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
   when: manual
 
 DefectDojo Engagement Creation:
