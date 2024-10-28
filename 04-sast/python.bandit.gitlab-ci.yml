@@ -1,0 +1,30 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# Bandit (https://github.com/PyCQA/bandit)
+Bandit:
+  variables:
+    SAST_IMAGE: $CI_REGISTRY/devops/bandit:latest
+    SEARCH_MAX_DEPTH: 4
+  extends:
+    - ".sast_base"
+    - ".sast_bandit_rule"
+    - ".DefectDojo_variables"
+  script:
+    - bandit
+      -r .
+      -f json
+      -o reports/sast.bandit.report.json
+      --exit-zero
+  after_script:
+    - |
+      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+        echo "Uploading"
+        dd-wrapper --dd-report-file=reports/sast.bandit.report.json --dd-engagement-test-title="Bandit scan" --dd-engagement-scan-type="Bandit Scan"
+      fi
+  when: manual
+  allow_failure: true
+
+DefectDojo Engagement Creation:
+  extends:
+    - ".DefectDojo_Engagement_Creation"
