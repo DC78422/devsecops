@@ -1,6 +1,9 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
+variables:
+  DD_UPLOAD_REPORT: "true"
+
 # Kube-bench
 
 DefectDojo Engagement Creation:

@@ -1,0 +1,31 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+variables:
+  DD_UPLOAD_REPORT: "true"
+
+# KICS Scanner (https://github.com/Checkmarx/kics)
+KICS Scanning:
+  extends:
+    - ".sast_base"
+    - ".DefectDojo_variables"
+  variables:
+    IAC_IMAGE: harbor.example.com/devops/kics:latest
+  script:
+    - kics scan
+      --no-progress
+      --output-path reports/
+      --output-name lint.kics_k8s.report.json
+      --report-formats json
+      --path .
+      --ignore-on-exit all
+  rules:
+    - if: "$CI_COMMIT_BRANCH"
+      exists:
+        - "Chart.yaml"
+        - "Chart.lock"
+  when: manual
+
+DefectDojo Engagement Creation:
+  extends:
+    - ".DefectDojo_Engagement_Creation"

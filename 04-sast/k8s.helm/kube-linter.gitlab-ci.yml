@@ -1,18 +1,19 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
-# kube-score (https://github.com/zegl/kube-score)
-kube-score:
+variables:
+  DD_UPLOAD_REPORT: "true"
+
+# kube-linter (https://github.com/stackrox/kube-linter)
+kube-linter:
   extends:
     - ".sast_base"
     - ".DefectDojo_variables"
   variables:
-    IAC_IMAGE: zegl/kube-score:v1.18.0
-    HELM_VALUES_FILES: >
-      -f values.yaml
+    IAC_IMAGE: harbor.example.com/devops/kube-linter:latest 
   script:
-    - helm template $HELM_VALUES_FILES . | kube-score score -
-      --output-format sarif
+    - kube-linter lint .
+    # - kube-linter lint /path/to/your/yaml.yaml
   rules:
     - if: "$CI_COMMIT_BRANCH"
       exists:

@@ -1,21 +1,20 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
-# KICS Scanner (https://github.com/Checkmarx/kics)
-KICS Scanning:
+variables:
+  DD_UPLOAD_REPORT: "true"
+
+# chart-testing
+chart-testing:
   extends:
     - ".sast_base"
     - ".DefectDojo_variables"
   variables:
-    IAC_IMAGE: harbor.example.com/devops/kics:latest
+    IAC_IMAGE: quay.io/helmpack/chart-testing:v3.11.0
   script:
-    - kics scan
-      --no-progress
-      --output-path reports/
-      --output-name lint.kics_k8s.report.json
-      --report-formats json
-      --path .
-      --ignore-on-exit all
+    - ct install
+      --chart-dirs . 
+      --charts .
   rules:
     - if: "$CI_COMMIT_BRANCH"
       exists:

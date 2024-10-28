@@ -1,3 +1,14 @@
 include:
-  - local: 'functions.gitlab-ci.yml'
+  - local: '04-sast/k8s.helm/chart-testing.gitlab-ci.yml'
+  - local: '04-sast/k8s.helm/checkov.gitlab-ci.yml'
+  - local: '04-sast/k8s.helm/kics.gitlab-ci.yml'
+  - local: '04-sast/k8s.helm/kube-bench.gitlab-ci.yml'
+  - local: '04-sast/k8s.helm/kube-linter.gitlab-ci.yml'
+  - local: '04-sast/k8s.helm/kube-score.gitlab-ci.yml'
+  - local: '04-sast/k8s.helm/kubeconform.gitlab-ci.yml'
+  - local: '04-sast/k8s.helm/kubescape.gitlab-ci.yml'
+  - local: '04-sast/k8s.helm/kubesec.gitlab-ci.yml'
+  - local: '04-sast/k8s.helm/trivy.helm.gitlab-ci.yml'
 
+variables:
+  DD_UPLOAD_REPORT: "true"

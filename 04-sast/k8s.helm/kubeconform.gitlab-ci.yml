@@ -1,6 +1,9 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
+variables:
+  DD_UPLOAD_REPORT: "true"
+
 # kubeconform (https://github.com/yannh/kubeconform)
 kubeconform:
   extends:
