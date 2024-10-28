@@ -1,0 +1,35 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# Semgrep https://github.com/semgrep/semgrep
+Semgrep:
+  variables:
+    SAST_IMAGE: harbor.example.com/devops/semgrep:latest 
+    SEARCH_MAX_DEPTH: 4
+  extends:
+    - ".sast_base"
+    - ".DefectDojo_variables"
+  script:
+    - semgrep scan
+      --config auto
+      --json
+      --json-output=reports/sast.semgrep.report.json
+      --error
+  after_script:
+    - |
+      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+        echo "Uploading"
+        dd-wrapper --dd-report-file=reports/sast.semgrep.report.json --dd-engagement-test-title="Semgrep JSON Report" --dd-engagement-scan-type="Semgrep JSON Report"
+      fi
+  rules:
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /semgrep/"
+      when: never
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
+  when: manual
+  allow_failure: true
+
+DefectDojo Engagement Creation:
+  extends:
+    - ".DefectDojo_Engagement_Creation"
