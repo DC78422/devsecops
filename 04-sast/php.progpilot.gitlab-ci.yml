@@ -2,7 +2,7 @@ include:
   - local: 'functions.gitlab-ci.yml'
 
 # progpilot (https://github.com/designsecurity/progpilot)
-Progpilot:
+progpilot:
   variables:
     SAST_IMAGE: harbor.example.com/devops/progpilot:latest
     SEARCH_MAX_DEPTH: 4
@@ -19,9 +19,9 @@ Progpilot:
         dd-wrapper --dd-report-file=reports/sast.progpilot.report.json --dd-engagement-test-title="Progpilot Scan" --dd-engagement-scan-type="Progpilot Scan"
       fi
   rules:
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /progpilot/"
+      when: never
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
       when: never
     - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /php/"
   when: manual
