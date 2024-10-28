@@ -19,7 +19,6 @@ stages:
 #   yarn >= 3 (berry)
 
 Forming CycloneDX SBOM (yarn) v1:
-  stage: Audit (src)
   variables:
     SPEC_VERSION: "1.4"                       # (choices: "1.2", "1.3", "1.4", "1.5", "1.6")
     OUTPUT_FILE: "reports/cdx-sbom.yarn.json"
@@ -53,7 +52,6 @@ stages:
 #   yarn >= 3 (berry)
 
 Forming CycloneDX SBOM (yarn) v2:
-  stage: Audit (src)
   variables:
     SPEC_VERSION: "1.4"                       # (choices: "1.2", "1.3", "1.4", "1.5", "1.6")
     OUTPUT_FILE: "reports/cdx-sbom.yarn.json"
@@ -88,7 +86,6 @@ stages:
 #   yarn >= 3 (berry)
 
 Forming CycloneDX SBOM (yarn) v3:
-  stage: Audit (src)
   variables:
     SPEC_VERSION: "1.4"                       # (choices: "1.2", "1.3", "1.4", "1.5", "1.6")
     OUTPUT_FILE: "reports/cdx-sbom.yarn.json"

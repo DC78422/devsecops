@@ -1,17 +1,14 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
-variables:
-  SBOM_PATH: "reports/cdx-sbom.json"
-
-Forming CycloneDX SBOM:
+Forming CycloneDX SBOM (go):
   extends:
     - ".artifacts"
     - ".audit_base"
     - ".audit_rule"
+    - ".DefectDojo_variables"
   variables:
     AUDIT_IMAGE: "cyclonedx-gomod:1.7.0"
-    AUDIT_IMAGE_ENTRYPOINT: ""
   before_script:
     - mkdir reports/ || true
   script:

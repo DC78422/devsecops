@@ -31,12 +31,7 @@ tasks.cyclonedxBom {
 # Необходимые переменные:
 variables:
   SBOM_PATH: "build/reports/bom.json"
-
-stages:
-  - Audit (src)
-
 Forming CycloneDX SBOM:
-  stage: Audit (src)
   image:
     name: gradle:8.7.0-jdk17
   script:

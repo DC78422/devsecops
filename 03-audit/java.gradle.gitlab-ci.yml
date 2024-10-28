@@ -1,13 +1,12 @@
-variables:
-  SBOM_PATH: "build/reports/bom.json"
 
-stages:
-  - Audit (src)
-
-Forming CycloneDX SBOM:
-  stage: Audit (src)
-  image:
-    name: "gradle:8.7.0-jdk17"
+Forming CycloneDX SBOM (gradle):
+  extends:
+    - ".artifacts"
+    - ".audit_base"
+    - ".audit_rule"
+    - ".DefectDojo_variables"
+  variables:
+    AUDIT_IMAGE: "gradle:8.7.0-jdk17"
   script:
     - gradle cyclonedxBom
   artifacts:

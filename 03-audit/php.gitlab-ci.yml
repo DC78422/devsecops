@@ -1,9 +1,6 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
-variables:
-  SBOM_PATH: "reports/cdx-sbom.php.json"
-
 Forming CycloneDX SBOM:
   extends:
     - ".artifacts"
@@ -16,12 +13,12 @@ Forming CycloneDX SBOM:
   script:
     - composer CycloneDX:make-sbom 
       --output-format=JSON
-      --output-file=$SBOM_PATH
+      --output-file=reports/cdx-sbom.php.json
   after_script:
     - |
       if [ "$DT_UPLOAD_REPORT" = 'true' ]; then
         echo "Uploading"
-        dt-wrapper --dt-sbom-path $SBOM_PATH --dt-enable-project-properties
+        dt-wrapper --dt-sbom-path reports/cdx-sbom.php.json --dt-enable-project-properties
       fi
   when: manual
 

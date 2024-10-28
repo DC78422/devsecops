@@ -22,14 +22,6 @@ Forming CycloneDX SBOM (Docker):
       fi
   when: manual
 
-# Uploading Syft SBOM to Dependency Track:
-#   extends:
-#     - ".Uploading_SBOM_to_Dependency_Track"
-#     - ".audit_rule"
-#   variables:
-#     SBOM_PATH: $SBOM_PATH_SYFT
-#   needs: ["Syft CycloneDX SBOM"]
-
-# DefectDojo Engagement Creation:
-#   extends:
-#     - ".DefectDojo_Engagement_Creation"
+DefectDojo Engagement Creation:
+  extends:
+    - ".DefectDojo_Engagement_Creation"

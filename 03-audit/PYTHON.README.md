@@ -17,7 +17,6 @@ variables:
 #   PYTHON_DEPENDENCY_MANAGMENT: "poetry"        # Build an SBOM from Poetry project
 
 Forming CycloneDX SBOM:
-  stage: Audit (src)
   image:
     name: "python:3.12.6-alpine3.20"
   before_script:

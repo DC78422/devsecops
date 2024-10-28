@@ -15,7 +15,6 @@ stages:
   - Audit (src)
 
 Forming CycloneDX SBOM (npm) v1:
-  stage: Audit (src)
   variables:
     PACKAGE_LOCK_ONLY: "true"
     SPEC_VERSION: "1.4"                       # (choices: "1.2", "1.3", "1.4", "1.5", "1.6")
@@ -48,7 +47,6 @@ stages:
   - Audit (src)
 
 Forming CycloneDX SBOM (npm) v2:
-  stage: Audit (src)
   variables:
     PACKAGE_LOCK_ONLY: "true"
     SPEC_VERSION: "1.4"                       # (choices: "1.2", "1.3", "1.4", "1.5", "1.6")
@@ -81,7 +79,6 @@ stages:
   - Audit (src)
 
 Forming CycloneDX SBOM (npm) v3:
-  stage: Audit (src)
   variables:
     PACKAGE_LOCK_ONLY: "true"
     SBOM_FROMAT: "cyclonedx"

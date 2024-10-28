@@ -29,12 +29,7 @@ SBOM генерируется на основе зависимостей, кот
 ```yaml
 variables:
   SBOM_PATH: "target/bom.json"
-
-stages:
-  - Audit (src)
-
 Forming CycloneDX SBOM:
-  stage: Audit (src)
   image:
     name: "maven:3.9.6-eclipse-temurin-17"
   before_script:

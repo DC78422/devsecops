@@ -2,18 +2,10 @@ include:
   - local: 'functions.gitlab-ci.yml'
 
 variables:
-  SBOM_PATH: "reports/cdx-sbom.py.json"
-
-Registry Check (Python):
-  extends:
-    - ".audit_base"
-    - ".audit_rule"
-  stage: ".pre"
-  variables:
-    AUDIT_IMAGE: harbor.example.com/devops/registry-checker:latest
-  script:
-    - registrycheck python poetry
-  when: manual
+#   PYTHON_DEPENDENCY_MANAGMENT: "environment"   # Build an SBOM from Python (virtual) environment
+#   PYTHON_DEPENDENCY_MANAGMENT: "requirements"  # Build an SBOM from Pip requirements
+  PYTHON_DEPENDENCY_MANAGMENT: "pipenv"        # Build an SBOM from Pipenv manifest
+#   PYTHON_DEPENDENCY_MANAGMENT: "poetry"        # Build an SBOM from Poetry project
 
 Forming CycloneDX SBOM:
   extends:
@@ -22,12 +14,10 @@ Forming CycloneDX SBOM:
     - ".audit_rule"
   variables:
     AUDIT_IMAGE: harbor.example.com/devops/cyclonedx-py:latest
-  # before_script:
-  #   - mkdir reports/ || true
   script:
     - cyclonedx-py $PYTHON_DEPENDENCY_MANAGMENT
       --output-format json
-      --outfile $SBOM_PATH
+      --outfile reports/cdx-sbom.py.json
   after_script:
     - |
       if [ "$DT_UPLOAD_REPORT" = 'true' ]; then
