@@ -1,13 +1,14 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
+variables:
+  DD_UPLOAD_REPORT: "true"
+
 # Anchore Grype (https://github.com/anchore/grype)
 Grype Image Scanning:
-  # stage: .post
   stage: SAST (image)
   extends:
     - ".sast_base"
-    - ".sast_rule"
     - ".DefectDojo_variables"
   variables:
     SAST_IMAGE: registry.example.com/openshift/grype:0.74.6-debug

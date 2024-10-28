@@ -1,5 +1,8 @@
 include:
   - local: 'functions.gitlab-ci.yml'
-  - local: '04-sast/docker.dockle.image.gitlab-ci.yml'
-  - local: '04-sast/docker.grype.image.gitlab-ci.yml'
-  - local: '04-sast/docker.trivy.image.gitlab-ci.yml'
+  - local: '04-sast/docker/dockle.image.gitlab-ci.yml'
+  - local: '04-sast/docker/grype.image.gitlab-ci.yml'
+  - local: '04-sast/docker/trivy.image.gitlab-ci.yml'
+
+variables:
+  DD_UPLOAD_REPORT: "true"

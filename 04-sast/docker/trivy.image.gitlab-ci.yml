@@ -1,13 +1,14 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
+variables:
+  DD_UPLOAD_REPORT: "true"
+
 # Trivy (https://github.com/aquasecurity/trivy)
 Trivy Image Scanning:
-  # stage: .post
   stage: SAST (image)
   extends:
     - ".sast_base"
-    - ".sast_rule"
     - ".DefectDojo_variables"
   variables:
     # SAST_IMAGE: harbor.example.com/devops/trivy:latest
