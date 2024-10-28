@@ -1,0 +1,17 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# ESLint (https://eslint.org/)
+eslint (lint):
+  extends:
+    - ".lint_base"
+    - ".lint_rule"
+  variables:
+    LINT_IMAGE: harbor.example.com/devops/node:18.20.3-p10
+    SEARCH_MAX_DEPTH: 4
+  script:
+    - echo "Здесь необходимо переопределить блок script в соответствии с окружением"
+  # after_script:
+  #   - dd-wrapper --dd-report-file=reports/lint.kics_dockerfile.report.json    --dd-engagement-test-title="KICS Dockerfile Scanner"    --dd-engagement-scan-type="KICS Scan"
+  when: manual
+  allow_failure: true

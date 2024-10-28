@@ -1,0 +1,12 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+php-lint:
+  extends:
+    - ".lint_base"
+    - ".lint_rule"
+  variables:
+    LINT_IMAGE: harbor.example.com/devops/php-lint:latest
+  script:
+    - echo "Nothing"
+  when: manual

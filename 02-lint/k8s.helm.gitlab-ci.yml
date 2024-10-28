@@ -1,15 +1,2 @@
 include:
-  - local: 'functions.gitlab-ci.yml'
-
-# Helm Lint
-helm lint:
-  extends:
-    - ".lint_base"
-    - ".lint_rule"
-  variables:
-    LINT_IMAGE: $CI_REGISTRY/devops/helm:latest
-  script:
-    - helm lint .
-  # after_script:
-  #   - dd-wrapper --dd-report-file=reports/lint.kics_dockerfile.report.json    --dd-engagement-test-title="KICS Dockerfile Scanner"    --dd-engagement-scan-type="KICS Scan"
-  when: manual
+  - local: '02-lint/k8s.helm/lint.gitlab-ci.yml'
