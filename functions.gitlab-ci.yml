@@ -12,6 +12,17 @@ variables:
   IMAGE_TO_SCAN: $APP_IMAGE:latest
   SECURITY_BRANCH: $CI_DEFAULT_BRANCH
 
+stages:
+  - .pre
+  - Secrets
+  - Lint
+  - Audit (src)
+  - SAST (src)
+  - Build
+  - Deploy
+  - DAST
+  - .post
+
 ".artifacts":
   before_script:
     - mkdir reports/ || true
