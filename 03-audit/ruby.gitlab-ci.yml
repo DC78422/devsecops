@@ -21,12 +21,12 @@ Forming CycloneDX SBOM:
       - reports/
     expire_in: 1 day
 
-DefectDojo Engagement Creation:
-  extends:
-    - ".DefectDojo_Engagement_Creation"
+# DefectDojo Engagement Creation:
+#   extends:
+#     - ".DefectDojo_Engagement_Creation"
 
-Uploading SBOM to Dependency Track:
-  extends:
-    - ".Uploading_SBOM_to_Dependency_Track"
-    - ".audit_rule"
-  needs: ["Forming CycloneDX SBOM"]
+# Uploading SBOM to Dependency Track:
+#   extends:
+#     - ".Uploading_SBOM_to_Dependency_Track"
+#     - ".audit_rule"
+#   needs: ["Forming CycloneDX SBOM"]

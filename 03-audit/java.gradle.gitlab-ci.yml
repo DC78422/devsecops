@@ -1,4 +1,3 @@
-
 Forming CycloneDX SBOM (gradle):
   extends:
     - ".artifacts"

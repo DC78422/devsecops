@@ -1,6 +1,3 @@
-stages:
-  - Audit (src)
-
 # Requirements
 #   node >= 18
 #   yarn >= 3 (berry)

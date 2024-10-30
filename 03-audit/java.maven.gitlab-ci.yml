@@ -1,5 +1,3 @@
-variables:
-  SBOM_PATH: "target/bom.json"
 Forming CycloneDX SBOM:
   extends:
     - ".artifacts"
