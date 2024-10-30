@@ -11,11 +11,12 @@ GitLeaks:
     name: registry.gitlab.com/dc20e6/devsecops/images/gitleaks:latest
     entrypoint: [""]
   script:
-    - gitleaks detect
-      --source .
-      --report-format=json
-      --report-path=reports/secrets.gitleaks.report.json
-      -v
+    - |
+      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+        gitleaks detect --source . --report-format=json --report-path=reports/secrets.gitleaks.report.json -v
+      else
+        gitleaks detect --source .
+      fi
   after_script:
     - |
       if [ "$DD_UPLOAD_REPORT" = 'true' ]; then

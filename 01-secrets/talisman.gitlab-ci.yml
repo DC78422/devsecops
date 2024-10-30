@@ -21,5 +21,7 @@ Talisman:
       if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
         echo "Uploading"
         cat reports/secrets.talisman.report.json
+      else
+        cat reports/secrets.talisman.report.json
       fi
   when: manual
