@@ -9,8 +9,9 @@ variables:
 
 # Bandit (https://github.com/PyCQA/bandit)
 Bandit:
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/bandit:latest
   variables:
-    SAST_IMAGE: $CI_REGISTRY/devops/bandit:latest
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"

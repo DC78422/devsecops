@@ -6,8 +6,9 @@ variables:
 
 # Gosec Scanner (https://github.com/securego/gosec)
 Gosec:
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/gosec:latest
   variables:
-    SAST_IMAGE: harbor.example.com/devops/gosec:latest
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"

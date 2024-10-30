@@ -3,8 +3,9 @@ include:
 
 # Semgrep https://github.com/semgrep/semgrep
 Semgrep:
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/semgrep:latest
   variables:
-    SAST_IMAGE: harbor.example.com/devops/semgrep:latest 
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"

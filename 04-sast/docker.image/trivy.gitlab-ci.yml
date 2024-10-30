@@ -10,9 +10,8 @@ Trivy Image Scanning:
   extends:
     - ".sast_base"
     - ".DefectDojo_variables"
-  variables:
-    # SAST_IMAGE: harbor.example.com/devops/trivy:latest
-    SAST_IMAGE: registry.example.com/openshift/trivy:0.49.1
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/trivy:latest
   script:
     - trivy image
       --ignore-unfixed
@@ -21,9 +20,9 @@ Trivy Image Scanning:
       --username serviceaccount,"$HARBOR_LOGIN"
       --password "$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)","$HARBOR_PASSWORD"
       $IMAGE_TO_SCAN
-  after_script:
-    - echo "Uploading"
-    - dd-wrapper --dd-report-file=reports/iac.trivy.image.report.json --dd-engagement-test-title="Trivy Image Scan" --dd-engagement-scan-type="Trivy Scan"
+  # after_script:
+  #   - echo "Uploading"
+  #   - dd-wrapper --dd-report-file=reports/iac.trivy.image.report.json --dd-engagement-test-title="Trivy Image Scan" --dd-engagement-scan-type="Trivy Scan"
   rules:
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /Trivy Image Scanning/"
       when: never

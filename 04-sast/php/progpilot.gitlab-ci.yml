@@ -6,8 +6,9 @@ variables:
 
 # progpilot (https://github.com/designsecurity/progpilot)
 progpilot:
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/progpilot:latest
   variables:
-    SAST_IMAGE: harbor.example.com/devops/progpilot:latest
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
@@ -15,12 +16,12 @@ progpilot:
   script:
     - echo progpilot
     - echo progpilot > reports/sast.progpilot.report.json
-  after_script:
-    - |
-      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
-        echo "Uploading"
-        dd-wrapper --dd-report-file=reports/sast.progpilot.report.json --dd-engagement-test-title="Progpilot Scan" --dd-engagement-scan-type="Progpilot Scan"
-      fi
+  # after_script:
+  #   - |
+  #     if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+  #       echo "Uploading"
+  #       dd-wrapper --dd-report-file=reports/sast.progpilot.report.json --dd-engagement-test-title="Progpilot Scan" --dd-engagement-scan-type="Progpilot Scan"
+  #     fi
   rules:
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /progpilot/"
       when: never
