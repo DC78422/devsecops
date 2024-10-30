@@ -19,6 +19,7 @@ stages:
   - Audit (src)
   - SAST (src)
   - Build
+  - Audit (image)
   - Deploy
   - DAST
   - .post
