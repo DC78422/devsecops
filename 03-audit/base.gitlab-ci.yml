@@ -7,21 +7,23 @@ Grype SBOM:
     - ".audit_base"
     - ".audit_rule"
     - ".DefectDojo_variables"
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/grype:latest
+    entrypoint: [""]
   variables:
-    AUDIT_IMAGE: harbor.example.com/devops/grype:latest
     GIT_STRATEGY: none
-    GRYPE_DB_UPDATE_URL: "https://grype-db.example.com/listing.json"
+    # GRYPE_DB_UPDATE_URL: "https://grype-db.example.com/listing.json"
     GRYPE_DB_CACHE_DIR: "/tmp"
   script:
     - mkdir /tmp/config || true
     - grype db list
     - grype ./ -o json > reports/audit.grype.report.json
-  after_script:
-    - |
-      if [ "$DT_UPLOAD_REPORT" = 'true' ]; then
-        echo "Uploading"
-        dt-wrapper --dt-sbom-path reports/audit.grype.report.json --dt-enable-project-properties
-      fi
+  # after_script:
+  #   - |
+  #     if [ "$DT_UPLOAD_REPORT" = 'true' ]; then
+  #       echo "Uploading"
+  #       dt-wrapper --dt-sbom-path reports/audit.grype.report.json --dt-enable-project-properties
+  #     fi
   when: manual
 
 # DefectDojo Engagement Creation:
