@@ -5,8 +5,9 @@ php-lint:
   extends:
     - ".lint_base"
     - ".lint_rule"
-  variables:
-    LINT_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/phplint:latest
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/phplint:latest
+    entrypoint: [""]
   script:
     - lint .
   when: manual
