@@ -18,12 +18,13 @@ Trufflehog3:
       else
         trufflehog3 .
       fi
-  # after_script:
-  #   - |
-  #     if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
-  #       echo "Uploading"
+  after_script:
+    - |
+      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+        echo "Uploading"
+        cat reports/secrets.trufflehog3.report.json
   #       dd-wrapper --dd-report-file=reports/secrets.trufflehog3.report.json --dd-engagement-test-title="Trufflehog3 Scan" --dd-engagement-scan-type="Trufflehog3 Scan"
-  #     fi
+      fi
   when: manual
 
 # DefectDojo Engagement Creation:
