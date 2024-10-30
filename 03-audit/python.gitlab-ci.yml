@@ -18,12 +18,12 @@ Forming CycloneDX SBOM:
     - cyclonedx-py $PYTHON_DEPENDENCY_MANAGMENT
       --output-format json
       --outfile reports/cdx-sbom.py.json
-  after_script:
-    - |
-      if [ "$DT_UPLOAD_REPORT" = 'true' ]; then
-        echo "Uploading"
-        dt-wrapper --dt-sbom-path $SBOM_PATH --dt-enable-project-properties
-      fi
+  # after_script:
+  #   - |
+  #     if [ "$DT_UPLOAD_REPORT" = 'true' ]; then
+  #       echo "Uploading"
+  #       dt-wrapper --dt-sbom-path $SBOM_PATH --dt-enable-project-properties
+  #     fi
   when: manual
 
 # poetry-audit:
