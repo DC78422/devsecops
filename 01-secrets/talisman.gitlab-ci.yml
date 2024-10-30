@@ -7,6 +7,7 @@ Talisman:
     - ".artifacts"
     - ".secrets_base"
     - ".secrets_rule"
+    - ".DefectDojo_variables"
   variables:
     SECRETS_IMAGE: harbor.example.com/devops/talisman:latest
   script:

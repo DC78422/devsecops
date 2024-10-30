@@ -4,8 +4,10 @@ include:
 # Gitleaks (https://github.com/gitleaks/gitleaks)
 GitLeaks:
   extends:
+    - ".artifacts"
     - ".secrets_base"
     - ".secrets_rule"
+    - ".DefectDojo_variables"
   variables:
     SECRETS_IMAGE: harbor.example.com/devops/gitleaks:latest
   script:
