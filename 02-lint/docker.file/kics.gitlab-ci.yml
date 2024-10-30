@@ -12,7 +12,7 @@ KICS Dockerfile Scanning:
     - ".lint_rule"
     - ".DefectDojo_variables"
   variables:
-    LINT_IMAGE: harbor.example.com/devops/kics:latest
+    LINT_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/kics:latest
   script:
     - kics scan
       --no-progress
