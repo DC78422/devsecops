@@ -9,5 +9,5 @@ php-lint:
     name: registry.gitlab.com/dc20e6/devsecops/images/phplint:latest
     entrypoint: [""]
   script:
-    - lint .
+    - phplint .
   when: manual
