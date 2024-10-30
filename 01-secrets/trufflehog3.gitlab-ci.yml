@@ -8,8 +8,9 @@ Trufflehog3:
     - ".secrets_base"
     - ".secrets_rule"
     - ".DefectDojo_variables"
-  variables:
-    SECRETS_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/trufflehog3:latest
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/trufflehog3:latest
+    entrypoint: [""]
   script:
     - |
       if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
