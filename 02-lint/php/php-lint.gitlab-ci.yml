@@ -6,7 +6,7 @@ php-lint:
     - ".lint_base"
     - ".lint_rule"
   variables:
-    LINT_IMAGE: harbor.example.com/devops/php-lint:latest
+    LINT_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/phplint:latest
   script:
-    - echo "Nothing"
+    - lint .
   when: manual
