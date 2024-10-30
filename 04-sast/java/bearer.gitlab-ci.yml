@@ -32,6 +32,6 @@ bearer:
   when: manual
   allow_failure: true
 
-DefectDojo Engagement Creation:
-  extends:
-    - ".DefectDojo_Engagement_Creation"
+# DefectDojo Engagement Creation:
+#   extends:
+#     - ".DefectDojo_Engagement_Creation"

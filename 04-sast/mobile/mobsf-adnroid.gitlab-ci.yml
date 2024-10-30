@@ -39,6 +39,6 @@ mobsf-android:
   allow_failure: true
   when: manual
 
-DefectDojo Engagement Creation:
-  extends:
-    - ".DefectDojo_Engagement_Creation"
+# DefectDojo Engagement Creation:
+#   extends:
+#     - ".DefectDojo_Engagement_Creation"

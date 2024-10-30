@@ -1,2 +1,3 @@
 include:
   - local: '02-lint/go/golangci-lint.gitlab-ci.yml'
+

@@ -6,8 +6,8 @@ Forming CycloneDX SBOM:
     - ".artifacts"
     - ".audit_base"
     - ".audit_rule"
-  variables:
-    AUDIT_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/cyclonedx-php:latest
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/cyclonedx-php:latest
   before_script:
     - mkdir reports/ || true
   script:

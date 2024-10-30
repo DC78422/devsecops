@@ -7,6 +7,6 @@ variables:
 # добавить и попробовать
 # https://github.com/golang/vuln
 
-DefectDojo Engagement Creation:
-  extends:
-    - ".DefectDojo_Engagement_Creation"
+# DefectDojo Engagement Creation:
+#   extends:
+#     - ".DefectDojo_Engagement_Creation"

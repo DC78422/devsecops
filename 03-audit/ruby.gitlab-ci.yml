@@ -9,8 +9,8 @@ Forming CycloneDX SBOM:
     - ".artifacts"
     - ".audit_base"
     - ".audit_rule"
-  variables:
-    AUDIT_IMAGE: "ruby:2.7.2"
+  image:
+    name: "ruby:2.7.2"
   # before_script:
   #   - mkdir reports/ || true
   script:

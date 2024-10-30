@@ -3,3 +3,6 @@ include:
   - local: '01-secrets/gitleaks.gitlab-ci.yml'
   - local: '01-secrets/talisman.gitlab-ci.yml'
   - local: '01-secrets/trufflehog3.gitlab-ci.yml'
+
+variables:
+  DD_UPLOAD_REPORT: "true"

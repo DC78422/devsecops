@@ -8,8 +8,8 @@ Forming CycloneDX SBOM (Docker):
     - ".audit_base"
     - ".audit_rule"
     - ".DefectDojo_variables"
-  variables:
-    AUDIT_IMAGE: harbor.example.com/devops/syft:latest
+  image:
+    name: harbor.example.com/devops/syft:latest
   script:
     - syft login $TARGET_REGISTRY -u $TARGET_REGISTRY_LOGIN -p $TARGET_REGISTRY_PASSWORD
     - syft scan $IMAGE_TO_SCAN

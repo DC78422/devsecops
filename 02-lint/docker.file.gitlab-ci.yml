@@ -3,3 +3,4 @@ include:
 
 variables:
   CI_DOCKERFILE: Dockerfile
+  DD_UPLOAD_REPORT: "true"

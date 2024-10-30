@@ -4,8 +4,8 @@ Forming CycloneDX SBOM (gradle):
     - ".audit_base"
     - ".audit_rule"
     - ".DefectDojo_variables"
-  variables:
-    AUDIT_IMAGE: "gradle:8.7.0-jdk17"
+  image:
+    name: "gradle:8.7.0-jdk17"
   script:
     - gradle cyclonedxBom
   artifacts:

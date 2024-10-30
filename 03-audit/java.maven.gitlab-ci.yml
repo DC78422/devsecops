@@ -4,8 +4,8 @@ Forming CycloneDX SBOM:
     - ".audit_base"
     - ".audit_rule"
     - ".DefectDojo_variables"
-  variables:
-    AUDIT_IMAGE: "maven:3.9.6-eclipse-temurin-17"
+  image:
+    name: "maven:3.9.6-eclipse-temurin-17"
   before_script:
     - cp -r settings.xml /usr/share/maven/conf/
   script:
