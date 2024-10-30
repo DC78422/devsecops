@@ -10,6 +10,7 @@ Forming CycloneDX SBOM:
     name: registry.gitlab.com/dc20e6/devsecops/images/cyclonedx-php:latest
   before_script:
     - mkdir reports/ || true
+    - composer
   script:
     - composer CycloneDX:make-sbom 
       --output-format=JSON
