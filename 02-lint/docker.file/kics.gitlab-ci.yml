@@ -19,14 +19,14 @@ KICS Dockerfile Scanning:
       --output-path reports/
       --output-name lint.kics_dockerfile.report.json
       --report-formats json
-      --path $CI_DOCKERFILE
+      --path ${CI_DOCKERFILE:-Dockerfile}
       --ignore-on-exit all
-  after_script:
-    - |
-      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
-        echo "Uploading"
-        dd-wrapper --dd-report-file=reports/lint.kics_dockerfile.report.json --dd-engagement-test-title="KICS Dockerfile Scanner" --dd-engagement-scan-type="KICS Scan"
-      fi
+  # after_script:
+  #   - |
+  #     if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+  #       echo "Uploading"
+  #       dd-wrapper --dd-report-file=reports/lint.kics_dockerfile.report.json --dd-engagement-test-title="KICS Dockerfile Scanner" --dd-engagement-scan-type="KICS Scan"
+  #     fi
   when: manual
 
 # DefectDojo Engagement Creation:
