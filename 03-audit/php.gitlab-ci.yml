@@ -8,6 +8,7 @@ Forming CycloneDX SBOM:
     - ".audit_rule"
   image:
     name: registry.gitlab.com/dc20e6/devsecops/images/cyclonedx-php:latest
+    entrypoint: [""]
   before_script:
     - mkdir reports/ || true
     - composer
