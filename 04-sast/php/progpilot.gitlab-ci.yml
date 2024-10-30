@@ -14,14 +14,13 @@ progpilot:
     - ".sast_base"
     - ".DefectDojo_variables"
   script:
-    - echo progpilot
-    - echo progpilot > reports/sast.progpilot.report.json
-  # after_script:
-  #   - |
-  #     if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
-  #       echo "Uploading"
-  #       dd-wrapper --dd-report-file=reports/sast.progpilot.report.json --dd-engagement-test-title="Progpilot Scan" --dd-engagement-scan-type="Progpilot Scan"
-  #     fi
+    - progpilot . > reports/sast.progpilot.report.json
+  after_script:
+    - |
+      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+        echo "Uploading"
+        cat reports/sast.progpilot.report.json
+      fi
   rules:
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /progpilot/"
       when: never
