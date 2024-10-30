@@ -22,8 +22,8 @@ Talisman:
       if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
         echo "Uploading"
         cat reports/secrets.talisman.report.json
-  #       dd-wrapper --dd-report-file=reports/secrets.talisman.report.json --dd-engagement-test-title="Talisman Scan"  --dd-engagement-scan-type="Talisman Scan"
       fi
+  #       dd-wrapper --dd-report-file=reports/secrets.talisman.report.json --dd-engagement-test-title="Talisman Scan"  --dd-engagement-scan-type="Talisman Scan"
   when: manual
 
 # DefectDojo Engagement Creation:

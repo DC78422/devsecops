@@ -22,8 +22,8 @@ GitLeaks:
       if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
         echo "Uploading"
         cat reports/secrets.gitleaks.report.json
-  #       dd-wrapper --dd-report-file=reports/secrets.gitleaks.report.json --dd-engagement-test-title="Gitleaks Scan"  --dd-engagement-scan-type="Gitleaks Scan"
       fi
+  #       dd-wrapper --dd-report-file=reports/secrets.gitleaks.report.json --dd-engagement-test-title="Gitleaks Scan"  --dd-engagement-scan-type="Gitleaks Scan"
   when: manual
 
 # DefectDojo Engagement Creation:

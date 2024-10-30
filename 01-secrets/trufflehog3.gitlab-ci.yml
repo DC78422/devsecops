@@ -23,8 +23,8 @@ Trufflehog3:
       if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
         echo "Uploading"
         cat reports/secrets.trufflehog3.report.json
-  #       dd-wrapper --dd-report-file=reports/secrets.trufflehog3.report.json --dd-engagement-test-title="Trufflehog3 Scan" --dd-engagement-scan-type="Trufflehog3 Scan"
       fi
+  #       dd-wrapper --dd-report-file=reports/secrets.trufflehog3.report.json --dd-engagement-test-title="Trufflehog3 Scan" --dd-engagement-scan-type="Trufflehog3 Scan"
   when: manual
 
 # DefectDojo Engagement Creation:
