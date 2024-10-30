@@ -13,7 +13,7 @@ Forming CycloneDX SBOM:
     - ".audit_base"
     - ".audit_rule"
   variables:
-    AUDIT_IMAGE: harbor.example.com/devops/cyclonedx-py:latest
+    AUDIT_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/cyclonedx-py:latest
   script:
     - cyclonedx-py $PYTHON_DEPENDENCY_MANAGMENT
       --output-format json

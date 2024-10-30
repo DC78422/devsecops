@@ -10,7 +10,7 @@ Forming CycloneDX SBOM:
     - ".audit_base"
     - ".audit_rule"
   variables:
-    AUDIT_IMAGE: "$REGISTRY/openshift/ruby:2.7.2"
+    AUDIT_IMAGE: "ruby:2.7.2"
   # before_script:
   #   - mkdir reports/ || true
   script:
