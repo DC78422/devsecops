@@ -17,9 +17,12 @@ GitLeaks:
       --report-format=json
       --report-path=reports/secrets.gitleaks.report.json
       -v
-  after_script:
-    - echo "Uploading"
-    - dd-wrapper --dd-report-file=reports/secrets.gitleaks.report.json --dd-engagement-test-title="Gitleaks Scan"  --dd-engagement-scan-type="Gitleaks Scan"
+  # after_script:
+  #   - |
+  #     if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+  #       echo "Uploading"
+  #       dd-wrapper --dd-report-file=reports/secrets.gitleaks.report.json --dd-engagement-test-title="Gitleaks Scan"  --dd-engagement-scan-type="Gitleaks Scan"
+  #     fi
   when: manual
 
 # DefectDojo Engagement Creation:

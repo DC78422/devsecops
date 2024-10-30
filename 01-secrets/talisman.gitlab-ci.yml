@@ -18,8 +18,11 @@ Talisman:
   after_script:
     - mv reports/talisman_reports/data/report.json reports/secrets.talisman.report.json
     - rm -rf reports/talisman_reports/
-    - echo "Uploading"
-    - dd-wrapper --dd-report-file=reports/secrets.talisman.report.json --dd-engagement-test-title="Talisman Scan"  --dd-engagement-scan-type="Talisman Scan"
+  #   - |
+  #     if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+  #       echo "Uploading"
+  #       dd-wrapper --dd-report-file=reports/secrets.talisman.report.json --dd-engagement-test-title="Talisman Scan"  --dd-engagement-scan-type="Talisman Scan"
+  #     fi
   when: manual
 
 # DefectDojo Engagement Creation:
