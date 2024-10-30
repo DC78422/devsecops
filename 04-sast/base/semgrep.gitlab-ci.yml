@@ -7,16 +7,15 @@ Semgrep:
     name: registry.gitlab.com/dc20e6/devsecops/images/semgrep:latest
   variables:
     SEARCH_MAX_DEPTH: 4
-    SEMGREP_CONFIG: "--config auto"
   extends:
     - ".sast_base"
     - ".DefectDojo_variables"
   script:
     - |
       if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
-        semgrep scan $SEMGREP_CONFIG --json --json-output=reports/sast.semgrep.report.json --error
+        semgrep scan --config auto --json --json-output=reports/sast.semgrep.report.json --error
       else
-        semgrep scan $SEMGREP_CONFIG
+        semgrep scan --config auto
       fi
     - 
   after_script:
