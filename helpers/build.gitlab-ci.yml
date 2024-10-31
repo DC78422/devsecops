@@ -3,8 +3,8 @@
   variables:
     DOCKERFILE: "Dockerfile"
     REGISTRY: $CI_REGISTRY
-    REGISTRY_USER: CI_REGISTRY_USER
-    REGISTRY_PASSWORD: CI_REGISTRY_PASSWORD
+    REGISTRY_USER: $CI_REGISTRY_USER
+    REGISTRY_PASSWORD: $CI_REGISTRY_PASSWORD
     REGISTRY_PATH: $CI_PROJECT_PATH
     TAG: "latest"
     KANIKO_CONTEXT: >
@@ -31,7 +31,6 @@
   before_script:
     - echo "{\"auths\":{\"${REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${REGISTRY_USER}" "${REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
   script:
-
     - /kaniko/executor
       $KANIKO_CONTEXT
       $KANIKO_DOCKERFILE
