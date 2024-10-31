@@ -9,7 +9,7 @@ Dockle Image Scanning:
   extends:
     - ".sast_base"
   variables:
-    SAST_IMAGE: harbor.example.com/devops/dockle:latest
+    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/dockle:latest
   script:
     - dockle
       --username $HARBOR_LOGIN

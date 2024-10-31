@@ -5,8 +5,9 @@ ruff:
   extends:
     - ".lint_base"
     - ".lint_rule"
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/ruff:latest
   variables:
-    LINT_IMAGE: harbor.example.com/devops/ruff:latest
     RUFF_TARGET_VERSION: py311
     RUFF_SOURCE: .
     RUFF_ARGS: ""

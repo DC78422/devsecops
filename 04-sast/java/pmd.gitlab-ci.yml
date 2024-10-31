@@ -7,7 +7,7 @@ variables:
 # PMD (https://github.com/pmd/pmd)
 pmd:
   variables:
-    SAST_IMAGE: harbor.example.com/devops/pmd:latest
+    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/pmd:latest
     SEARCH_MAX_DEPTH: 4
     PMD_LANGUAGE: java
     PMD_LANGUAGE_RULESETS: rulesets

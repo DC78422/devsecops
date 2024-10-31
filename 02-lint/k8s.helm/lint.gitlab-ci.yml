@@ -6,8 +6,8 @@ Helm Lint:
   extends:
     - ".lint_base"
     - ".lint_rule"
-  variables:
-    LINT_IMAGE: $CI_REGISTRY/devops/helm:latest
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/helm:latest
   script:
     - helm lint .
   when: manual

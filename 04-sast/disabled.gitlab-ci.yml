@@ -1,7 +1,7 @@
 # -
 flawfinder:
   variables:
-    SAST_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
+    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/python:3.11.6-p9
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
@@ -34,7 +34,7 @@ flawfinder:
 # -
 kubesec:
   variables:
-    SAST_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
+    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/python:3.11.6-p9
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
@@ -54,7 +54,7 @@ kubesec:
 # -
 nodejs-scan:
   variables:
-    SAST_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
+    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/python:3.11.6-p9
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
@@ -77,7 +77,7 @@ nodejs-scan:
 # -
 phpcs-security-audit:
   variables:
-    SAST_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
+    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/python:3.11.6-p9
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
@@ -100,7 +100,7 @@ phpcs-security-audit:
 # -
 sobelow:
   variables:
-    SAST_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
+    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/python:3.11.6-p9
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
@@ -123,7 +123,7 @@ sobelow:
 # -
 salus:
   variables:
-    SAST_IMAGE: $CI_REGISTRY/devops/python:3.11.6-p9
+    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/python:3.11.6-p9
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
@@ -161,7 +161,7 @@ salus:
 # bearer (https://github.com/Bearer/bearer)
 bearer:
   variables:
-    SAST_IMAGE: harbor.example.com/devops/bearer:latest
+    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/bearer:latest
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"

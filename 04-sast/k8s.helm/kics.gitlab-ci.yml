@@ -9,7 +9,7 @@ KICS Scanning:
   extends:
     - ".sast_base"
   variables:
-    IAC_IMAGE: harbor.example.com/devops/kics:latest
+    IAC_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/kics:latest
   script:
     - kics scan
       --no-progress

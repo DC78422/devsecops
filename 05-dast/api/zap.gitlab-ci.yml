@@ -6,7 +6,7 @@ ZAP API scan:
   extends:
     - ".dast_base"
   variables:
-    DAST_IMAGE: harbor.example.com/devops/zap:2.15.0
+    DAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/zap:2.15.0
   before_script:
     - mkdir zap/ || true
   script:

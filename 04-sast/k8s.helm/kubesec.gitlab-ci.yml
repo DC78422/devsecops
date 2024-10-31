@@ -9,7 +9,7 @@ kubesec:
   extends:
     - ".sast_base"
   variables:
-    IAC_IMAGE: harbor.example.com/devops/kubesec:latest 
+    IAC_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/kubesec:latest 
     HELM_VALUES_FILES: >
       -f values.yaml
   script:

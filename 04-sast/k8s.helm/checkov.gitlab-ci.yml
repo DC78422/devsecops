@@ -9,7 +9,7 @@ checkov:
   extends:
     - ".sast_base"
   variables:
-    IAC_IMAGE: $CI_REGISTRY/devops/checkov:3.2.91
+    IAC_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/checkov:3.2.91
   script:
     - checkov
       --framework helm

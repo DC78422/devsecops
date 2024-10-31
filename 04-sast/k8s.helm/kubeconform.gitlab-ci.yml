@@ -9,7 +9,7 @@ kubeconform:
   extends:
     - ".sast_base"
   variables:
-    IAC_IMAGE: $CI_REGISTRY/devops/deploy-tools:latest
+    IAC_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/deploy-tools:latest
     HELM_VALUES_FILES: >
       -f values.yaml
   script:

@@ -6,7 +6,7 @@ Nuclei:
   extends:
     - ".dast_base"
   variables:
-    DAST_IMAGE: harbor.example.com/devops/nuclei:latest
+    DAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/nuclei:latest
   script:
     - echo $CI_JOB_NAME
     - nuclei

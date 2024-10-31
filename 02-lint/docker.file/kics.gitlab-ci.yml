@@ -9,8 +9,8 @@ KICS Dockerfile Scanning:
   extends:
     - ".lint_base"
     - ".lint_rule"
-  variables:
-    LINT_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/kics:latest
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/kics:latest
   script:
     - kics scan
       --no-progress

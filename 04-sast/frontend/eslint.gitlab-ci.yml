@@ -7,7 +7,7 @@ variables:
 # ESLint (https://eslint.org/)
 eslint (sast):
   variables:
-    SAST_IMAGE: harbor.example.com/devops/node:18.20.3-p10
+    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/node:18.20.3-p10
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"

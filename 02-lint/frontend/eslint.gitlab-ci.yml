@@ -6,8 +6,9 @@ eslint (lint):
   extends:
     - ".lint_base"
     - ".lint_rule"
+  image:
+    name: node:18.20.3-p10
   variables:
-    LINT_IMAGE: harbor.example.com/devops/node:18.20.3-p10
     SEARCH_MAX_DEPTH: 4
   script:
     - echo "Здесь необходимо переопределить блок script в соответствии с окружением"

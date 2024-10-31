@@ -6,7 +6,7 @@ Dastardly:
   extends:
     - ".dast_base"
   image:
-    name: harbor.example.com/devops/dastardly:2024.4.1
+    name: registry.gitlab.com/dc20e6/devsecops/images/dastardly:2024.4.1
     entrypoint: [dastardly-entrypoint.sh]
   variables:
     BURP_START_URL: https://$DAST_WEBSITE

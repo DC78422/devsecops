@@ -6,7 +6,7 @@ Nikto:
   extends:
     - ".dast_base"
   variables:
-    DAST_IMAGE: harbor.example.com/devops/nikto:latest
+    DAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/nikto:latest
   script:
     - echo $CI_JOB_NAME
     - nikto.pl
@@ -23,7 +23,7 @@ Nikto (all):
   extends:
     - ".dast_base"
   variables:
-    DAST_IMAGE: harbor.example.com/devops/nikto:latest
+    DAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/nikto:latest
   script:
     - echo $CI_JOB_NAME
     - nikto.pl
@@ -42,7 +42,7 @@ Dastardly:
   extends:
     - ".dast_base"
   image:
-    name: harbor.example.com/devops/dastardly:2024.4.1
+    name: registry.gitlab.com/dc20e6/devsecops/images/dastardly:2024.4.1
     entrypoint: [dastardly-entrypoint.sh]
   variables:
     BURP_START_URL: https://$DAST_WEBSITE
@@ -62,7 +62,7 @@ ZAP baseline scan:
   extends:
     - ".dast_base"
   variables:
-    DAST_IMAGE: harbor.example.com/devops/zap:2.15.0
+    DAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/zap:2.15.0
   before_script:
     - mkdir zap/ || true
   script:

@@ -5,8 +5,8 @@ golangci-lint:
   extends:
     - ".lint_base"
     - ".lint_rule"
-  variables:
-    LINT_IMAGE: harbor.example.com/devops/golangci-lint:latest
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/golangci-lint:latest
   script:
     - golangci-lint run -v
       --issues-exit-code 0

@@ -5,8 +5,9 @@ mypy:
   extends:
     - ".lint_base"
     - ".lint_rule"
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/mypy:latest
   variables:
-    LINT_IMAGE: harbor.example.com/devops/mypy:latest
     MYPY_SOURCE: .
     MYPY_EXCLUDE: >
       --exclude '/build\.py$'
