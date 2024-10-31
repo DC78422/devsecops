@@ -7,19 +7,27 @@ Forming CycloneDX SBOM (Docker):
     - ".artifacts"
     - ".audit_base"
     - ".audit_rule"
-    - ".DefectDojo_variables"
+  variables:
+    REGISTRY: $CI_REGISTRY
+    REGISTRY_USER: CI_REGISTRY_USER
+    REGISTRY_PASSWORD: CI_REGISTRY_PASSWORD
+    REGISTRY_PATH: $CI_PROJECT_PATH
+    TAG: "latest"
+    SYFT_IMAGE: $REGISTRY/$REGISTRY_PATH:$TAG
   image:
-    name: harbor.example.com/devops/syft:latest
+    name: registry.gitlab.com/dc20e6/devsecops/images/syft:latest
   script:
-    - syft login $TARGET_REGISTRY -u $TARGET_REGISTRY_LOGIN -p $TARGET_REGISTRY_PASSWORD
-    - syft scan $IMAGE_TO_SCAN
+    - syft login $REGISTRY
+      -u $REGISTRY_USER
+      -p $REGISTRY_PASSWORD
+    - syft scan $SYFT_IMAGE
       -o cyclonedx-json > reports/cdx-sbom.syft.json
-  # after_script:
-  #   - |
-  #     if [ "$DT_UPLOAD_REPORT" = 'true' ]; then
-  #       echo "Uploading"
-  #       dt-wrapper --dt-sbom-path reports/cdx-sbom.syft.json --dt-enable-project-properties
-  #     fi
+  after_script:
+    - |
+      if [ "$DT_UPLOAD_REPORT" = 'true' ]; then
+        echo "Uploading"
+        cat reports/cdx-sbom.syft.json
+      fi
   when: manual
 
 # DefectDojo Engagement Creation:

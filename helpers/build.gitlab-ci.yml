@@ -2,6 +2,10 @@
   stage: Build
   variables:
     DOCKERFILE: "Dockerfile"
+    REGISTRY: $CI_REGISTRY
+    REGISTRY_USER: CI_REGISTRY_USER
+    REGISTRY_PASSWORD: CI_REGISTRY_PASSWORD
+    REGISTRY_PATH: $CI_PROJECT_PATH
     TAG: "latest"
     KANIKO_CONTEXT: >
       --context $CI_PROJECT_DIR
@@ -12,7 +16,7 @@
     #   --build-arg ARG1=ARG1
     #   --build-arg ARG2=ARG2
     KANIKO_DESTINATION: >
-      --destination $CI_REGISTRY_IMAGE:$TAG
+      --destination $CI_REGISTRY/$REGISTRY_PATH:$TAG
     KANIKO_LABELS: >
       --label org.opencontainers.image.vendor=$CI_SERVER_URL/$GITLAB_USER_LOGIN
       --label org.opencontainers.image.authors=$CI_SERVER_URL/$GITLAB_USER_LOGIN
@@ -25,7 +29,7 @@
     name: "gcr.io/kaniko-project/executor:v1.23.2-debug"
     entrypoint: [""]
   before_script:
-    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - echo "{\"auths\":{\"${REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${REGISTRY_USER}" "${REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
   script:
 
     - /kaniko/executor
