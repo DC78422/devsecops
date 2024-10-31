@@ -14,10 +14,6 @@ Forming CycloneDX SBOM:
     - mkdir reports/ || true
     - gem install cyclonedx-ruby
     - cyclonedx-ruby -p . -o "reports/cdx-sbom.xml"
-  artifacts:
-    paths:
-      - reports/
-    expire_in: 1 day
 ```
 
 Для встраивания этого шага в пайплайн нужно объявить переменную `DEPENDENCYTRACK_SBOM_PATH`, её значением должен быть путь до сгенерированного SBOM'а.

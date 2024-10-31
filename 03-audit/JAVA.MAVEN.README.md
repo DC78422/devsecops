@@ -36,10 +36,6 @@ Forming CycloneDX SBOM:
     - cp -r settings.xml /usr/share/maven/conf/
   script:
     - mvn install cyclonedx:makeAggregateBom
-  artifacts:
-    paths:
-      - target/bom.json
-    expire_in: 1 day
 ```
 
 ## Дополнительные параметры плагина cyclonedx-maven-plugin

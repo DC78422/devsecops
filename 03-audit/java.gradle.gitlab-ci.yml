@@ -10,7 +10,3 @@ Forming CycloneDX SBOM (gradle):
     - mv build/reports/bom.json reports/cdx-sbom.gradle.json
     - echo "Uploading"
     - cat reports/cdx-sbom.gradle.json
-  artifacts:
-    paths:
-      - build/reports/bom.json
-    expire_in: 1 day

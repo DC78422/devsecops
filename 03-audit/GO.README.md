@@ -14,10 +14,6 @@ Forming CycloneDX SBOM:
     - mkdir reports/ || true
     - go install github.com/CycloneDX/cyclonedx-gomod/cmd/cyclonedx-gomod@latest
     - /go/bin/cyclonedx-gomod mod -json -output reports/cdx-sbom.json -assert-licenses -licenses .
-  artifacts:
-    paths:
-      - reports/
-    expire_in: 1 day
 ```
 
 Для встраивания этого шага в пайплайн нужно объявить переменную `DEPENDENCYTRACK_SBOM_PATH`, её значением должен быть путь до сгенерированного SBOM'а.

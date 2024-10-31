@@ -32,10 +32,6 @@ Forming CycloneDX SBOM (npm) v1:
       --spec-version $SPEC_VERSION
       --output-file $OUTPUT_FILE
       --mc-type $MC_TYPE
-  artifacts:
-    paths:
-      - reports/cdx-sbom.npm.json
-    expire_in: 1 day
 ```
 
 ### V2: npx
@@ -64,10 +60,6 @@ Forming CycloneDX SBOM (npm) v2:
       --spec-version $SPEC_VERSION
       --output-file $OUTPUT_FILE
       --mc-type $MC_TYPE
-  artifacts:
-    paths:
-      - reports/cdx-sbom.npm.json
-    expire_in: 1 day
 ```
 
 ### V3: npm@latest
@@ -96,10 +88,6 @@ Forming CycloneDX SBOM (npm) v3:
       --package-lock-only $PACKAGE_LOCK_ONLY \
       --sbom-format $SBOM_FROMAT \
       --sbom-type $SBOM_TYPE > $OUTPUT_FILE
-  artifacts:
-    paths:
-      - reports/cdx-sbom.npm.json
-    expire_in: 1 day
 ```
 
 ## Дополнительные параметры плагина cyclonedx-node-npm

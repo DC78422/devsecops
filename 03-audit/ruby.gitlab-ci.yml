@@ -10,17 +10,6 @@ Forming CycloneDX SBOM:
     - ".audit_rule"
   image:
     name: "ruby:2.7.2"
-  # before_script:
-  #   - mkdir reports/ || true
   script:
     - gem install cyclonedx-ruby
     - cyclonedx-ruby -p . -o $SBOM_PATH
-  artifacts:
-    paths:
-      - reports/
-    expire_in: 1 day
-# Uploading SBOM to Dependency Track:
-#   extends:
-#     - ".Uploading_SBOM_to_Dependency_Track"
-#     - ".audit_rule"
-#   needs: ["Forming CycloneDX SBOM"]

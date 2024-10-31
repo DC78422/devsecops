@@ -43,10 +43,6 @@ Forming CycloneDX SBOM (yarn):
 #       --spec-version $SPEC_VERSION
 #       --output-file $OUTPUT_FILE
 #       --mc-type $MC_TYPE
-#   artifacts:
-#     paths:
-#       - reports/cdx-sbom.yarn.json
-#     expire_in: 1 day
 
 # Forming CycloneDX SBOM (yarn) v3:
 #   stage: Audit (src)
@@ -65,7 +61,3 @@ Forming CycloneDX SBOM (yarn):
 #       --spec-version $SPEC_VERSION
 #       --output-file $OUTPUT_FILE
 #       --mc-type $MC_TYPE
-#   artifacts:
-#     paths:
-#       - reports/cdx-sbom.yarn.json
-#     expire_in: 1 day

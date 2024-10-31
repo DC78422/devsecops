@@ -33,10 +33,6 @@ Forming CycloneDX SBOM (yarn) v1:
       --spec-version $SPEC_VERSION
       --output-file $OUTPUT_FILE
       --mc-type $MC_TYPE
-  artifacts:
-    paths:
-      - reports/cdx-sbom.yarn.json
-    expire_in: 1 day
 ```
 
 ### V2: cli-wrapper
@@ -67,10 +63,6 @@ Forming CycloneDX SBOM (yarn) v2:
       --spec-version $SPEC_VERSION
       --output-file $OUTPUT_FILE
       --mc-type $MC_TYPE
-  artifacts:
-    paths:
-      - reports/cdx-sbom.yarn.json
-    expire_in: 1 day
 ```
 
 ### V3: plugin
@@ -101,10 +93,6 @@ Forming CycloneDX SBOM (yarn) v3:
       --spec-version $SPEC_VERSION
       --output-file $OUTPUT_FILE
       --mc-type $MC_TYPE
-  artifacts:
-    paths:
-      - reports/cdx-sbom.yarn.json
-    expire_in: 1 day
 ```
 
 ## Дополнительные параметры плагина cyclonedx-node-yarn

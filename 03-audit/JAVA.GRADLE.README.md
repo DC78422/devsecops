@@ -36,10 +36,6 @@ Forming CycloneDX SBOM:
     name: gradle:8.7.0-jdk17
   script:
     - gradle cyclonedxBom
-  artifacts:
-    paths:
-      - build/reports/bom.json
-    expire_in: 1 day
 ```
 
 ## Дополнительные параметры плагина cyclonedx-gradle-plugin

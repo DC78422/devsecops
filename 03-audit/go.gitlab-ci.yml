@@ -17,8 +17,3 @@ Forming CycloneDX SBOM (go):
   after_script:
     - echo "Uploading"
     - cat reports/cdx-sbom.go.json
-  artifacts:
-    paths:
-      - reports/
-    expire_in: 1 day
-

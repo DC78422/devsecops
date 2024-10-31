@@ -26,10 +26,6 @@ Forming CycloneDX SBOM:
     - cyclonedx-py $PYTHON_DEPENDENCY_MANAGMENT
       --output-format json
       --outfile reports/cdx-sbom.py.json
-  artifacts:
-    paths:
-      - reports/cdx-sbom.py.json
-    expire_in: 1 day
 ```
 
 ## Дополнительные параметры плагина cyclonedx-gradle-plugin
