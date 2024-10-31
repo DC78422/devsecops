@@ -1,8 +1,8 @@
 ".build":
   stage: Build
   variables:
-    DOCKERFILE: ${NAME_DOCKERFILE:-Dockerfile}
-    TAG: "${CI_COMMIT_TAG:-latest}"
+    DOCKERFILE: "Dockerfile"
+    TAG: "latest"
     KANIKO_CONTEXT: >
       --context ${CI_PROJECT_DIR}
     KANIKO_DOCKERFILE: >
