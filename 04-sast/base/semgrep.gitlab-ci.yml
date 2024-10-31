@@ -22,7 +22,7 @@ Semgrep:
     - |
       if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
         echo "Uploading"
-        dd-wrapper --dd-report-file=reports/sast.semgrep.report.json --dd-engagement-test-title="Semgrep JSON Report" --dd-engagement-scan-type="Semgrep JSON Report"
+        cat reports/sast.semgrep.report.json
       fi
   rules:
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /semgrep/"
