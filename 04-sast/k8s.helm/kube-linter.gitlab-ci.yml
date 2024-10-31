@@ -1,9 +1,6 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
-variables:
-  DD_UPLOAD_REPORT: "true"
-
 # kube-linter (https://github.com/stackrox/kube-linter)
 kube-linter:
   extends:

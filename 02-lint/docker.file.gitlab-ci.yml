@@ -1,6 +1,2 @@
 include:
   - local: '02-lint/docker.file/kics.gitlab-ci.yml'
-
-variables:
-  CI_DOCKERFILE: Dockerfile
-  DD_UPLOAD_REPORT: "true"

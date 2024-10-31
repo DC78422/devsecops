@@ -1,12 +1,6 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
-variables:
-  # SAST_EXCLUDED_ANALYZERS: "bandit"
-  # SAST_DISABLED: "true"
-  SECURITY_BRANCH: "develop"
-  DD_UPLOAD_REPORT: "true"
-
 # Bandit (https://github.com/PyCQA/bandit)
 Bandit:
   image:

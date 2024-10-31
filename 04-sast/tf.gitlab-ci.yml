@@ -4,6 +4,3 @@ include:
   - local: '04-sast/tf/kics.gitlab-ci.yml'
   - local: '04-sast/tf/terrascan.gitlab-ci.yml'
   - local: '04-sast/tf/tfsec.gitlab-ci.yml'
-
-variables:
-  DD_UPLOAD_REPORT: "true"

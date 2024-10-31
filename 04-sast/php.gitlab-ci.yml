@@ -1,6 +1,3 @@
 include:
   - local: '04-sast/base/semgrep.gitlab-ci.yml'
   - local: '04-sast/php/progpilot.gitlab-ci.yml'
-
-variables:
-  DD_UPLOAD_REPORT: "true"

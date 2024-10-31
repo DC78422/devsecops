@@ -10,6 +10,3 @@ include:
   - local: '04-sast/k8s.helm/kubescape.gitlab-ci.yml'
   - local: '04-sast/k8s.helm/kubesec.gitlab-ci.yml'
   - local: '04-sast/k8s.helm/trivy.helm.gitlab-ci.yml'
-
-variables:
-  DD_UPLOAD_REPORT: "true"

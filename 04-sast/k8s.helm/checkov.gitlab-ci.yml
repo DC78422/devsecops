@@ -1,9 +1,6 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
-variables:
-  DD_UPLOAD_REPORT: "true"
-
 # chechov (https://github.com/bridgecrewio/checkov)
 checkov:
   extends:

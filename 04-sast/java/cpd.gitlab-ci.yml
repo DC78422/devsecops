@@ -1,9 +1,6 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
-variables:
-  DD_UPLOAD_REPORT: "true"
-
 cpd:
   variables:
     SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/pmd:latest

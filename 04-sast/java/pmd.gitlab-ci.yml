@@ -1,9 +1,6 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
-variables:
-  DD_UPLOAD_REPORT: "true"
-
 # PMD (https://github.com/pmd/pmd)
 pmd:
   variables:

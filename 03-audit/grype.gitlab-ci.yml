@@ -10,8 +10,8 @@ Grype SBOM:
     entrypoint: [""]
   variables:
     GIT_STRATEGY: none
-    # GRYPE_DB_UPDATE_URL: "https://grype-db.example.com/listing.json"
-    GRYPE_DB_CACHE_DIR: "/tmp"
+    # GRYPE_DB_UPDATE_URL: https://grype-db.example.com/listing.json
+    GRYPE_DB_CACHE_DIR: /tmp
   script:
     - mkdir /tmp/config || true
     - grype db list

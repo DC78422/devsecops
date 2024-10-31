@@ -1,9 +1,6 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
-variables:
-  DD_UPLOAD_REPORT: "true"
-
 # Brakeman Scan (https://github.com/presidentbeef/brakeman)
 Brakeman:
   variables:

@@ -1,8 +1,4 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
-variables:
-  DD_UPLOAD_REPORT: "true"
-
-# chechov
-# https://www.checkov.io/1.Welcome/Quick%20Start.html
+# chechov (https://www.checkov.io/1.Welcome/Quick%20Start.html)

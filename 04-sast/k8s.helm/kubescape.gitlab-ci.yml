@@ -1,9 +1,6 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
-variables:
-  DD_UPLOAD_REPORT: "true"
-
 # Kubescape Scanner (https://github.com/kubescape/kubescape)
 Kubescape Helm Scan:
   extends:

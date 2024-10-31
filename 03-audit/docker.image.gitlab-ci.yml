@@ -10,7 +10,7 @@ Forming CycloneDX SBOM (Docker):
     REGISTRY_USER: $CI_REGISTRY_USER
     REGISTRY_PASSWORD: $CI_REGISTRY_PASSWORD
     REGISTRY_PATH: $CI_PROJECT_PATH
-    TAG: "latest"
+    TAG: latest
     SYFT_IMAGE: $REGISTRY/$REGISTRY_PATH:$TAG
   image:
     name: registry.gitlab.com/dc20e6/devsecops/images/syft:latest

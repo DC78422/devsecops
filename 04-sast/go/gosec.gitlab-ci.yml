@@ -1,9 +1,6 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
-variables:
-  DD_UPLOAD_REPORT: "true"
-
 # Gosec Scanner (https://github.com/securego/gosec)
 Gosec:
   image:

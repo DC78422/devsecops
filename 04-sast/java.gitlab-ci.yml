@@ -4,6 +4,3 @@ include:
   - local: '04-sast/java/cpd.gitlab-ci.yml'
   - local: '04-sast/java/pmd.gitlab-ci.yml'
   - local: '04-sast/java/spotbugs.gitlab-ci.yml'
-
-variables:
-  DD_UPLOAD_REPORT: "true"

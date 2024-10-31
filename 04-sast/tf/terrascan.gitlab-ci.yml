@@ -1,7 +1,4 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
-variables:
-  DD_UPLOAD_REPORT: "true"
-
 # Terrascan (https://github.com/tenable/terrascan)

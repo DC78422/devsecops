@@ -1,6 +1,3 @@
 include:
   - local: '04-sast/base/semgrep.gitlab-ci.yml'
   - local: '04-sast/ruby/brakeman.gitlab-ci.yml'
-
-variables:
-  DD_UPLOAD_REPORT: "true"

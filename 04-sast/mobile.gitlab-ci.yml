@@ -2,6 +2,3 @@ include:
   - local: '04-sast/base/semgrep.gitlab-ci.yml'
   - local: '04-sast/mobile/mobsf-adnroid.gitlab-ci.yml'
   - local: '04-sast/mobile/mobsf-ios.gitlab-ci.yml'
-
-variables:
-  DD_UPLOAD_REPORT: "true"
