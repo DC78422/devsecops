@@ -8,11 +8,8 @@ Forming CycloneDX SBOM (gradle):
     - gradle cyclonedxBom
   after_script:
     - mv build/reports/bom.json reports/cdx-sbom.gradle.json
-    - |
-      if [ "$DT_UPLOAD_REPORT" = 'true' ]; then
-        echo "Uploading"
-        cat reports/cdx-sbom.gradle.json
-      fi
+    - echo "Uploading"
+    - cat reports/cdx-sbom.gradle.json
   artifacts:
     paths:
       - build/reports/bom.json

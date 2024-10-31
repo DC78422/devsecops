@@ -17,12 +17,9 @@ KICS Dockerfile Scanning:
       --output-path reports/
       --output-name lint.kics_dockerfile.report.json
       --report-formats json
-      --path ${CI_DOCKERFILE:-Dockerfile}
+      --path ${CI_DOCKERFILE}
       --ignore-on-exit all
   after_script:
-    - |
-      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
-        echo "Uploading"
-        cat reports/lint.kics_dockerfile.report.json
-      fi
+    - echo "Uploading"
+    - cat reports/lint.kics_dockerfile.report.json
   when: manual

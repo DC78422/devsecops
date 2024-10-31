@@ -11,14 +11,14 @@ GitLeaks:
     entrypoint: [""]
   script:
     - |
-      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+      if [ "$GENERATE_REPORT" = 'true' ]; then
         gitleaks detect --source . --report-format=json --report-path=reports/secrets.gitleaks.report.json -v
       else
         gitleaks detect --source .
       fi
   after_script:
     - |
-      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+      if [ "$GENERATE_REPORT" = 'true' ]; then
         echo "Uploading"
         cat reports/secrets.gitleaks.report.json
       fi

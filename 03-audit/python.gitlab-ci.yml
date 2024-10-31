@@ -18,11 +18,8 @@ Forming CycloneDX SBOM:
       --output-format json
       --outfile reports/cdx-sbom.py.json
   after_script:
-    - |
-      if [ "$DT_UPLOAD_REPORT" = 'true' ]; then
-        echo "Uploading"
-        cat reports/cdx-sbom.py.json
-      fi
+    - echo "Uploading"
+    - cat reports/cdx-sbom.py.json
   when: manual
 
 # poetry-audit:

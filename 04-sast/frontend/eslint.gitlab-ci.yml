@@ -15,7 +15,7 @@ eslint (sast):
     - echo eslint > reports/sast.eslint.report.json
   after_script:
     - |
-      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+      if [ "$GENERATE_REPORT" = 'true' ]; then
         echo "Uploading"
         cat reports/sast.eslint.report.json
       fi

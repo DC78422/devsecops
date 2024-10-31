@@ -13,7 +13,7 @@ progpilot:
     - progpilot . > reports/sast.progpilot.report.json
   after_script:
     - |
-      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+      if [ "$GENERATE_REPORT" = 'true' ]; then
         echo "Uploading"
         cat reports/sast.progpilot.report.json
       fi

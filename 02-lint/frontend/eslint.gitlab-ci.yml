@@ -14,7 +14,7 @@ eslint (lint):
     - echo "Здесь необходимо переопределить блок script в соответствии с окружением"
   after_script:
     - |
-      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+      if [ "$GENERATE_REPORT" = 'true' ]; then
         echo "Uploading"
         cat reports/lint.eslint.report.json
       fi

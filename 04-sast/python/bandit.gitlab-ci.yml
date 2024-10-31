@@ -17,7 +17,7 @@ Bandit:
       --exit-zero
   after_script:
     - |
-      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+      if [ "$GENERATE_REPORT" = 'true' ]; then
         echo "Uploading"
         cat reports/sast.bandit.report.json
       fi

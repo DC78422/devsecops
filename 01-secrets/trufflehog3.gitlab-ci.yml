@@ -11,14 +11,14 @@ Trufflehog3:
     entrypoint: [""]
   script:
     - |
-      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+      if [ "$GENERATE_REPORT" = 'true' ]; then
         trufflehog3 -f JSON -o reports/secrets.trufflehog3.report.json .
       else
         trufflehog3 .
       fi
   after_script:
     - |
-      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+      if [ "$GENERATE_REPORT" = 'true' ]; then
         echo "Uploading"
         cat reports/secrets.trufflehog3.report.json
       fi

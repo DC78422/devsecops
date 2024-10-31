@@ -12,14 +12,14 @@ Semgrep:
     - ".sast_base"
   script:
     - |
-      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+      if [ "$GENERATE_REPORT" = 'true' ]; then
         semgrep scan $SEMGREP_CONFIG --json --json-output=reports/sast.semgrep.report.json --error
       else
         semgrep scan $SEMGREP_CONFIG
       fi
   after_script:
     - |
-      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+      if [ "$GENERATE_REPORT" = 'true' ]; then
         echo "Uploading"
         cat reports/sast.semgrep.report.json
       fi

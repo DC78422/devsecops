@@ -64,25 +64,25 @@ stages:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
     - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
       variables:
-        DD_UPLOAD_REPORT: "true"
-        DT_UPLOAD_REPORT: "true"
+        GENERATE_REPORT: "true"
+        GENERATE_REPORT: "true"
 
 ".lint_rule":
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
     - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
       variables:
-        DD_UPLOAD_REPORT: "true"
-        DT_UPLOAD_REPORT: "true"
+        GENERATE_REPORT: "true"
+        GENERATE_REPORT: "true"
 
 ".audit_rule":
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       variables:
-        DT_UPLOAD_REPORT: "false"
+        GENERATE_REPORT: "false"
     - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
       variables:
-        DT_UPLOAD_REPORT: "true"
+        GENERATE_REPORT: "true"
 
 ".audit_rule_mr":
   rules:
@@ -94,7 +94,7 @@ stages:
       when: never
     - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
       variables:
-        DD_UPLOAD_REPORT: "true"
+        GENERATE_REPORT: "true"
 
 ".dast_rule":
   rules:
@@ -102,4 +102,4 @@ stages:
       when: never
     - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
       variables:
-        DD_UPLOAD_REPORT: "true"
+        GENERATE_REPORT: "true"

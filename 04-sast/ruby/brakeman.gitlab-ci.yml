@@ -14,7 +14,7 @@ Brakeman:
       -o reports/sast.brakeman.report.json
   after_script:
     - |
-      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+      if [ "$GENERATE_REPORT" = 'true' ]; then
         echo "Uploading"
         cat reports/sast.brakeman.report.json
       fi

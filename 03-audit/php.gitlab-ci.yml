@@ -13,9 +13,6 @@ Forming CycloneDX SBOM:
       --output-format=JSON
       --output-file=reports/cdx-sbom.php.json
   after_script:
-    - |
-      if [ "$DT_UPLOAD_REPORT" = 'true' ]; then
-        echo "Uploading"
-        cat reports/cdx-sbom.php.json
-      fi
+    - echo "Uploading"
+    - cat reports/cdx-sbom.php.json
   when: manual

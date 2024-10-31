@@ -17,9 +17,6 @@ Grype SBOM:
     - grype db list
     - grype ./ -o json > reports/audit.grype.report.json
   after_script:
-    - |
-      if [ "$DT_UPLOAD_REPORT" = 'true' ]; then
-        echo "Uploading"
-        cat reports/audit.grype.report.json
-      fi
+    - echo "Uploading"
+    - cat reports/audit.grype.report.json
   when: manual

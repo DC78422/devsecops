@@ -16,11 +16,6 @@ Talisman:
   after_script:
     - mv reports/talisman_reports/data/report.json reports/secrets.talisman.report.json
     - rm -rf reports/talisman_reports/
-    - |
-      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
-        echo "Uploading"
-        cat reports/secrets.talisman.report.json
-      else
-        cat reports/secrets.talisman.report.json
-      fi
+    - echo "Uploading"
+    - cat reports/secrets.talisman.report.json
   when: manual
