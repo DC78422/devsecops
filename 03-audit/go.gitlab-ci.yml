@@ -7,8 +7,6 @@ Forming CycloneDX SBOM (go):
     - ".audit_rule"
   image:
     name: registry.gitlab.com/dc20e6/devsecops/images/cyclonedx-gomod:1.7.0
-  before_script:
-    - mkdir reports/ || true
   script:
     - /usr/bin/cyclonedx-gomod mod
       -json

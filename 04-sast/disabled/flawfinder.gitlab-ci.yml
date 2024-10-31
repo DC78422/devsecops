@@ -8,8 +8,7 @@ flawfinder:
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
-  before_script:
-    - mkdir reports/ || true
+    - ".artifacts"
   script:
     - find . -type f -name "*.c"
     - find . -type f -name "*.cc"

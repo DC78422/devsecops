@@ -8,8 +8,7 @@ nodejs-scan:
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
-  before_script:
-    - mkdir reports/ || true
+    - ".artifacts"
   script:
     - find . -type f -name package.json
     - echo nodejs-scan

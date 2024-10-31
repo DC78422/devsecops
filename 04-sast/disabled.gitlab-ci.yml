@@ -5,8 +5,7 @@ flawfinder:
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
-  before_script:
-    - mkdir reports/ || true
+    - ".artifacts"
   script:
     - find . -type f -name "*.c"
     - find . -type f -name "*.cc"
@@ -38,8 +37,7 @@ kubesec:
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
-  before_script:
-    - mkdir reports/ || true
+    - ".artifacts"
   script:
     - echo kubesec
     - echo kubesec > reports/kubesec.json
@@ -58,8 +56,7 @@ nodejs-scan:
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
-  before_script:
-    - mkdir reports/ || true
+    - ".artifacts"
   script:
     - find . -type f -name package.json
     - echo nodejs-scan
@@ -81,8 +78,7 @@ phpcs-security-audit:
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
-  before_script:
-    - mkdir reports/ || true
+    - ".artifacts"
   script:
     - find . -type f -name "*.php"
     - echo phpcs-security-audit
@@ -104,8 +100,7 @@ sobelow:
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
-  before_script:
-    - mkdir reports/ || true
+    - ".artifacts"
   script:
     - find . -type f -name "mix.exs"
     - echo sobelow
@@ -127,8 +122,7 @@ salus:
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
-  before_script:
-    - mkdir reports/ || true
+    - ".artifacts"
   script:
     - find . -type f -name "*.ipa"
     - find . -type d -name "*.xcodeproj"
