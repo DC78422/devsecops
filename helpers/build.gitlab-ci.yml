@@ -4,15 +4,15 @@
     DOCKERFILE: "Dockerfile"
     TAG: "latest"
     KANIKO_CONTEXT: >
-      --context ${CI_PROJECT_DIR}
+      --context $CI_PROJECT_DIR
     KANIKO_DOCKERFILE: >
-      --dockerfile ${CI_PROJECT_DIR}/${DOCKERFILE}
+      --dockerfile $CI_PROJECT_DIR/$DOCKERFILE
     KANIKO_ARGS: ''
     # KANIKO_ARGS: >
     #   --build-arg ARG1=ARG1
     #   --build-arg ARG2=ARG2
     KANIKO_DESTINATION: >
-      --destination "${CI_REGISTRY_IMAGE}:${TAG}"
+      --destination "$CI_REGISTRY_IMAGE:$TAG"
     KANIKO_LABELS: >
       --label org.opencontainers.image.vendor=$CI_SERVER_URL/$GITLAB_USER_LOGIN
       --label org.opencontainers.image.authors=$CI_SERVER_URL/$GITLAB_USER_LOGIN
