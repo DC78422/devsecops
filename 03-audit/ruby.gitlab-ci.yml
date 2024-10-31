@@ -4,7 +4,7 @@ include:
 variables:
   SBOM_PATH: "reports/cdx-sbom.ruby.json"
 
-Forming CycloneDX SBOM:
+Forming CycloneDX SBOM (ruby):
   extends:
     - ".audit_src_base"
     - ".audit_rule"

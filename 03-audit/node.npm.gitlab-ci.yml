@@ -17,7 +17,6 @@ Forming CycloneDX SBOM (npm):
     - mkdir reports/ || true
   script:
     - cyclonedx-npm
-      --package-lock-only $PACKAGE_LOCK_ONLY
       --spec-version $SPEC_VERSION
       --output-file reports/cdx-sbom.npm.json
       --mc-type $MC_TYPE
@@ -25,6 +24,8 @@ Forming CycloneDX SBOM (npm):
     - echo "Uploading"
     - cat reports/cdx-sbom.npm.json
   when: manual
+
+      # --package-lock-only $PACKAGE_LOCK_ONLY
 
 # Forming CycloneDX SBOM (npm) v2:
 #   stage: Audit (src)

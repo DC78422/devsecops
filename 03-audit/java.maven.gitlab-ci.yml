@@ -1,4 +1,4 @@
-Forming CycloneDX SBOM:
+Forming CycloneDX SBOM (maven):
   extends:
     - ".audit_src_base"
     - ".audit_rule"

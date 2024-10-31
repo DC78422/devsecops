@@ -1,7 +1,7 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
-Forming CycloneDX SBOM:
+Forming CycloneDX SBOM (php):
   extends:
     - ".audit_src_base"
     - ".audit_rule"
