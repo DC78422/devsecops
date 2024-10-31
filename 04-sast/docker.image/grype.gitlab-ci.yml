@@ -9,7 +9,6 @@ Grype Image Scanning:
   stage: SAST (image)
   extends:
     - ".sast_base"
-    - ".DefectDojo_variables"
   variables:
     SAST_IMAGE: registry.example.com/openshift/grype:0.74.6-debug
     GIT_STRATEGY: none
@@ -23,7 +22,7 @@ Grype Image Scanning:
     - grype $IMAGE_TO_SCAN --only-fixed -o json > reports/iac.grype.report.json
   after_script:
     - echo "Uploading"
-    - dd-wrapper --dd-report-file=reports/iac.grype.report.json --dd-engagement-test-title="Anchore Image Grype" --dd-engagement-scan-type="Anchore Grype"
+    - cat reports/iac.grype.report.json
   rules:
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /Grype Image Scanning/"
       when: never
@@ -31,7 +30,3 @@ Grype Image Scanning:
       when: never
     - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
   when: manual
-
-# DefectDojo Engagement Creation:
-#   extends:
-#     - ".DefectDojo_Engagement_Creation"

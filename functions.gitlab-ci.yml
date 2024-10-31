@@ -1,13 +1,4 @@
 variables:
-  DD_WRAPPER_VERSION: "1.0.6"
-  DD_URL: "https://defectdojo.example.com"
-  DD_PRODUCT_TYPE_NAME: ${NAMESPACE}
-  DD_ENGAGEMENT_PRODUCT_NAME: ${APP_NAME}
-
-  DT_WRAPPER_VERSION: "1.0.7"
-  DT_SERVER: "https://dt-api.example.com"
-  DT_PARENT_PROJECT_NAME: ${NAMESPACE}
-  DT_CHILD_PROJECT_NAME: ${NAMESPACE}-${APP_NAME}
 
   IMAGE_TO_SCAN: $APP_IMAGE:latest
   SECURITY_BRANCH: $CI_DEFAULT_BRANCH
@@ -36,50 +27,33 @@ stages:
 
 ".secrets_base":
   stage: Secrets
-  image:
-    name: $SECRETS_IMAGE
-    # entrypoint: [$SECRETS_IMAGE_ENTRYPOINT]
-  # variables:
-  #   SECRETS_IMAGE_ENTRYPOINT: ""
+  extends:
+    - ".artifacts"
 
 ".lint_base":
   stage: Lint
   extends:
     - ".artifacts"
-  image:
-    name: $LINT_IMAGE
-    # entrypoint: [$LINT_IMAGE_ENTRYPOINT]
-  # variables:
-    # LINT_IMAGE_ENTRYPOINT: ""
-    # PYTHON_INSTALL_CMD: "echo 'Здесь может быть команда для установки зависимостей'"
 
-".audit_base":
+".audit_src_base":
   stage: Audit (src)
-  image:
-    name: $AUDIT_IMAGE
-    # entrypoint: [$AUDIT_IMAGE_ENTRYPOINT]
-  # variables:
-  #   AUDIT_IMAGE_ENTRYPOINT: ""
+  extends:
+    - ".artifacts"
 
 ".sast_base":
   stage: SAST (src)
   extends:
     - ".artifacts"
-  image:
-    name: $SAST_IMAGE
-    # entrypoint: [$SAST_IMAGE_ENTRYPOINT]
-  # variables:
-  #   SAST_IMAGE_ENTRYPOINT: ""
+
+".audit_image_base":
+  stage: Audit (image)
+  extends:
+    - ".artifacts"
 
 ".dast_base":
   stage: DAST
   extends:
     - ".artifacts"
-  image:
-    name: $DAST_IMAGE
-    # entrypoint: [$DAST_IMAGE_ENTRYPOINT]
-  variables:
-    # DAST_IMAGE_ENTRYPOINT: ""
 
 # ".security_rule":
 #   rules:
@@ -129,76 +103,3 @@ stages:
     - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
       variables:
         DD_UPLOAD_REPORT: "true"
-
-".DefectDojo_variables":
-  variables:
-    DD_ENGAGEMENT_TAGS: gitlab-ci
-    DD_ENGAGEMENT_NAME: ${CI_PIPELINE_ID}
-    DD_ENGAGEMENT_VERSION: ${CI_COMMIT_REF_NAME}
-    DD_ENGAGEMENT_COMMIT_HASH: ${CI_COMMIT_SHORT_SHA}
-    DD_ENGAGEMENT_BRANCH_TAG: ${CI_COMMIT_REF_NAME}
-    DD_ENGAGEMENT_SOURCE_CODE_MANAGEMENT_URI: ${CI_PIPELINE_URL}
-    DD_ENGAGEMENT_DESCRIPTION: 'Engagement for product "${DD_ENGAGEMENT_PRODUCT_NAME}"'
-
-".DefectDojo":
-  extends:
-    # - ".security_rule"
-    - ".DefectDojo_variables"
-  variables:
-    GIT_STRATEGY: none
-  image:
-    name: "stock.example.com/pcp/dd-wrapper:$DD_WRAPPER_VERSION"
-    entrypoint: [""]
-
-".DefectDojo_Engagement_Creation":
-  extends:
-    - ".DefectDojo"
-  variables:
-    DD_CREATE_ENGAGEMENT: "true"
-  stage: .pre
-  script:
-    - ENGAGEMENTID=$(dd-wrapper)
-    - echo "DD_ENGAGEMENT_ID=${ENGAGEMENTID}" >> defectdojo.env
-  artifacts:
-    reports:
-      dotenv: defectdojo.env
-
-".Uploading_Scan_Reports_to_DefectDojo":
-  extends:
-    - ".DefectDojo"
-    - ".artifacts"
-  variables:
-    DD_UPLOAD_REPORT: "true"
-  stage: .post
-#   needs:
-#     [
-#       "DefectDojo Engagement Creation",
-#       "Trivy Scanning",
-#       "Gitleaks Scanning",
-#       "Grype Docker Image Scanning",
-#     ]
-#   script:
-#     - |
-#       if [ "$DOCKER_SCAN_DISABLED" = 'true' ]; then
-#         echo "Docker scanning is disabled"
-#       else
-#         echo "Uploading"
-#         dd-wrapper --dd-report-file=reports/trivy-image-report.json --dd-engagement-test-title="Trivy Image Scan" --dd-engagement-scan-type="Trivy Scan"
-#       fi
-#     - echo "Uploading"
-#     - dd-wrapper --dd-report-file=reports/gitleaks-report.json --dd-engagement-test-title="Gitleaks Scan" --dd-engagement-scan-type="Gitleaks Scan"
-
-".Uploading_SBOM_to_Dependency_Track":
-  extends:
-    - ".artifacts"
-    # - ".security_rule"
-  variables:
-  stage: .post
-  image:
-    name: "stock.example.com/pcp/dt-wrapper:$DT_WRAPPER_VERSION"
-    entrypoint: [""]
-  script:
-    - echo "Uploading"
-    - dt-wrapper
-      --dt-sbom-path $SBOM_PATH
-      --dt-enable-project-properties

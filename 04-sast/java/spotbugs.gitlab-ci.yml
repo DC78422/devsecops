@@ -11,7 +11,6 @@ spotbugs:
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
-    - ".DefectDojo_variables"
   script:
     - echo sobelow
     - echo sobelow > reports/sast.sobelow.report.json
@@ -24,7 +23,3 @@ spotbugs:
     - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
   when: manual
   allow_failure: true
-
-# DefectDojo Engagement Creation:
-#   extends:
-#     - ".DefectDojo_Engagement_Creation"

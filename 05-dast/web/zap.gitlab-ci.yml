@@ -14,7 +14,7 @@ Nikto:
       -o reports/dast.nikto.report.json
   after_script:
     - echo "Uploading"
-    - dd-wrapper --dd-report-file=reports/dast.nikto.report.json --dd-engagement-test-title="Nikto" --dd-engagement-scan-type="Nikto Scan"
+    - cat reports/dast.nikto.report.json
   rules:
     - if: $DAST_WEBSITE
   when: manual
@@ -32,7 +32,7 @@ Nikto (all):
       -C all
   after_script:
     - echo "Uploading"
-    - dd-wrapper --dd-report-file=reports/dast.nikto_all.report.json       --dd-engagement-test-title="Nikto (all)"       --dd-engagement-scan-type="Nikto Scan"
+    - cat reports/dast.nikto_all.report.json
   rules:
     - if: $DAST_WEBSITE
   when: manual
@@ -51,7 +51,7 @@ Dastardly:
     - /usr/local/burpsuite_enterprise/bin/dastardly
   after_script:
     - echo "Uploading"
-    - dd-wrapper --dd-report-file=reports/dast.dastardly.report.xml   --dd-engagement-test-title="Dastardly"  --dd-engagement-scan-type="Burp Dastardly Scan"
+    - cat reports/dast.dastardly.report.xml
   rules:
     - if: $DAST_WEBSITE
   when: manual
@@ -79,7 +79,7 @@ ZAP baseline scan:
     - cp /zap/wrk/dast.zap-baseline-scan.report.html ./zap/
     - cp /zap/wrk/dast.zap-baseline-scan.report.xml ./zap/
     - echo "Uploading"
-    - dd-wrapper --dd-report-file=zap/dast.zap-baseline-scan.report.xml --dd-engagement-test-title="ZAP baseline scan" --dd-engagement-scan-type="ZAP Scan"
+    - cat zap/dast.zap-baseline-scan.report.xml
   rules:
     - if: $DAST_WEBSITE
   artifacts:

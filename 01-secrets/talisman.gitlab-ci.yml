@@ -4,7 +4,6 @@ include:
 # Talisman (https://github.com/thoughtworks/talisman)
 Talisman:
   extends:
-    - ".artifacts"
     - ".secrets_base"
     - ".secrets_rule"
   image:

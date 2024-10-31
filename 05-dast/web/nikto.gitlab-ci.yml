@@ -14,7 +14,7 @@ nikto:
       -o reports/dast.nikto.report.json
   after_script:
     - echo "Uploading"
-    - dd-wrapper --dd-report-file=reports/dast.nikto.report.json --dd-engagement-test-title="Nikto" --dd-engagement-scan-type="Nikto Scan"
+    - cat reports/dast.nikto.report.json
   rules:
     - if: $DAST_WEBSITE
   when: manual
@@ -32,7 +32,7 @@ Nikto (all):
       -C all
   after_script:
     - echo "Uploading"
-    - dd-wrapper --dd-report-file=reports/dast.nikto_all.report.json       --dd-engagement-test-title="Nikto (all)"       --dd-engagement-scan-type="Nikto Scan"
+    - cat reports/dast.nikto_all.report.json
   rules:
     - if: $DAST_WEBSITE
   when: manual

@@ -14,7 +14,7 @@ Nuclei:
       -json-export reports/dast.nuclei.report.json
   after_script:
     - echo "Uploading"
-    - dd-wrapper --dd-report-file=reports/dast.nuclei.report.json --dd-engagement-test-title="Nuclei" --dd-engagement-scan-type="Nuclei Scan"
+    - cat reports/dast.nuclei.report.json
   rules:
     - if: $DAST_WEBSITE
   when: manual

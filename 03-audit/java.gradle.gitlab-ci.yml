@@ -1,13 +1,18 @@
 Forming CycloneDX SBOM (gradle):
   extends:
-    - ".artifacts"
-    - ".audit_base"
+    - ".audit_src_base"
     - ".audit_rule"
-    - ".DefectDojo_variables"
   image:
     name: "gradle:8.7.0-jdk17"
   script:
     - gradle cyclonedxBom
+  after_script:
+    - mv build/reports/bom.json reports/cdx-sbom.gradle.json
+    - |
+      if [ "$DT_UPLOAD_REPORT" = 'true' ]; then
+        echo "Uploading"
+        cat reports/cdx-sbom.gradle.json
+      fi
   artifacts:
     paths:
       - build/reports/bom.json

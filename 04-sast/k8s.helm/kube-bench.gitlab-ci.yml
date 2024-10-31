@@ -5,7 +5,3 @@ variables:
   DD_UPLOAD_REPORT: "true"
 
 # Kube-bench
-
-# DefectDojo Engagement Creation:
-#   extends:
-#     - ".DefectDojo_Engagement_Creation"

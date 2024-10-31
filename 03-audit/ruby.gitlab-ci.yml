@@ -6,8 +6,7 @@ variables:
 
 Forming CycloneDX SBOM:
   extends:
-    - ".artifacts"
-    - ".audit_base"
+    - ".audit_src_base"
     - ".audit_rule"
   image:
     name: "ruby:2.7.2"
@@ -20,11 +19,6 @@ Forming CycloneDX SBOM:
     paths:
       - reports/
     expire_in: 1 day
-
-# DefectDojo Engagement Creation:
-#   extends:
-#     - ".DefectDojo_Engagement_Creation"
-
 # Uploading SBOM to Dependency Track:
 #   extends:
 #     - ".Uploading_SBOM_to_Dependency_Track"

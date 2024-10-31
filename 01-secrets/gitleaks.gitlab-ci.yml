@@ -4,7 +4,6 @@ include:
 # Gitleaks (https://github.com/gitleaks/gitleaks)
 GitLeaks:
   extends:
-    - ".artifacts"
     - ".secrets_base"
     - ".secrets_rule"
   image:

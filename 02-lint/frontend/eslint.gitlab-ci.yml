@@ -11,7 +11,11 @@ eslint (lint):
     SEARCH_MAX_DEPTH: 4
   script:
     - echo "Здесь необходимо переопределить блок script в соответствии с окружением"
-  # after_script:
-  #   - dd-wrapper --dd-report-file=reports/lint.kics_dockerfile.report.json    --dd-engagement-test-title="KICS Dockerfile Scanner"    --dd-engagement-scan-type="KICS Scan"
+  after_script:
+    - |
+      if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
+        echo "Uploading"
+        cat reports/lint.eslint.report.json
+      fi
   when: manual
   allow_failure: true

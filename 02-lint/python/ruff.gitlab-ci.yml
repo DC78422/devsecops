@@ -20,7 +20,4 @@ ruff:
       echo "ruff args: $RUFF_ARGS"
       echo "ruff source: $RUFF_SOURCE"
       ruff check $RUFF_ARGS $RUFF_SOURCE
-    #  > reports/lint.ruff.txt
-  # after_script:
-  #   - dd-wrapper --dd-report-file=reports/lint.kics_dockerfile.report.json    --dd-engagement-test-title="KICS Dockerfile Scanner"    --dd-engagement-scan-type="KICS Scan"
   when: manual

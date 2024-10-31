@@ -13,9 +13,9 @@ Wapiti:
       --format xml
       --output ./reports/dast.wapiti.report.xml
   after_script:
-    - sed -i '/info name="auth"/d' ./reports/dast.wapiti.report.xml
+    # - sed -i '/info name="auth"/d' ./reports/dast.wapiti.report.xml
     - echo "Uploading"
-    - dd-wrapper --dd-report-file=reports/dast.wapiti.report.xml --dd-engagement-test-title="Wapiti Scan" --dd-engagement-scan-type="Wapiti Scan"
+    - cat reports/dast.wapiti.report.xml
   rules:
     - if: $DAST_WEBSITE
   when: manual

@@ -13,7 +13,6 @@ cpd:
     CPD_MINIMUM_TOKENS: 0
   extends:
     - ".sast_base"
-    - ".DefectDojo_variables"
   script:
     - /pmd-bin-7.1.0/bin/pmd cpd 
       -d .
@@ -30,7 +29,3 @@ cpd:
     - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
   when: manual
   allow_failure: true
-
-# DefectDojo Engagement Creation:
-#   extends:
-#     - ".DefectDojo_Engagement_Creation"

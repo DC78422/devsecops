@@ -11,7 +11,6 @@ Brakeman:
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
-    - ".DefectDojo_variables"
   script:
     - /usr/src/app/bin/brakeman
       -f json
@@ -20,7 +19,7 @@ Brakeman:
     - |
       if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
         echo "Uploading"
-        dd-wrapper --dd-report-file=reports/sast.brakeman.report.json --dd-engagement-test-title="Brakeman scan" --dd-engagement-scan-type="Brakeman Scan"
+        cat reports/sast.brakeman.report.json
       fi
   rules:
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /brakeman/"
@@ -31,7 +30,3 @@ Brakeman:
     - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
   when: manual
   allow_failure: true
-
-# DefectDojo Engagement Creation:
-#   extends:
-#     - ".DefectDojo_Engagement_Creation"

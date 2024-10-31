@@ -1,9 +1,7 @@
 Forming CycloneDX SBOM:
   extends:
-    - ".artifacts"
-    - ".audit_base"
+    - ".audit_src_base"
     - ".audit_rule"
-    - ".DefectDojo_variables"
   image:
     name: "maven:3.9.6-eclipse-temurin-17"
   before_script:

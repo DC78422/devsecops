@@ -3,27 +3,27 @@ include:
 
 Forming CycloneDX SBOM (go):
   extends:
-    - ".artifacts"
-    - ".audit_base"
+    - ".audit_src_base"
     - ".audit_rule"
-    - ".DefectDojo_variables"
   image:
     name: registry.gitlab.com/dc20e6/devsecops/images/cyclonedx-gomod:1.7.0
   before_script:
     - mkdir reports/ || true
   script:
-    - /usr/bin/cyclonedx-gomod mod -json -output reports/cdx-sbom.json -assert-licenses -licenses .
+    - /usr/bin/cyclonedx-gomod mod
+      -json
+      -output reports/cdx-sbom.go.json
+      -assert-licenses
+      -licenses
+      .
+  after_script:
+    - |
+      if [ "$DT_UPLOAD_REPORT" = 'true' ]; then
+        echo "Uploading"
+        cat reports/cdx-sbom.go.json
+      fi
   artifacts:
     paths:
       - reports/
     expire_in: 1 day
 
-# DefectDojo Engagement Creation:
-#   extends:
-#     - ".DefectDojo_Engagement_Creation"
-
-# Uploading SBOM to Dependency Track:
-#   extends:
-#     - ".Uploading_SBOM_to_Dependency_Track"
-#     - ".audit_rule"
-#   needs: ["Forming CycloneDX SBOM"]

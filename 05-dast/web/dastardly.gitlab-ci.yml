@@ -15,7 +15,7 @@ Dastardly:
     - /usr/local/burpsuite_enterprise/bin/dastardly
   after_script:
     - echo "Uploading"
-    - dd-wrapper --dd-report-file=reports/dast.dastardly.report.xml   --dd-engagement-test-title="Dastardly"  --dd-engagement-scan-type="Burp Dastardly Scan"
+    - cat reports/dast.dastardly.report.xml
   rules:
     - if: $DAST_WEBSITE
   when: manual

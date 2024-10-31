@@ -23,7 +23,7 @@ ZAP API scan:
     - cp /zap/wrk/dast.zap-api-scan.report.html ./zap/
     - cp /zap/wrk/dast.zap-api-scan.report.xml ./zap/
     - echo "Uploading"
-    - dd-wrapper --dd-report-file=zap/dast.zap-api-scan.report.xml --dd-engagement-test-title="ZAP API scan" --dd-engagement-scan-type="ZAP Scan"
+    - cat zap/dast.zap-api-scan.report.xml
   rules:
     - if: $DAST_WEBSITE_API
   artifacts:

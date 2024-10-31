@@ -10,7 +10,6 @@ Semgrep:
     SEMGREP_CONFIG: "--config auto"
   extends:
     - ".sast_base"
-    - ".DefectDojo_variables"
   script:
     - |
       if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
@@ -32,7 +31,3 @@ Semgrep:
     - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
   when: manual
   allow_failure: true
-
-# DefectDojo Engagement Creation:
-#   extends:
-#     - ".DefectDojo_Engagement_Creation"

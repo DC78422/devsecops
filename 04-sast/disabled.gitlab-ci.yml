@@ -173,7 +173,7 @@ bearer:
     - |
       if [ "$DD_UPLOAD_REPORT" = 'true' ]; then
         echo "Uploading"
-        dd-wrapper --dd-report-file=reports/sast.bearer.report.json --dd-engagement-test-title="Bearer Sarif Report" --dd-engagement-scan-type="SARIF"
+        cat reports/sast.bearer.report.json
       fi
   rules:
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /bearer/"

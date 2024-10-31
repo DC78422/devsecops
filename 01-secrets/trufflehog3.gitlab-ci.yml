@@ -4,7 +4,6 @@ include:
 # Trufflehog3 (https://github.com/feeltheajf/trufflehog3)
 Trufflehog3:
   extends:
-    - ".artifacts"
     - ".secrets_base"
     - ".secrets_rule"
   image:
