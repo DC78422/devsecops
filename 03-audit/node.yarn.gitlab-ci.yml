@@ -18,6 +18,7 @@ Forming CycloneDX SBOM (yarn):
     - yarn dlx -q @cyclonedx/yarn-plugin-cyclonedx --help
     - mkdir reports/ || true
   script:
+    - yarn install
     - yarn dlx -q @cyclonedx/yarn-plugin-cyclonedx
       --spec-version $SPEC_VERSION
       --output-file reports/cdx-sbom.yarn.json
