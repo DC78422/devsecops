@@ -9,13 +9,10 @@ Forming CycloneDX SBOM:
   image:
     name: registry.gitlab.com/dc20e6/devsecops/images/cyclonedx-php:latest
     entrypoint: [""]
-  before_script:
-    - composer --help
   script:
-    - echo "composer"
-    # - composer CycloneDX:make-sbom 
-    #   --output-format=JSON
-    #   --output-file=reports/cdx-sbom.php.json
+    - composer CycloneDX:make-sbom 
+      --output-format=JSON
+      --output-file=reports/cdx-sbom.php.json
   # after_script:
   #   - |
   #     if [ "$DT_UPLOAD_REPORT" = 'true' ]; then
