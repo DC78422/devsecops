@@ -16,7 +16,7 @@ eslint (lint):
     - |
       if [ "$GENERATE_REPORT" = 'true' ]; then
         echo "Uploading"
-        cat reports/lint.eslint.report.json
+        cat reports/lint.eslint.npm.report.json
       fi
   when: manual
   allow_failure: true
