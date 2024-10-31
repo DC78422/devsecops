@@ -23,6 +23,7 @@ Forming CycloneDX SBOM (npm):
   after_script:
     - echo "Uploading"
     - cat reports/cdx-sbom.npm.json
+  when: manual
 
 # Forming CycloneDX SBOM (npm) v2:
 #   stage: Audit (src)
