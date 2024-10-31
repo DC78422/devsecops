@@ -1,2 +1,0 @@
-include:
-  - local: '02-lint/frontend/eslint.gitlab-ci.yml'

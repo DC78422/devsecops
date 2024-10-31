@@ -1,0 +1,2 @@
+include:
+  - local: '02-lint/node.npm/eslint.gitlab-ci.yml'

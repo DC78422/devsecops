@@ -1,0 +1,22 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# ESLint (https://eslint.org/)
+eslint (lint):
+  extends:
+    - ".lint_base"
+    - ".lint_rule"
+  image:
+    name: node:18.20.3-p10
+  variables:
+    SEARCH_MAX_DEPTH: 4
+  script:
+    - echo "Здесь необходимо переопределить блок script в соответствии с окружением"
+  after_script:
+    - |
+      if [ "$GENERATE_REPORT" = 'true' ]; then
+        echo "Uploading"
+        cat reports/lint.eslint.report.json
+      fi
+  when: manual
+  allow_failure: true
