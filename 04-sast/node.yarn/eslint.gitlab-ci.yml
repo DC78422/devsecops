@@ -1,0 +1,30 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# ESLint (https://eslint.org/)
+eslint (sast):
+  variables:
+    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/node:18.20.3-p10
+    SEARCH_MAX_DEPTH: 4
+  extends:
+    - ".sast_base"
+  script:
+    # - npx eslint .
+    # - npm test
+    - echo "Здесь необходимо переопределить блок script в соответствии с окружением"
+    - echo eslint > reports/sast.eslint.report.json
+  after_script:
+    - |
+      if [ "$GENERATE_REPORT" = 'true' ]; then
+        echo "Uploading"
+        cat reports/sast.eslint.report.json
+      fi
+  rules:
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /eslint/"
+      when: never
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /(javascript|typescript|jsx|tsx)/"
+    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
+  when: manual
+  allow_failure: true

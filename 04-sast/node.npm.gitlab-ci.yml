@@ -1,0 +1,3 @@
+include:
+  - local: '04-sast/base/semgrep.gitlab-ci.yml'
+  - local: '04-sast/node.npm/eslint.gitlab-ci.yml'
