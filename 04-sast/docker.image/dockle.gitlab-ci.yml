@@ -13,7 +13,8 @@ Dockle Image Scanning:
     TAG: latest
     DOCKLE_IMAGE: $REGISTRY/$REGISTRY_PATH:$TAG
   image:
-    name: registry.gitlab.com/dc20e6/devsecops/images/dockle:latest
+    # name: registry.gitlab.com/dc20e6/devsecops/images/dockle:latest
+    name: goodwithtech/dockle:v0.4.14
     entrypoint: [""]
   script:
     - dockle
