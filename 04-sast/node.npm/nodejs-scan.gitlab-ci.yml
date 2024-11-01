@@ -14,9 +14,8 @@ nodejs-scan:
   script:
     # - njsscan
     - nodejsscan
-      --json
       -o reports/sast.nodejs-scan.npm.report.json
-      .
+      -d ./
   after_script:
     - |
       if [ "$GENERATE_REPORT" = 'true' ]; then
