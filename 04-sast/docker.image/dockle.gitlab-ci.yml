@@ -25,11 +25,8 @@ Dockle Image Scanning:
       -o reports/iac.dockle.report.json
       $DOCKLE_IMAGE
   after_script:
-    - |
-      if [ "$GENERATE_REPORT" = 'true' ]; then
-        echo "Uploading"
-        cat reports/iac.dockle.report.json
-      fi
+    - echo "Uploading"
+    - cat reports/iac.dockle.report.json
   rules:
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /Dockle Image Scanning/"
       when: never
