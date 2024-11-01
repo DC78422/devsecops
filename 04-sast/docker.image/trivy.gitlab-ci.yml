@@ -24,4 +24,4 @@ Trivy Image Scanning:
       when: never
     - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
       when: never
-    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
+    - !reference [.security_rule, rules]
