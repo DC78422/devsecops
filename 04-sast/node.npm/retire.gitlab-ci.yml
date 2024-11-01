@@ -12,7 +12,11 @@ retire:
     - npm install -g retire
     - mkdir reports/ || true
   script:
-    - retire --path . --colors --outputformat json --outputpath reports/sast.retire.npm.report.json
+    - retire
+      --path ./
+      --colors
+      --outputformat json
+      --outputpath reports/sast.retire.npm.report.json
   after_script:
     - |
       if [ "$GENERATE_REPORT" = 'true' ]; then
