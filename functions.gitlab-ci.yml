@@ -55,34 +55,52 @@ stages:
   extends:
     - ".artifacts"
 
-# ".security_rule":
-#   rules:
-#     - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
+".security_rule":
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $RULES_ALLOW_FAILURE_ON_TEST_ON_DEFAULT_BRANCH == "true"'
+      allow_failure: true
+    # disallow failures on feature-branches when RULES_ALLOW_FAILURE_ON_TEST_ON_DEFAULT_BRANCH == false
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $RULES_ALLOW_FAILURE_ON_TEST_ON_DEFAULT_BRANCH == "false"'
+      allow_failure: false
 
 ".secrets_rule":
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
+    - if: '$CI_COMMIT_REF_NAME == $SECURITY_BRANCH && $RULES_ALLOW_FAILURE_ON_TEST_ON_DEFAULT_BRANCH == "true"'
       variables:
         GENERATE_REPORT: "true"
+      allow_failure: true
+    - if: '$CI_COMMIT_REF_NAME == $SECURITY_BRANCH && $RULES_ALLOW_FAILURE_ON_TEST_ON_DEFAULT_BRANCH == "false"'
+      variables:
         GENERATE_REPORT: "true"
+      allow_failure: false
 
 ".lint_rule":
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
+    - if: '$CI_COMMIT_REF_NAME == $SECURITY_BRANCH && $RULES_ALLOW_FAILURE_ON_TEST_ON_DEFAULT_BRANCH == "true"'
       variables:
         GENERATE_REPORT: "true"
+      allow_failure: true
+    - if: '$CI_COMMIT_REF_NAME == $SECURITY_BRANCH && $RULES_ALLOW_FAILURE_ON_TEST_ON_DEFAULT_BRANCH == "false"'
+      variables:
         GENERATE_REPORT: "true"
+      allow_failure: false
 
 ".audit_rule":
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       variables:
         GENERATE_REPORT: "false"
-    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
+    - if: '$CI_COMMIT_REF_NAME == $SECURITY_BRANCH && $RULES_ALLOW_FAILURE_ON_TEST_ON_DEFAULT_BRANCH == "true"'
       variables:
         GENERATE_REPORT: "true"
+      allow_failure: true
+    - if: '$CI_COMMIT_REF_NAME == $SECURITY_BRANCH && $RULES_ALLOW_FAILURE_ON_TEST_ON_DEFAULT_BRANCH == "false"'
+      variables:
+        GENERATE_REPORT: "true"
+      allow_failure: false
 
 ".audit_rule_mr":
   rules:
@@ -92,14 +110,24 @@ stages:
   rules:
     - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
       when: never
-    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
+    - if: '$CI_COMMIT_REF_NAME == $SECURITY_BRANCH && $RULES_ALLOW_FAILURE_ON_TEST_ON_DEFAULT_BRANCH == "true"'
       variables:
         GENERATE_REPORT: "true"
+      allow_failure: true
+    - if: '$CI_COMMIT_REF_NAME == $SECURITY_BRANCH && $RULES_ALLOW_FAILURE_ON_TEST_ON_DEFAULT_BRANCH == "false"'
+      variables:
+        GENERATE_REPORT: "true"
+      allow_failure: false
 
 ".dast_rule":
   rules:
     - if: "$DAST_DISABLED == 'true' || $DAST_DISABLED == '1'"
       when: never
-    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
+    - if: '$CI_COMMIT_REF_NAME == $SECURITY_BRANCH && $RULES_ALLOW_FAILURE_ON_TEST_ON_DEFAULT_BRANCH == "true"'
       variables:
         GENERATE_REPORT: "true"
+      allow_failure: true
+    - if: '$CI_COMMIT_REF_NAME == $SECURITY_BRANCH && $RULES_ALLOW_FAILURE_ON_TEST_ON_DEFAULT_BRANCH == "false"'
+      variables:
+        GENERATE_REPORT: "true"
+      allow_failure: false
