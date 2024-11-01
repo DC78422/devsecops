@@ -10,10 +10,11 @@ nodejs-scan:
     - ".sast_base"
   before_script:
     - pip install nodejsscan
-    - nodejsscan --help
   script:
-    - echo "Здесь необходимо переопределить блок script в соответствии с окружением"
-    - echo nodejs-scan > reports/sast.nodejs-scan.npm.report.json
+    - njsscan
+      --json
+      -o reports/sast.nodejs-scan.npm.report.json
+      .
   after_script:
     - |
       if [ "$GENERATE_REPORT" = 'true' ]; then
