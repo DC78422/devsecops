@@ -14,8 +14,6 @@ retire:
   script:
     - retire
     - retire
-      --path ./
-      --colors
       --outputformat json
       --outputpath reports/sast.retire.npm.report.json
   after_script:
