@@ -7,7 +7,7 @@ eslint (lint):
     - ".lint_base"
     - ".lint_rule"
   image:
-    name: node:18.20.3-p10
+    name: node:22.9.0-alpine3.20
   variables:
     SEARCH_MAX_DEPTH: 4
   script:

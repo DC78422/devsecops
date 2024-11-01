@@ -3,8 +3,9 @@ include:
 
 # ESLint (https://eslint.org/)
 eslint (sast):
+  image:
+    name: node:22.9.0-alpine3.20
   variables:
-    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/node:18.20.3-p10
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
