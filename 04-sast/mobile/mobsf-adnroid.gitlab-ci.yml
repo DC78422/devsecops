@@ -12,7 +12,6 @@ include:
     - when: never
   script:
     - echo mobsf
-  allow_failure: true
 
 # +
 mobsf-android:
@@ -30,5 +29,4 @@ mobsf-android:
       exists:
         - "**/*.apk"
         - "**/AndroidManifest.xml"
-  allow_failure: true
   when: manual

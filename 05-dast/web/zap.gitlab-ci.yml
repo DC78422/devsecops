@@ -55,7 +55,6 @@ Dastardly:
   rules:
     - if: $DAST_WEBSITE
   when: manual
-  allow_failure: true
 
 # Zed Attack Proxy
 ZAP baseline scan:
@@ -89,7 +88,6 @@ ZAP baseline scan:
     expire_in: 1 day
     when: always
   when: manual
-  allow_failure: true
 
 DefectDojo Engagement Creation:
   extends:

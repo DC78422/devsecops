@@ -32,5 +32,4 @@ salus:
         - "**/*.rs"
         - "**/*.toml"
         - "**/*.cargo"
-  allow_failure: true
   when: manual

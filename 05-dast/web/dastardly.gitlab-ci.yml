@@ -19,7 +19,6 @@ Dastardly:
   rules:
     - if: $DAST_WEBSITE
   when: manual
-  allow_failure: true
 
 DefectDojo Engagement Creation:
   extends:

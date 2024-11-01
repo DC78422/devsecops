@@ -23,4 +23,3 @@ sobelow:
       exists:
         - "**/mix.exs"
   when: manual
-  allow_failure: true

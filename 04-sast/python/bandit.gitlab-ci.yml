@@ -28,4 +28,3 @@ Bandit:
       when: never
     - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
   when: manual
-  allow_failure: true

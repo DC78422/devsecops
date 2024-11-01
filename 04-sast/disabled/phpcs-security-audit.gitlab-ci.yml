@@ -23,4 +23,3 @@ phpcs-security-audit:
       exists:
         - "**/*.php"
   when: manual
-  allow_failure: true

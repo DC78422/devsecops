@@ -33,7 +33,6 @@ ZAP API scan:
     expire_in: 1 day
     when: always
   when: manual
-  allow_failure: true
 
 DefectDojo Engagement Creation:
   extends:

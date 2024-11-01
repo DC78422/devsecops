@@ -23,4 +23,3 @@ nodejs-scan:
       exists:
         - "**/package.json"
   when: manual
-  allow_failure: true

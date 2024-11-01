@@ -27,4 +27,3 @@ Brakeman:
     # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /ruby/"
     - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
   when: manual
-  allow_failure: true

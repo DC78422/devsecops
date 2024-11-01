@@ -15,4 +15,3 @@ eslint (lint):
   script:
     - echo "Здесь необходимо переопределить блок script в соответствии с окружением"
   when: manual
-  allow_failure: true

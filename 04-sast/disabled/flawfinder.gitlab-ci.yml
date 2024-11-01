@@ -33,4 +33,3 @@ flawfinder:
         - "**/*.cp"
         - "**/*.cxx"
   when: manual
-  allow_failure: true
