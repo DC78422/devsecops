@@ -13,6 +13,7 @@ retire:
     - mkdir reports/ || true
   script:
     - retire
+    - retire
       --path ./
       --colors
       --outputformat json
