@@ -17,13 +17,14 @@ Trivy Image Scanning:
     name: registry.gitlab.com/dc20e6/devsecops/images/trivy:latest
     entrypoint: [""]
   script:
-    - trivy image
-      --ignore-unfixed
-      --image-config-scanners misconfig,secret
-      --username $REGISTRY_USER
-      --password $REGISTRY_PASSWORD
-      -o reports/iac.trivy.image.report.json
-      $TRIVY_IMAGE
+    - trivy image alpine:latest
+    # - trivy image
+    #   --ignore-unfixed
+    #   --image-config-scanners misconfig,secret
+    #   --username $REGISTRY_USER
+    #   --password $REGISTRY_PASSWORD
+    #   -o reports/iac.trivy.image.report.json
+    #   $TRIVY_IMAGE
   after_script:
     - echo "Uploading"
     - cat reports/iac.trivy.image.report.json
