@@ -30,7 +30,6 @@ Forming CycloneDX SBOM (npm):
     - npm install --global @cyclonedx/cyclonedx-npm
     - mkdir reports/ || true
   script:
-    - npm install
     - cyclonedx-npm
       --package-lock-only $PACKAGE_LOCK_ONLY
       --spec-version $SPEC_VERSION
