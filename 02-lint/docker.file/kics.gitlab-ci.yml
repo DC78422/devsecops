@@ -22,4 +22,3 @@ KICS Dockerfile Scanning:
   after_script:
     - echo "Uploading"
     - cat reports/lint.kics_dockerfile.report.json
-  when: manual

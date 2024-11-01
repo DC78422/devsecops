@@ -16,4 +16,3 @@ chart-testing:
       exists:
         - "Chart.yaml"
         - "Chart.lock"
-  when: manual

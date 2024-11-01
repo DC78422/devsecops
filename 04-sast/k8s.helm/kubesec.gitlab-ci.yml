@@ -11,4 +11,3 @@ kubesec:
       -f values.yaml
   script:
     - helm template $HELM_VALUES_FILES ./ | kubesec scan /dev/stdin
-  when: manual

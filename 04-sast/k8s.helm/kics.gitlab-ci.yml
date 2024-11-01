@@ -20,4 +20,3 @@ KICS Scanning:
       exists:
         - "Chart.yaml"
         - "Chart.lock"
-  when: manual

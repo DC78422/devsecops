@@ -28,4 +28,3 @@ nodejs-scan:
       when: never
     # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /(javascript|typescript|jsx|tsx)/"
     - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
-  when: manual

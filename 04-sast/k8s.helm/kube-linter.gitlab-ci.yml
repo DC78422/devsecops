@@ -15,4 +15,3 @@ kube-linter:
       exists:
         - "Chart.yaml"
         - "Chart.lock"
-  when: manual

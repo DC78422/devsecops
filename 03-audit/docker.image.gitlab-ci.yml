@@ -23,4 +23,3 @@ Forming CycloneDX SBOM (Docker):
   after_script:
     - echo "Uploading"
     - cat reports/cdx-sbom.syft.json
-  when: manual

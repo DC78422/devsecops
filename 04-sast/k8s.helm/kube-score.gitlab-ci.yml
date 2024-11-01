@@ -17,4 +17,3 @@ kube-score:
       exists:
         - "Chart.yaml"
         - "Chart.lock"
-  when: manual

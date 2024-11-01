@@ -16,4 +16,3 @@ kubeconform:
       --summary
       $HELM_VALUES_FILES
       .
-  when: manual

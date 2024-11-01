@@ -15,4 +15,3 @@ Kubescape Helm Scan:
       exists:
         - "Chart.yaml"
         - "Chart.lock"
-  when: manual

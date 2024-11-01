@@ -15,4 +15,3 @@ Forming CycloneDX SBOM (php):
   after_script:
     - echo "Uploading"
     - cat reports/cdx-sbom.php.json
-  when: manual

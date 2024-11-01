@@ -29,4 +29,3 @@ mobsf-android:
       exists:
         - "**/*.apk"
         - "**/AndroidManifest.xml"
-  when: manual

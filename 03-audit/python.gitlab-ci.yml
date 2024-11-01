@@ -31,4 +31,3 @@ Forming CycloneDX SBOM (python):
 #     - poetry self add ko-poetry-audit-plugin
 #   script:
 #     - poetry audit --with dev
-#   when: manual

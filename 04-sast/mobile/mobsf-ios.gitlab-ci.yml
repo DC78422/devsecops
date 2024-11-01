@@ -29,4 +29,3 @@ mobsf-ios:
       exists:
         - "**/*.ipa"
         - "**/*.xcodeproj/*"
-  when: manual

@@ -27,4 +27,3 @@ Dockle Image Scanning:
     - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
       when: never
     - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
-  when: manual

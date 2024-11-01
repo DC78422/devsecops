@@ -10,4 +10,3 @@ Trivy K8S Scanning:
   script:
     - trivy k8s 
       --report summary cluster
-  when: manual

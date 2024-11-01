@@ -26,4 +26,3 @@ Gosec:
       when: never
     # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /go/"
     - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
-  when: manual

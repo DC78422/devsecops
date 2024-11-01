@@ -25,4 +25,3 @@ cpd:
       when: never
     # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /java$/"
     - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
-  when: manual
