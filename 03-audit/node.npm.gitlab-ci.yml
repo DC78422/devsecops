@@ -1,6 +1,19 @@
 include:
   - local: 'functions.gitlab-ci.yml'
 
+NPM Audit:
+  extends:
+    - ".audit_src_base"
+    - ".audit_rule"
+  image:
+    name: "node:22.9.0-alpine3.20"
+  script:
+    - npm audit --json > reports/audit.npm.json
+  after_script:
+    - echo "Uploading"
+    - cat reports/audit.npm.json
+  when: manual
+
 Forming CycloneDX SBOM (npm):
   extends:
     - ".audit_src_base"

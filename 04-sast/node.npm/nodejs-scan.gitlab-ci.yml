@@ -1,0 +1,31 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+nodejs-scan:
+  image:
+    name: python:3.11.6-alpine3.20
+  variables:
+    SEARCH_MAX_DEPTH: 4
+  extends:
+    - ".sast_base"
+  before_script:
+    - pip install nodejsscan
+    - nodejsscan --help
+  script:
+    - echo "Здесь необходимо переопределить блок script в соответствии с окружением"
+    - echo nodejs-scan > reports/sast.nodejs-scan.npm.report.json
+  after_script:
+    - |
+      if [ "$GENERATE_REPORT" = 'true' ]; then
+        echo "Uploading"
+        cat reports/sast.nodejs-scan.npm.report.json
+      fi
+  rules:
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /nodejs-scan/"
+      when: never
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /(javascript|typescript|jsx|tsx)/"
+    - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
+  when: manual
+  allow_failure: true
