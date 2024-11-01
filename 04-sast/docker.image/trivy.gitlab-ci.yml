@@ -17,13 +17,16 @@ Trivy Image Scanning:
     name: registry.gitlab.com/dc20e6/devsecops/images/trivy:latest
     entrypoint: [""]
   script:
-    - trivy image alpine:latest
+    - trivy image
+      --ignore-unfixed
+      --format json
+      --output rports/iac.trivy.image.report.json
+      alpine:latest
     # - trivy image
     #   --ignore-unfixed
     #   --image-config-scanners misconfig,secret
     #   --username $REGISTRY_USER
     #   --password $REGISTRY_PASSWORD
-    #   -o reports/iac.trivy.image.report.json
     #   $TRIVY_IMAGE
   after_script:
     - echo "Uploading"
@@ -34,3 +37,4 @@ Trivy Image Scanning:
     - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
       when: never
     - !reference [.security_rule, rules]
+  when: manual
