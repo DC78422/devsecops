@@ -20,7 +20,7 @@ Trivy Image Scanning:
     - trivy image
       --ignore-unfixed
       --format json
-      --output rports/iac.trivy.image.report.json
+      --output reports/iac.trivy.image.report.json
       alpine:latest
     # - trivy image
     #   --ignore-unfixed
@@ -37,4 +37,3 @@ Trivy Image Scanning:
     - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
       when: never
     - !reference [.security_rule, rules]
-  when: manual
