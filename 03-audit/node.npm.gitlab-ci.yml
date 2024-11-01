@@ -22,8 +22,6 @@ Forming CycloneDX SBOM (npm):
   image:
     name: "node:18-alpine"
   variables:
-    # PACKAGE_LOCK_ONLY: "true"
-    PACKAGE_LOCK_ONLY: "false"
     SPEC_VERSION: "1.4"                       # (choices: "1.2", "1.3", "1.4", "1.5", "1.6")
     MC_TYPE: "application"                    # (choices: "application", "firmware", "library")
   before_script:
@@ -31,7 +29,6 @@ Forming CycloneDX SBOM (npm):
     - mkdir reports/ || true
   script:
     - cyclonedx-npm
-      --package-lock-only $PACKAGE_LOCK_ONLY
       --spec-version $SPEC_VERSION
       --output-file reports/cdx-sbom.npm.json
       --mc-type $MC_TYPE

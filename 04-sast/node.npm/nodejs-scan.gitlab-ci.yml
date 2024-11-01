@@ -12,7 +12,6 @@ nodejs-scan:
     - pip install nodejsscan
     - mkdir reports/ || true
   script:
-    # - njsscan
     - nodejsscan
       -o reports/sast.nodejs-scan.npm.report.json
       -d ./
