@@ -10,13 +10,9 @@ eslint (lint):
     name: node:22.9.0-alpine3.20
   variables:
     SEARCH_MAX_DEPTH: 4
+  before_script:
+    - echo "Здесь необходимо переопределить блок before_script в соответствии с окружением"
   script:
     - echo "Здесь необходимо переопределить блок script в соответствии с окружением"
-  after_script:
-    - |
-      if [ "$GENERATE_REPORT" = 'true' ]; then
-        echo "Uploading"
-        cat reports/lint.eslint.yarn.report.json
-      fi
   when: manual
   allow_failure: true
