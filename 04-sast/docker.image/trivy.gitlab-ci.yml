@@ -21,7 +21,9 @@ Trivy Image Scanning:
       --ignore-unfixed
       --format json
       --output reports/iac.trivy.image.report.json
-      alpine:latest
+      --username $REGISTRY_USER
+      --password $REGISTRY_PASSWORD
+      $TRIVY_IMAGE
     # - trivy image
     #   --ignore-unfixed
     #   --image-config-scanners misconfig,secret
