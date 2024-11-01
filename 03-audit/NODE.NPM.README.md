@@ -21,7 +21,7 @@ Forming CycloneDX SBOM (npm) v1:
     OUTPUT_FILE: "reports/cdx-sbom.npm.json"
     MC_TYPE: "application"                    # (choices: "application", "firmware", "library")
   image:
-    name: "repository.rt.ru/node:22.9.0-alpine3.20"
+    name: "node:18-alpine"
   before_script:
     - npm install --global @cyclonedx/cyclonedx-npm
     - cyclonedx-npm --help
@@ -49,7 +49,7 @@ Forming CycloneDX SBOM (npm) v2:
     OUTPUT_FILE: "reports/cdx-sbom.npm.json"
     MC_TYPE: "application"                    # (choices: "application", "firmware", "library")
   image:
-    name: "repository.rt.ru/node:22.9.0-alpine3.20"
+    name: "node:18-alpine"
   before_script:
     - npx --package @cyclonedx/cyclonedx-npm --call exit
     - npx @cyclonedx/cyclonedx-npm --help
@@ -78,7 +78,7 @@ Forming CycloneDX SBOM (npm) v3:
     SPEC_VERSION: "1.4"                        # (choices: "1.2", "1.3", "1.4", "1.5", "1.6")
     OUTPUT_FILE: "reports/cdx-sbom.npm.json"
   image:
-    name: "repository.rt.ru/node:22.9.0-alpine3.20"
+    name: "node:18-alpine"
   before_script:
     - npm install -g npm@latest
     - npm sbom --help

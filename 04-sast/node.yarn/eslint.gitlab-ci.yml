@@ -4,7 +4,7 @@ include:
 # ESLint (https://eslint.org/)
 eslint (sast):
   image:
-    name: node:22.9.0-alpine3.20
+    name: node:18-alpine
   variables:
     SEARCH_MAX_DEPTH: 4
   extends:

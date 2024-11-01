@@ -24,7 +24,7 @@ Forming CycloneDX SBOM (yarn) v1:
     OUTPUT_FILE: "reports/cdx-sbom.yarn.json"
     MC_TYPE: "application"                    # (choices: "application", "firmware", "library")
   image:
-    name: "repository.rt.ru/node:22.9.0-alpine3.20"
+    name: "node:18-alpine"
   before_script:
     - yarn dlx -q @cyclonedx/yarn-plugin-cyclonedx --help
     - mkdir reports/ || true
@@ -53,7 +53,7 @@ Forming CycloneDX SBOM (yarn) v2:
     OUTPUT_FILE: "reports/cdx-sbom.yarn.json"
     MC_TYPE: "application"                    # (choices: "application", "firmware", "library")
   image:
-    name: "repository.rt.ru/node:22.9.0-alpine3.20"
+    name: "node:18-alpine"
   before_script:
     - yarn add --dev @cyclonedx/yarn-plugin-cyclonedx
     - yarn exec cyclonedx-yarn --help
@@ -83,7 +83,7 @@ Forming CycloneDX SBOM (yarn) v3:
     OUTPUT_FILE: "reports/cdx-sbom.yarn.json"
     MC_TYPE: "application"                    # (choices: "application", "firmware", "library")
   image:
-    name: "repository.rt.ru/node:22.9.0-alpine3.20"
+    name: "node:18-alpine"
   before_script:
     - yarn plugin import https://github.com/CycloneDX/cyclonedx-node-yarn/releases/latest/download/yarn-plugin-cyclonedx.cjs
     - yarn cyclonedx --help
