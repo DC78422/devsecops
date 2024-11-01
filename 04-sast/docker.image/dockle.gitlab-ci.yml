@@ -14,6 +14,7 @@ Dockle Image Scanning:
     DOCKLE_IMAGE: $REGISTRY/$REGISTRY_PATH:$TAG
   image:
     name: registry.gitlab.com/dc20e6/devsecops/images/dockle:latest
+    entrypoint: [""]
   script:
     - dockle
       --username $REGISTRY_USER

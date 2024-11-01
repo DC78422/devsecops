@@ -15,6 +15,7 @@ Trivy Image Scanning:
     TRIVY_IMAGE: $REGISTRY/$REGISTRY_PATH:$TAG
   image:
     name: registry.gitlab.com/dc20e6/devsecops/images/trivy:latest
+    entrypoint: [""]
   script:
     - trivy image
       --ignore-unfixed
