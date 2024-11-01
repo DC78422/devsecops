@@ -2,8 +2,9 @@ include:
   - local: 'functions.gitlab-ci.yml'
 
 cpd:
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/pmd:latest
   variables:
-    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/pmd:latest
     SEARCH_MAX_DEPTH: 4
     CPD_LANGUAGE: java
     CPD_LANGUAGE_RULESETS: rulesets

@@ -9,16 +9,16 @@ eslint (sast):
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
+  before_script:
+    - echo "Здесь необходимо переопределить блок before_script в соответствии с окружением"
   script:
-    # - npx eslint .
-    # - npm test
     - echo "Здесь необходимо переопределить блок script в соответствии с окружением"
-    - echo eslint > reports/sast.eslint.report.json
+    - echo eslint > reports/sast.eslint.npm.report.json
   after_script:
     - |
       if [ "$GENERATE_REPORT" = 'true' ]; then
         echo "Uploading"
-        cat reports/sast.eslint.report.json
+        cat reports/sast.eslint.npm.report.json
       fi
   rules:
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /eslint/"

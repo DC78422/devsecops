@@ -6,8 +6,9 @@ Grype Image Scanning:
   stage: SAST (image)
   extends:
     - ".sast_base"
+  image:
+    name: registry.example.com/openshift/grype:0.74.6-debug
   variables:
-    SAST_IMAGE: registry.example.com/openshift/grype:0.74.6-debug
     GIT_STRATEGY: none
     DOCKER_CONFIG: "/tmp/config"
     GRYPE_DB_UPDATE_URL: "https://grype-db.example.com/listing.json"

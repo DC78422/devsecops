@@ -3,8 +3,9 @@ include:
 
 # Brakeman Scan (https://github.com/presidentbeef/brakeman)
 Brakeman:
+  image:
+    name: presidentbeef/brakeman
   variables:
-    SAST_IMAGE: presidentbeef/brakeman
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"

@@ -3,8 +3,9 @@ include:
 
 # -
 flawfinder:
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/python:3.11.6-p9
   variables:
-    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/python:3.11.6-p9
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"

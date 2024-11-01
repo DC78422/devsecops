@@ -1,7 +1,8 @@
 # -
 flawfinder:
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/python:3.11.6-p9
   variables:
-    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/python:3.11.6-p9
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
@@ -32,8 +33,9 @@ flawfinder:
   allow_failure: true
 # -
 kubesec:
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/python:3.11.6-p9
   variables:
-    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/python:3.11.6-p9
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
@@ -51,8 +53,9 @@ kubesec:
   allow_failure: true
 # -
 nodejs-scan:
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/python:3.11.6-p9
   variables:
-    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/python:3.11.6-p9
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
@@ -73,8 +76,9 @@ nodejs-scan:
   allow_failure: true
 # -
 phpcs-security-audit:
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/python:3.11.6-p9
   variables:
-    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/python:3.11.6-p9
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
@@ -95,8 +99,9 @@ phpcs-security-audit:
   allow_failure: true
 # -
 sobelow:
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/python:3.11.6-p9
   variables:
-    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/python:3.11.6-p9
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
@@ -117,8 +122,9 @@ sobelow:
   allow_failure: true
 # -
 salus:
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/python:3.11.6-p9
   variables:
-    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/python:3.11.6-p9
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
@@ -154,8 +160,9 @@ salus:
 
 # bearer (https://github.com/Bearer/bearer)
 bearer:
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/bearer:latest
   variables:
-    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/bearer:latest
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"

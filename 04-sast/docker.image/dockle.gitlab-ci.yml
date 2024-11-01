@@ -5,8 +5,8 @@ Dockle Image Scanning:
   stage: SAST (image)
   extends:
     - ".sast_base"
-  variables:
-    SAST_IMAGE: registry.gitlab.com/dc20e6/devsecops/images/dockle:latest
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/dockle:latest
   script:
     - dockle
       --username $HARBOR_LOGIN
