@@ -12,8 +12,11 @@ retire:
     - npm install -g retire
     - echo "Здесь необходимо переопределить блок before_script в соответствии с окружением"
   script:
-    - echo "Здесь необходимо переопределить блок script в соответствии с окружением"
-    - echo eslint > reports/sast.retire.npm.report.json
+    - retire
+      --path .
+      --colors
+      --outputformat json
+      --outputpath reports/sast.retire.npm.report.json
   after_script:
     - |
       if [ "$GENERATE_REPORT" = 'true' ]; then
