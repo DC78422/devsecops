@@ -10,6 +10,7 @@ nodejs-scan:
     - ".sast_base"
   before_script:
     - pip install nodejsscan
+    - mkdir reports/ || true
   script:
     - njsscan
       --json

@@ -10,7 +10,7 @@ retire:
     - ".sast_base"
   before_script:
     - npm install -g retire
-    - echo "Здесь необходимо переопределить блок before_script в соответствии с окружением"
+    - mkdir reports/ || true
   script:
     - retire
       --path .
