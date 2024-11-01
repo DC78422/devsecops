@@ -72,11 +72,15 @@ stages:
 ".secrets_rule":
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      variables:
+        GENERATE_REPORT: "false"
     - !reference [.security_rule, rules]
 
 ".lint_rule":
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      variables:
+        GENERATE_REPORT: "false"
     - !reference [.security_rule, rules]
 
 ".audit_rule":
@@ -89,6 +93,8 @@ stages:
 ".audit_rule_mr":
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      variables:
+        GENERATE_REPORT: "false"
 
 ".sast_rule":
   rules:

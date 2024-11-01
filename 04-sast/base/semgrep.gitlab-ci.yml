@@ -29,4 +29,3 @@ Semgrep:
     - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
       when: never
     - !reference [.security_rule, rules]
-    - !reference [.security_rule, rules]

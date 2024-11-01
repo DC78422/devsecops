@@ -6,18 +6,26 @@ Grype Image Scanning:
   stage: SAST (image)
   extends:
     - ".sast_base"
-  image:
-    name: registry.example.com/openshift/grype:0.74.6-debug
   variables:
+    REGISTRY: $CI_REGISTRY
+    REGISTRY_USER: $CI_REGISTRY_USER
+    REGISTRY_PASSWORD: $CI_REGISTRY_PASSWORD
+    REGISTRY_PATH: $CI_PROJECT_PATH
+    TAG: latest
+    GRYPE_IMAGE: $REGISTRY/$REGISTRY_PATH:$TAG
     GIT_STRATEGY: none
     DOCKER_CONFIG: "/tmp/config"
     GRYPE_DB_UPDATE_URL: "https://grype-db.example.com/listing.json"
     GRYPE_DB_CACHE_DIR: "/tmp"
+  image:
+    # name: egistry.gitlab.com/dc20e6/devsecops/images/grype:latest
+    name: anchore/grype:v0.83.0
   script:
     - mkdir /tmp/config || true
     - grype db list
-    - echo "{\"auths\":{\"registry.example.com\":{\"username\":\"serviceaccount\",\"password\":\"$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)\"},\"harbor.example.com\":{\"username\":\"$HARBOR_LOGIN\",\"password\":\"$HARBOR_PASSWORD\"}}}" > /tmp/config/config.json
-    - grype $IMAGE_TO_SCAN --only-fixed -o json > reports/iac.grype.report.json
+    # - echo "{\"auths\":{\"$REGISTRY\":{\"username\":\"$REGISTRY_USER\",\"password\":\"$()\"},{\"harbor.example.com\":{\"username\":\"$HARBOR_LOGIN\",\"password\":\"$HARBOR_PASSWORD\"}}}" > /tmp/config/config.json
+    - echo "{\"auths\":{\"${REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${REGISTRY_USER}" "${REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /tmp/config/config.json
+    - grype $GRYPE_IMAGE --only-fixed -o json > reports/iac.grype.report.json
   after_script:
     - echo "Uploading"
     - cat reports/iac.grype.report.json

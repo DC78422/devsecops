@@ -5,16 +5,23 @@ Dockle Image Scanning:
   stage: SAST (image)
   extends:
     - ".sast_base"
+  variables:
+    REGISTRY: $CI_REGISTRY
+    REGISTRY_USER: $CI_REGISTRY_USER
+    REGISTRY_PASSWORD: $CI_REGISTRY_PASSWORD
+    REGISTRY_PATH: $CI_PROJECT_PATH
+    TAG: latest
+    DOCKLE_IMAGE: $REGISTRY/$REGISTRY_PATH:$TAG
   image:
     name: registry.gitlab.com/dc20e6/devsecops/images/dockle:latest
   script:
     - dockle
-      --username $HARBOR_LOGIN
-      --password $HARBOR_PASSWORD
+      --username $REGISTRY_USER
+      --password $REGISTRY_PASSWORD
       --insecure
       -f json
       -o reports/iac.dockle.report.json
-      $IMAGE_TO_SCAN
+      $DOCKLE_IMAGE
   after_script:
     - |
       if [ "$GENERATE_REPORT" = 'true' ]; then

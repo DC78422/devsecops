@@ -6,16 +6,23 @@ Trivy Image Scanning:
   stage: SAST (image)
   extends:
     - ".sast_base"
+  variables:
+    REGISTRY: $CI_REGISTRY
+    REGISTRY_USER: $CI_REGISTRY_USER
+    REGISTRY_PASSWORD: $CI_REGISTRY_PASSWORD
+    REGISTRY_PATH: $CI_PROJECT_PATH
+    TAG: latest
+    TRIVY_IMAGE: $REGISTRY/$REGISTRY_PATH:$TAG
   image:
     name: registry.gitlab.com/dc20e6/devsecops/images/trivy:latest
   script:
     - trivy image
       --ignore-unfixed
       --image-config-scanners misconfig,secret
+      --username $REGISTRY_USER
+      --password $REGISTRY_PASSWORD
       -o reports/iac.trivy.image.report.json
-      --username serviceaccount,"$HARBOR_LOGIN"
-      --password "$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)","$HARBOR_PASSWORD"
-      $IMAGE_TO_SCAN
+      $TRIVY_IMAGE
   after_script:
     - echo "Uploading"
     - cat reports/iac.trivy.image.report.json
