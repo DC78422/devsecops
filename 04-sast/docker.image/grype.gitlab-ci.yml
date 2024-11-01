@@ -20,7 +20,7 @@ Grype Image Scanning:
   image:
     # name: egistry.gitlab.com/dc20e6/devsecops/images/grype:latest
     name: anchore/grype:v0.83.0
-    entrypoint: [""]
+    # entrypoint: [""]
   script:
     - mkdir /tmp/config || true
     - grype db list
