@@ -16,4 +16,3 @@ mypy:
     - mypy
       $MYPY_EXCLUDE
       $MYPY_SOURCE
-  when: manual

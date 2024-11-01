@@ -12,7 +12,6 @@ popeye:
     - popeye
   rules:
     - if: "$CLUSTER_SCAN == 'true' || $CLUSTER_SCAN == '1'"
-  when: manual
 
 DefectDojo Engagement Creation:
   extends:

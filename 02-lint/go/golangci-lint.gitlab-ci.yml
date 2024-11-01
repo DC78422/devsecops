@@ -11,4 +11,3 @@ golangci-lint:
     - golangci-lint run -v
       --issues-exit-code 0
       --print-issued-lines=false
-  when: manual

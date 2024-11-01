@@ -17,7 +17,6 @@ Nuclei:
     - cat reports/dast.nuclei.report.json
   rules:
     - if: $DAST_WEBSITE
-  when: manual
 
 DefectDojo Engagement Creation:
   extends:

@@ -10,4 +10,3 @@ Helm Lint:
     name: registry.gitlab.com/dc20e6/devsecops/images/helm:latest
   script:
     - helm lint .
-  when: manual

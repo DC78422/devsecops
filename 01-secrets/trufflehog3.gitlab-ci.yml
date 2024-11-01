@@ -22,4 +22,3 @@ Trufflehog3:
         echo "Uploading"
         cat reports/secrets.trufflehog3.report.json
       fi
-  when: manual

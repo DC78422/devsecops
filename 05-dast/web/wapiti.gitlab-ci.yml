@@ -18,7 +18,6 @@ Wapiti:
     - cat reports/dast.wapiti.report.xml
   rules:
     - if: $DAST_WEBSITE
-  when: manual
 
 DefectDojo Engagement Creation:
   extends:

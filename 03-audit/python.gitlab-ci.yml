@@ -20,7 +20,6 @@ Forming CycloneDX SBOM (python):
   after_script:
     - echo "Uploading"
     - cat reports/cdx-sbom.py.json
-  when: manual
 
 # poetry-audit:
 #   extends:

@@ -29,7 +29,6 @@ flawfinder:
         - "**/*.c++"
         - "**/*.cp"
         - "**/*.cxx"
-  when: manual
 # -
 kubesec:
   image:
@@ -48,7 +47,6 @@ kubesec:
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /kubesec/"
       when: never
     - if: "$CI_COMMIT_BRANCH && $SCAN_KUBERNETES_MANIFESTS == 'true'"
-  when: manual
 # -
 nodejs-scan:
   image:
@@ -70,7 +68,6 @@ nodejs-scan:
     - if: "$CI_COMMIT_BRANCH"
       exists:
         - "**/package.json"
-  when: manual
 # -
 phpcs-security-audit:
   image:
@@ -92,7 +89,6 @@ phpcs-security-audit:
     - if: "$CI_COMMIT_BRANCH"
       exists:
         - "**/*.php"
-  when: manual
 # -
 sobelow:
   image:
@@ -114,7 +110,6 @@ sobelow:
     - if: "$CI_COMMIT_BRANCH"
       exists:
         - "**/mix.exs"
-  when: manual
 # -
 salus:
   image:
@@ -146,7 +141,6 @@ salus:
         - "**/*.rs"
         - "**/*.toml"
         - "**/*.cargo"
-  when: manual
 
 # SonarQube
 
@@ -177,4 +171,3 @@ bearer:
       when: never
     # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /(javascript|typescript|ruby|php|go|python|java$|tsx)/"
     - if: $CI_COMMIT_REF_NAME == $SECURITY_BRANCH
-  when: manual

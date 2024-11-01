@@ -13,7 +13,6 @@ NPM Audit:
   after_script:
     - echo "Uploading"
     - cat reports/audit.npm.json
-  when: manual
 
 Forming CycloneDX SBOM (npm):
   extends:
@@ -35,7 +34,6 @@ Forming CycloneDX SBOM (npm):
   after_script:
     - echo "Uploading"
     - cat reports/cdx-sbom.npm.json
-  when: manual
 
       # --package-lock-only $PACKAGE_LOCK_ONLY
 

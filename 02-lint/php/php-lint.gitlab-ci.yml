@@ -10,4 +10,3 @@ phplint:
     entrypoint: [""]
   script:
     - phplint .
-  when: manual

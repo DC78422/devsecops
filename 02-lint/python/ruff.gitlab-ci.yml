@@ -21,4 +21,3 @@ ruff:
       echo "ruff args: $RUFF_ARGS"
       echo "ruff source: $RUFF_SOURCE"
       ruff check $RUFF_ARGS $RUFF_SOURCE
-  when: manual

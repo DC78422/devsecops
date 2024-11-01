@@ -22,4 +22,3 @@ GitLeaks:
         echo "Uploading"
         cat reports/secrets.gitleaks.report.json
       fi
-  when: manual

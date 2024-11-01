@@ -22,4 +22,3 @@ sobelow:
     - if: "$CI_COMMIT_BRANCH"
       exists:
         - "**/mix.exs"
-  when: manual

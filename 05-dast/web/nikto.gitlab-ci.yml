@@ -17,7 +17,6 @@ nikto:
     - cat reports/dast.nikto.report.json
   rules:
     - if: $DAST_WEBSITE
-  when: manual
 
 Nikto (all):
   extends:
@@ -35,7 +34,6 @@ Nikto (all):
     - cat reports/dast.nikto_all.report.json
   rules:
     - if: $DAST_WEBSITE
-  when: manual
 
 DefectDojo Engagement Creation:
   extends:

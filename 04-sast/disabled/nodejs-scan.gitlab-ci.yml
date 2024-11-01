@@ -22,4 +22,3 @@ nodejs-scan:
     - if: "$CI_COMMIT_BRANCH"
       exists:
         - "**/package.json"
-  when: manual

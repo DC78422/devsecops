@@ -27,7 +27,6 @@ Forming CycloneDX SBOM (yarn):
   after_script:
     - echo "Uploading"
     - cat reports/cdx-sbom.yarn.json
-  when: manual
 
 # Forming CycloneDX SBOM (yarn) v2:
 #   stage: Audit (src)

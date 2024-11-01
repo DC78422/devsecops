@@ -18,4 +18,3 @@ Talisman:
     - rm -rf reports/talisman_reports/
     - echo "Uploading"
     - cat reports/secrets.talisman.report.json
-  when: manual

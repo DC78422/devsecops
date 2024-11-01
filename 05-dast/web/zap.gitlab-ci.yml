@@ -17,7 +17,6 @@ Nikto:
     - cat reports/dast.nikto.report.json
   rules:
     - if: $DAST_WEBSITE
-  when: manual
 
 Nikto (all):
   extends:
@@ -35,7 +34,6 @@ Nikto (all):
     - cat reports/dast.nikto_all.report.json
   rules:
     - if: $DAST_WEBSITE
-  when: manual
 
 # Burp Dastardly
 Dastardly:
@@ -54,7 +52,6 @@ Dastardly:
     - cat reports/dast.dastardly.report.xml
   rules:
     - if: $DAST_WEBSITE
-  when: manual
 
 # Zed Attack Proxy
 ZAP baseline scan:
@@ -87,7 +84,6 @@ ZAP baseline scan:
       - zap/
     expire_in: 1 day
     when: always
-  when: manual
 
 DefectDojo Engagement Creation:
   extends:
