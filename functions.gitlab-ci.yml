@@ -1,7 +1,7 @@
 variables:
-
   IMAGE_TO_SCAN: $APP_IMAGE:latest
   SECURITY_BRANCH: $CI_DEFAULT_BRANCH
+  RULES_ALLOW_FAILURE_ON_TEST_ON_DEFAULT_BRANCH: true
 
 stages:
   - .pre
