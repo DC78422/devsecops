@@ -1,2 +1,4 @@
 include:
-  - local: '02-lint/java.maven/.gitlab-ci.yml'
+  - local: '02-lint/java.maven/checkstyle.gitlab-ci.yml'
+  - local: '02-lint/java.maven/pmd.gitlab-ci.yml'
+  - local: '02-lint/java.maven/spotbugs.gitlab-ci.yml'
