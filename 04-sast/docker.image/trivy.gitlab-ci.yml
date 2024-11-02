@@ -19,17 +19,12 @@ Trivy Image Scanning:
   script:
     - trivy image
       --ignore-unfixed
+      --image-config-scanners misconfig,secret
       --format json
       --output reports/iac.trivy.image.report.json
       --username $REGISTRY_USER
       --password $REGISTRY_PASSWORD
       $TRIVY_IMAGE
-    # - trivy image
-    #   --ignore-unfixed
-    #   --image-config-scanners misconfig,secret
-    #   --username $REGISTRY_USER
-    #   --password $REGISTRY_PASSWORD
-    #   $TRIVY_IMAGE
   after_script:
     - echo "Uploading"
     - cat reports/iac.trivy.image.report.json
