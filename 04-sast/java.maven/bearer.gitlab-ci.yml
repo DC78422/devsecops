@@ -4,21 +4,21 @@ include:
 # bearer (https://github.com/Bearer/bearer)
 bearer:
   image:
-    name: registry.gitlab.com/dc20e6/devsecops/images/bearer:latest
+    # name: registry.gitlab.com/dc20e6/devsecops/images/bearer:latest
+    name: bearer/bearer
+    entrypoint: [""]
   variables:
     SEARCH_MAX_DEPTH: 4
   extends:
     - ".sast_base"
   script:
-    - /bin/bearer scan .
+    - bearer scan
       --format sarif
       --output reports/sast.bearer.report.json
+      .
   after_script:
-    - |
-      if [ "$GENERATE_REPORT" = 'true' ]; then
-        echo "Uploading"
-        cat reports/sast.bearer.report.json
-      fi
+    - echo "Uploading"
+    - cat reports/sast.bearer.report.json
   rules:
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /bearer/"
       when: never
