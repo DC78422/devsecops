@@ -15,8 +15,6 @@ phpcs-security-audit:
     - echo phpcs-security-audit
     - echo phpcs-security-audit > reports/phpcs-security-audit.json
   rules:
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /phpcs-security-audit/"
       when: never
     - if: "$CI_COMMIT_BRANCH"

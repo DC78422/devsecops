@@ -31,6 +31,4 @@ Trivy Image Scanning:
   rules:
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /Trivy Image Scanning/"
       when: never
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
-    - !reference [.security_rule, rules]
+    - !reference [.sast_rule, rules]

@@ -21,8 +21,7 @@ mobsf-android:
     - echo mobsf-android
     - echo mobsf-android > reports/sast.mobsf-android.report.json
   rules:
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
+
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /mobsf/"
       when: never
     - if: "$CI_COMMIT_BRANCH && $SAST_EXPERIMENTAL_FEATURES == 'true'"

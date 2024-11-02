@@ -17,8 +17,6 @@ flawfinder:
     - echo flawfinder
     - echo flawfinder > reports/flawfinder.json
   rules:
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /flawfinder/"
       when: never
     - if: "$CI_COMMIT_BRANCH"
@@ -42,8 +40,7 @@ kubesec:
     - echo kubesec
     - echo kubesec > reports/kubesec.json
   rules:
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
+
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /kubesec/"
       when: never
     - if: "$CI_COMMIT_BRANCH && $SCAN_KUBERNETES_MANIFESTS == 'true'"
@@ -61,8 +58,7 @@ nodejs-scan:
     - echo nodejs-scan
     - echo nodejs-scan > reports/nodejs-scan.json
   rules:
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
+
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /nodejs-scan/"
       when: never
     - if: "$CI_COMMIT_BRANCH"
@@ -82,8 +78,7 @@ phpcs-security-audit:
     - echo phpcs-security-audit
     - echo phpcs-security-audit > reports/phpcs-security-audit.json
   rules:
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
+
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /phpcs-security-audit/"
       when: never
     - if: "$CI_COMMIT_BRANCH"
@@ -103,8 +98,7 @@ sobelow:
     - echo sobelow
     - echo sobelow > reports/sobelow.json
   rules:
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
+
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /sobelow/"
       when: never
     - if: "$CI_COMMIT_BRANCH"
@@ -125,8 +119,7 @@ salus:
     - echo salus
     - echo salus > reports/salus.json
   rules:
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
+
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /salus/"
       when: never
     - if: "$CI_COMMIT_BRANCH"
@@ -167,7 +160,5 @@ bearer:
   rules:
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /bearer/"
       when: never
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
     # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /(javascript|typescript|ruby|php|go|python|java$|tsx)/"
-    - !reference [.security_rule, rules]
+    - !reference [.sast_rule, rules]

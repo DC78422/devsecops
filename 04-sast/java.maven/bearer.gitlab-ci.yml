@@ -22,7 +22,5 @@ bearer:
   rules:
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /bearer/"
       when: never
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
     # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /(javascript|typescript|ruby|php|go|python|java$|tsx)/"
-    - !reference [.security_rule, rules]
+    - !reference [.sast_rule, rules]

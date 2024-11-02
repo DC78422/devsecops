@@ -12,15 +12,10 @@ progpilot:
   script:
     - progpilot . > reports/sast.progpilot.report.json
   after_script:
-    - |
-      if [ "$GENERATE_REPORT" = 'true' ]; then
-        echo "Uploading"
-        cat reports/sast.progpilot.report.json
-      fi
+    - echo "Uploading"
+    - cat reports/sast.progpilot.report.json
   rules:
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /progpilot/"
       when: never
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
     # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /php/"
-    - !reference [.security_rule, rules]
+    - !reference [.sast_rule, rules]

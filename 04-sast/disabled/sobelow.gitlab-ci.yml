@@ -15,8 +15,6 @@ sobelow:
     - echo sobelow
     - echo sobelow > reports/sobelow.json
   rules:
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /sobelow/"
       when: never
     - if: "$CI_COMMIT_BRANCH"

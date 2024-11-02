@@ -20,7 +20,5 @@ pmd:
   rules:
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /pmd/"
       when: never
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
     # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /java$/"
-    - !reference [.security_rule, rules]
+    - !reference [.sast_rule, rules]

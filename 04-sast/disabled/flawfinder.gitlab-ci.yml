@@ -20,8 +20,6 @@ flawfinder:
     - echo flawfinder
     - echo flawfinder > reports/flawfinder.json
   rules:
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /flawfinder/"
       when: never
     - if: "$CI_COMMIT_BRANCH"

@@ -14,8 +14,6 @@ kubesec:
     - echo kubesec
     - echo kubesec > reports/kubesec.json
   rules:
-    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
-      when: never
     - if: "$SAST_EXCLUDED_ANALYZERS =~ /kubesec/"
       when: never
     - if: "$CI_COMMIT_BRANCH && $SCAN_KUBERNETES_MANIFESTS == 'true'"
