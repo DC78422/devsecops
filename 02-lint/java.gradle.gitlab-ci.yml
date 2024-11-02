@@ -1,0 +1,3 @@
+include:
+  - local: '02-lint/java.gradle/.gitlab-ci.yml'
+

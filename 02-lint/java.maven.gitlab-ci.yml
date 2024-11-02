@@ -1,0 +1,2 @@
+include:
+  - local: '02-lint/java.maven/.gitlab-ci.yml'
