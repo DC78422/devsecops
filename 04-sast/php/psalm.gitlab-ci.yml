@@ -3,7 +3,7 @@ include:
 
 psalm:
   image:
-    name: registry.sanuslifedev.market/sanuslife/infra/images/codestyle:latest
+    name: registry.gitlab.com/dc20e6/devsecops/images/psalm:latest
   variables:
     PROJECT_DIR: /builds/$CI_PROJECT_PATH
   extends:
