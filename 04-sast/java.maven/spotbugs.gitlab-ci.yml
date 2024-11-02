@@ -1,0 +1,21 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# SpotBugs (https://github.com/spotbugs/spotbugs)
+spotbugs:
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/python:3.11.6-p9
+  variables:
+    SEARCH_MAX_DEPTH: 4
+  extends:
+    - ".sast_base"
+  script:
+    - echo sobelow
+    - echo sobelow > reports/sast.sobelow.report.json
+  rules:
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /spotbugs/"
+      when: never
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /java$/"
+    - !reference [.security_rule, rules]

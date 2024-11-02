@@ -1,0 +1,27 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+cpd:
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/pmd:latest
+  variables:
+    SEARCH_MAX_DEPTH: 4
+    CPD_LANGUAGE: java
+    CPD_LANGUAGE_RULESETS: rulesets
+    CPD_MINIMUM_TOKENS: 0
+  extends:
+    - ".sast_base"
+  script:
+    - /pmd-bin-7.1.0/bin/pmd cpd 
+      -d .
+      --minimum-tokens=$CPD_MINIMUM_TOKENS
+      -f text
+      --language=$LANGUAGE
+      --rulesets=$LANGUAGE_RULESETS
+  rules:
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /cpd/"
+      when: never
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /java$/"
+    - !reference [.security_rule, rules]

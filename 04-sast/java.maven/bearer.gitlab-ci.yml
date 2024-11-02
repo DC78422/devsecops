@@ -1,0 +1,28 @@
+include:
+  - local: 'functions.gitlab-ci.yml'
+
+# bearer (https://github.com/Bearer/bearer)
+bearer:
+  image:
+    name: registry.gitlab.com/dc20e6/devsecops/images/bearer:latest
+  variables:
+    SEARCH_MAX_DEPTH: 4
+  extends:
+    - ".sast_base"
+  script:
+    - /bin/bearer scan .
+      --format sarif
+      --output reports/sast.bearer.report.json
+  after_script:
+    - |
+      if [ "$GENERATE_REPORT" = 'true' ]; then
+        echo "Uploading"
+        cat reports/sast.bearer.report.json
+      fi
+  rules:
+    - if: "$SAST_EXCLUDED_ANALYZERS =~ /bearer/"
+      when: never
+    - if: "$SAST_DISABLED == 'true' || $SAST_DISABLED == '1'"
+      when: never
+    # - if: "$CI_COMMIT_BRANCH && $CI_PROJECT_REPOSITORY_LANGUAGES =~ /(javascript|typescript|ruby|php|go|python|java$|tsx)/"
+    - !reference [.security_rule, rules]
