@@ -1,6 +1,6 @@
 include:
   - local: '04-sast/base/semgrep.gitlab-ci.yml'
-  - local: '04-sast/java/bearer.gitlab-ci.yml'
-  - local: '04-sast/java/cpd.gitlab-ci.yml'
-  - local: '04-sast/java/pmd.gitlab-ci.yml'
-  - local: '04-sast/java/spotbugs.gitlab-ci.yml'
+  - local: '04-sast/java.maven/bearer.gitlab-ci.yml'
+  - local: '04-sast/java.maven/cpd.gitlab-ci.yml'
+  - local: '04-sast/java.maven/pmd.gitlab-ci.yml'
+  - local: '04-sast/java.maven/spotbugs.gitlab-ci.yml'
